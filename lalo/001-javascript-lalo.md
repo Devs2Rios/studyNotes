@@ -69,5 +69,13 @@
     - `>` plus than
     - `<=` less than equal
     - `>=` plus than equal
+- Strings and template literals
+    - `"String"` `'String'` `` `String` ``
+    - Concatenate `'Hi ' + 'dear!'`
+    - Template literals `` `I am ${jsValue} years old` ``
+- Conditionals:
+    - Positive `if (condition) {execution}`
+    - Negative `if (!condition) {execution}`
+    - Multiple `if (c) {e1} else if (c2) {e2} else {e3}`
 
 </details>
