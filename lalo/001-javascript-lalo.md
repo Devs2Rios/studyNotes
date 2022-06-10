@@ -79,3 +79,9 @@
     - Multiple `if (c) {e1} else if (c2) {e2} else {e3}`
 
 </details>
+
+- Switch:
+    - `switch(variable){case logic: exec;}`
+    - `break;` if you want to break at that step
+    - `case logic: case logic: exec;` several cases or
+    - `default` like an else statement
