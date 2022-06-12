@@ -6,6 +6,9 @@
 <summary><b>Intro</b></summary>
 <br/>
 
+- Web development basics
+    - HTML(Nouns) | CSS(Adjectives) | JS(Verbs)
+    - Separation of concerns - Every file separated, not in the HTML
 - Test with Console
     - Brave or Chrome - `⌘⌥J`
     - Safari - `⌘⌥C`
@@ -14,14 +17,28 @@
     - Object-Oriented - Data based on objects
     - Multi-Paradigm - Use different styles of programming
     - Programming language - Instruct computer to do things
-- Web development basics
-    - HTML(Nouns) | CSS(Adjectives) | JS(Verbs)
-    - Separation of concerns - Every file separated, not in the HTML
+    - ES5, ES6+
+        - 1995 - Mocha, first version of JavaScript created in just 10 days
+            - A language to create interactive sites
+        - 1996
+            - It has nothing to do with Java
+            - Changes to LiveScript and to JavaScript to attract Java divelopers
+            - Microsoft launches IE and copies JavaScript into JScript
+        - 1997 - ECMA releases ECMAScript 1 (ES1), the first standar for JavaScript
+        - 2009 - ES5 (ECMAScript 5) was released with a lot of new features
+        - 2015 - ES6 (ECMAScript 2015) was released (biggest update)
+            - Changes to an annual release cycle
+    - Don't break the web
+        - Older code is still working
+        - It's very buggy but still used
+    - Development - Use the latest Chrome
+    - Production - Transpile and polyfill the code to make it compatible with older browsers
+    - ESNext - Future versions
 
 </details>
 
 <details>
-<summary><b>JavaScript</b></summary>
+<summary><b>JavaScript1</b></summary>
 <br/>
 
 - Value - Smallest unit of information
@@ -50,7 +67,17 @@
         - Symbol `unique and cannot be changed`
         - BigInt `Larger numbers than Number can hold`
         - Dynamic type `you don't have to define the type of value`
+    - Type conversion and coercion
         - Check what kind of value you have `typeof`
+        - Change between types of values `Number('5')`
+        - Some changes are automatic `'Love ' + 5 // 5 becomes a string`
+        - Strings automatically transformed into numbers `'5' - '12' - 5`
+    - Truthy and falsy values
+        - `0, '', undefined, null, NaN` return a falsy value of `false`
+        - All other values are truthy and return `true`
+        - You can check by ransforming values to booleans:
+            - `Boolean(0) // false`
+            - `Boolean(1) // true`
 - Comments
     - `// Single line`
     - `/* Multiline */`
@@ -77,11 +104,40 @@
     - Positive `if (condition) {execution}`
     - Negative `if (!condition) {execution}`
     - Multiple `if (c) {e1} else if (c2) {e2} else {e3}`
-
-</details>
-
+- Expressions: poduce a value
+    -  `true && false`
+- Statements: sentences that translate our order
+    - `const str = 'Sentence'`
+- Equality operators:
+    - Strict operators, without type coercion:
+        - `===` equal
+        - `!==` not equal
+        - `1 === '1' // false`  
+    - Strict operators, with type coercion:
+        - `==` equal
+        - `!=` not equal
+         - `1 == '1' // true`
+- Boolean logic:
+    - `&&` and
+    - `||` or
+    - `!` not
 - Switch:
+    - It's an statement so it can`t be inside a function or return
     - `switch(variable){case logic: exec;}`
     - `break;` if you want to break at that step
     - `case logic: case logic: exec;` several cases or
     - `default` like an else statement
+- Ternary:
+    - It's a expression so it can be inside a function or return
+    - `5 ? It's five : 'It's not five'`
+
+</details>
+
+<details>
+<summary><b>JavaScript2</b></summary>
+<br/>
+
+- Strict mode - Use it always to create safer code
+    - Start a file with `'use strict';`
+
+</details>
