@@ -139,5 +139,36 @@
 
 - Strict mode - Use it always to create safer code
     - Start a file with `'use strict';`
+- Functions - piece of code that can be used several times
+    - Best way to implement the principle DRY (Don't Repeat Yourself)
+    - Define functions
+        - `function` reserved word can be used to define a function
+            - `function funcName(parameters) {action};` this is a function declaration and it can be used before it's declarated
+            - You can also use this reserved word to create an anonymous function (function expression):
+                - `const anonymous = function(params) {action}`
+        - Arrow functions
+            - It doesn't have the `this` keword
+            - `parameter => action`
+                - it returns explicitally without `return`
+            - If it gets complex it needs more structure
+                - `const myFunction = (multiple, params) => {multipleLineAction needs return}`
+    - Call / run / invoke functions
+        - `myFunction(argument);`
+        - The parameter is the name used to define the function variables and the argument the actual value used when calling the function
+    - `return` returns a value at the end of the function
+        - Just the first `return` achieved returns a value
+        - Just works inside functions
+        - If the function doesn't have a `return` it returns `undefined`
+        - If you want to return a list use brackets `[]` if not it will return just the last value
+            - `return true, false //false`
+            - `return [true, false] //[true, false]`
+    - You can use functions inside other functions so you can write cleaner code
+        ``` JavaScript
+        function func1() {return true};
+        function func2() {
+            const myTrue = func1();
+            return [myTrue, false];
+        }
+        ```
 
 </details>
