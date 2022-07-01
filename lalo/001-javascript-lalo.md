@@ -225,4 +225,57 @@
                 ```
                 - Even though you are able to perform the function several times, that's a bad practice because it uses a lot of computing, the best way to do it is to use the function ones to define a value inside the object.
 
+    - Iteration
+        - For loop keeps running while condition is true
+            ```JavaScript
+            for (let i=0; i<10; i++) {console.log(i)};
+            ```
+        - You can iterate through an array by using the index
+            ```JavaScript
+            const myArr = [0,1,2,3,4,5,6,7];
+            const doubleArr = [];
+            for (let i=0; i<myArr.length; i++) {
+                doubleArr.push(i*2);
+            };
+            ```
+        - Or by using an of loop
+            ```JavaScript
+            for (const i of myArr) {doubleArr.push(i*2);};
+            ```
+        - You can make jumps between the loop steps by using continue
+            ```JavaScript
+            for (const i of myArr) {
+                if (i === 3) continue;
+                doubleArr.push(i*2);
+            };
+            ```
+        - Or you can break the loop if a condition is met
+            ```JavaScript
+            for (const i of myArr) {
+                if (i === 5) break;
+                doubleArr.push(i*2);
+            };
+            ```
+        - This is a way to loop backwards
+            ```JavaScript
+            for (let i=myArr.length-1; i>=0; i--) {doubleArr.push(i*2);};
+            ```
+        - Nested loop are sometimes usefull, like when you want all the 10 units square coordinates inside a 100*100 square
+            ```JavaScript
+            const increment = 10;
+            for (let x=0; x<100; x+=increment) {
+                for (let y=0; y<100; y+=increment) {
+                    console.log('Coord:', [x,y]);
+                }
+            };
+            ```
+        - The while loop keeps runing until matches a condition
+            ```JavaScript
+            let ranNum = 0;
+            while (ranNum!==100) {
+                ranNum = Math.round(Math.random()*100);
+                console.log(ranNum);
+            };
+            ```
+
 </details>
