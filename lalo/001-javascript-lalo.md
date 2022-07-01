@@ -162,6 +162,12 @@
         - If you want to return a list use brackets `[]` if not it will return just the last value
             - `return true, false //false`
             - `return [true, false] //[true, false]`
+        - It needs parenthesis if you start the return value in the second line
+        ```JavaScript
+        return (
+            5 + 10
+        )
+        ```
     - You can use functions inside other functions so you can write cleaner code
         ``` JavaScript
         function func1() {return true};
@@ -170,5 +176,28 @@
             return [myTrue, false];
         }
         ```
+    - Arrays
+        - Declarate an array:
+            - Literal:
+                - `const nums = [1,2,3,4];`
+            - New object:
+                - `const nums = new Array(1,2,3,4);`
+            - Zero indexed `nums[0] // first element, expression inside, not statement`
+            - Length `nums.length // 4`
+            - Change array values:
+                - `nums[0] = 10; //[10,2,3,4]`
+            - This is not a primitive value so even though it's declared as const you can change the values inside the object.
+            - If you put an array in another variable and modify it, the value will be modified in both becaus is the same object referenced in another variable, to change this behavior you'll need to copy it in the new variable.
+        - Array methods:
+            - `.push` add to the end
+                - `console.log(arr.push(5)) //5`
+            - `.unshift` add to the begining
+                - `console.log(arr.unshift(5)) //5`
+            - `.pop` remove the last element
+                - `console.log(arr.pop()) //Value popped`
+            - `.shift` removes the first element
+                - `console.log(arr.shift()) //Value popped`
+            - `.indexOf` returns the index of the argument
+                - `arr.indexOf(value)`
 
 </details>
