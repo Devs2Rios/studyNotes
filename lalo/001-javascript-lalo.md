@@ -209,5 +209,20 @@
                     - Useful when concatenation needed `objName['key'+'2']`
             - Add or modify an entry:
                 -  `objName['key'+'2'] = 'new value 2';`
+            - Add functions to objects
+                ```JavaScript
+                const objWithFunc = {
+                    firstName: 'John',
+                    johnIs: '',
+                    myFunc: function(msg) {
+                        this.johnIs = `${this.firstName} ${msg}`;
+                        return this.johnIs;
+                    }
+                };
+                console.log(objWithFunc.myFunc('is good!')); // Changes johnIs entry
+                // console.log(objWithFunc['myFunc']('is good!')); // Another way to use the function
+                console.log(objWithFunc.johnIs); // John is good!
+                ```
+                - Even though you are able to perform the function several times, that's a bad practice because it uses a lot of computing, the best way to do it is to use the function ones to define a value inside the object.
 
 </details>
