@@ -199,5 +199,15 @@
                 - `console.log(arr.shift()) //Value popped`
             - `.indexOf` returns the index of the argument
                 - `arr.indexOf(value)`
+    - Objects
+        - Non ordered data structure
+        - Declarate an object:
+            - Literal `const objName = {key: value, key2: value2};`
+            - Acces to a key:
+                - Dot notation, member access `objName.key`
+                - Bracket notation, computed member access `objName['key']`
+                    - Useful when concatenation needed `objName['key'+'2']`
+            - Add or modify an entry:
+                -  `objName['key'+'2'] = 'new value 2';`
 
 </details>
