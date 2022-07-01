@@ -1,0 +1,202 @@
+how to round up and down
+
+Math.round() function returns the value of a number rounded to the nearest integer.
+console.log(Math.round(0.9));
+// expected output: 1
+
+Math.floor() function returns the largest integer less than or equal to a given number.
+console.log(Math.floor(5.95));
+// expected output: 5
+
+Math.ceil() function always rounds a number up to the next largest integer.
+console.log(Math.ceil(.95));
+// expected output: 1
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+****************ternary operator***************
+
+// const age = 23;
+
+//    //age >= 18 ? console.log('i like to drink wine') : console.log('i like to drink water')
+// // condition  if     if the condition acomplish  the : is like the else   else acomplish 
+
+// const drink = age >= 18 ? 'wine' : 'water';
+
+// //console.log(drink);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+***ARRAYS***
+aniadir cosas al array
+array.push('value') esto es para meter un value al final del arreglo
+array.unshift('value') esto es para meter un value al inicio del arreglo
+
+borrar cosas del array:
+array.pop() esto es para borrar el ultimo elemento del array
+array.shift() esto es para borrar el primer elemento del array
+
+para saber el index del value:
+array.indexOf('value') te da el index del value dentro del array, si pones
+en el value un valor que no existe dentro del array te da -1
+
+array.includes('value') te da true si existe el value dentro del array y si no
+ps false hace strict equality o sea si en el array hay una string '23' y le pones arra.includes(23)
+va a ser false por que uno es string y el otro es integer
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+***FUNCIONES***
+funcion de flecha:
+let myFunction = (a, b) => a * b;
+
+hello = () => {
+  return "Hello World!";
+} 
+
+funcion declarada con la keyword function
+let myFunction = function(a, b){a * b};
+
+hello = function() {
+  return "Hello World!";
+} 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+***OBJETOS***
+para definir un objeto:
+
+const objName = {
+    key: value,
+    key: value,
+    key: value
+}
+
+para acceder a la propiedad o key de un objeto es con objName.key o tambien objName[key] si imprimimos cualquiera de las dos opciones nos dara el value de dichos keys
+la diferencia entre . y [] es que en [] puedes poner expresiones(o sea puedes concatenar variables, strings y hacer operaciones para obtener el key de forma dinamica) y con el . solo puedes poner el nombre del key 
+
+  console.table(obj_name); -> esto nos imprimira una tabla que trae cada key y value y nos muestra el tipo de dato de los values, funciona tanto en el browser como en la terminal
+
+Funciones dentro de OBJETOS
+
+const jonas = {
+    firstName: 'Jonas',
+    lastName: 'Schmedtmann',
+    birthYear: 1991,
+    job: 'teacher',
+    friends: ['Michael', 'Peter', 'Steven'],
+    hasDriverLicense: true,
+
+    calcAge: function(birthYear) {   // se pone el nombre de  la property que seria el nombre de la funcion 
+        return 2037 - birthYear;
+    }
+};
+
+
+// y para llamar a la funcion seria asi:
+
+// console.log(jonas.calcAge(1992));  
+// console.log(jonas[`calcAge`](1992)); 
+// console.log(jonas[`calcAge`](jonas['age'])); 
+// console.log(jonas.calcAge(jonas.age));  
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+FOR LOOP to read and fill an array
+
+const jonasArray = [
+    'Jonas',
+    'Schmedtamnn',
+    2037 - 1991,
+    'teacher',
+    ['Michael', 'Peter', 'Steven'],
+    true
+];
+
+const types = [];
+const types2 = [];
+
+for(let i = 0; i < jonasArray.length; i++ ){
+    //reading from jonas array
+    // console.log(jonasArray[i], typeof jonasArray[i]);
+
+    //we have two main ways of filling an array:
+    types[i] = typeof jonasArray[i];  // 
+    types2.push(typeof jonasArray[i]); // you have to use push instead of unshift here cause otherwise the array would be filled backwards 
+};
+
+// console.log(types);  //[ 'Michael', 'Peter', 'Steven' ] 'object'
+// console.log(types2); //[ 'Michael', 'Peter', 'Steven' ] 'object'
+
+
+//***the use of continue and break in a loop***
+
+console.log('--- ONLY STRINGS --- ');
+for(let i = 0; i < jonasArray.length; i++){
+    if (typeof jonasArray[i] != 'string') continue; //so here the if is checknig if the data type of the index in turn is matching wiht the string 'string' because typeof returns the data type as a string so if the datatype is different from string if that is true then the continue keyword will be executed and what it does is to jump to the next iteration skipping the console.log, if the if is false then the loop proceed normaly and the console.log will be executed
+
+    console.log(jonasArray[i], typeof jonasArray[i]);
+}
+
+
+console.log('--- BREAK WITH NUMBER ---');
+for(let i = 0; i < jonasArray.length; i++){
+    if (typeof jonasArray[i] === 'number') break; //here when the loop reads the [2]index which is number it will be true that the jonasArray[2] === 'number' so it will execute the break and the break what it does is to exit the loop even if there are sill more pending array items to read
+
+    console.log(jonasArray[i], typeof jonasArray[i]);
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+***HOW TO USE THE DEBUGGER OF GOOGLE CHROME***
+
+Open a chrome tab, open the inspector, and select the Sources tab, then at the left side you must find the file you are trying to debugg
+
+breakpoints:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
