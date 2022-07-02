@@ -1,6 +1,6 @@
-# JavaScript from Zero to Expert Notes
+# JavaScript from Zero to Expert
 
-### JavaScript Fundamentals
+### Course notes
 
 <details>
 <summary><b>Intro</b></summary>
