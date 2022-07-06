@@ -231,6 +231,7 @@
     - For loop keeps running while condition is true
       ```JavaScript
       for (let i=0; i<10; i++) {console.log(i)};
+      for (let i=0; i<10; i++) console.log(i); // This will also work
       ```
     - You can iterate through an array by using the index
       ```JavaScript
@@ -488,6 +489,8 @@
   - JS interaction with the DOM reference is in WEB APIs
 - Acces to an HTML node
   - Access by query selector `document.querySelector('.my-class');`
+    - Query selector only acces the first incidence, if you want to get all just use `.querySelectorAll()`
+    - The `.` is only used when you are looking for a class selector, other methods like `myNode.classList.remove('my-class-1', 'my-class-2');`
   - Access by ID `document.getElementByID('my-ID');`
   - You can modify properties of the element
     ```JavaScript
@@ -500,7 +503,9 @@
     - Click example
       ```JavaScript
       const myNode = document.querySelector('.my-class');
-      myNode.addEventListener('click', function());
+      const myFunction = () => return true;
+      myNode.addEventListener('click', function() {return true});
+      myNode.addEventListener('click', myFunction);
       ```
 
 </details>
