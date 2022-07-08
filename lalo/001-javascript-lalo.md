@@ -56,8 +56,7 @@
   - Start with lowercase, upper is for classes
   - Check universal constants like `PI`
   - Be descriptive, `firstName` better than `name1`
-- Values are objects or primitives
-  - Objects
+- Primitives values
   - Primitives
     - Numbers `5, 5.9`
     - Strings `""`
@@ -76,11 +75,15 @@
     - `0, '', undefined, null, NaN` return a falsy value of `false`
     - All other values are truthy and return `true`
     - You can check by ransforming values to booleans:
-      - `Boolean(0) // false`
-      - `Boolean(1) // true`
+      ```JavaScript
+      Boolean(0) // false
+      Boolean(1) // true
+      ```
 - Comments
-  - `// Single line`
-  - `/* Multiline */`
+  ```JavaScript
+  // Single line
+  /* Multiline */
+  ```
 - Math operators
   - `+` plus (sum of two numbers or concatenate strings)
   - `-` less
@@ -97,17 +100,15 @@
   - `<=` less than equal
   - `>=` plus than equal
 - Strings and template literals
-  - `"String"` `'String'` `` `String` ``
+  - Syntax `"String"` `'String'` `` `String` ``
   - Concatenate `'Hi ' + 'dear!'`
   - Template literals `` `I am ${jsValue} years old` ``
 - Conditionals:
   - Positive `if (condition) {execution}`
   - Negative `if (!condition) {execution}`
   - Multiple `if (c) {e1} else if (c2) {e2} else {e3}`
-- Expressions: poduce a value
-  - `true && false`
-- Statements: sentences that translate our order
-  - `const str = 'Sentence'`
+- Expressions: poduce a value `true && false`
+- Statements: sentences that translate our order `const str = 'Sentence'`
 - Equality operators:
   - Strict operators, without type coercion:
     - `===` equal
@@ -121,15 +122,23 @@
   - `&&` and
   - `||` or
   - `!` not
-- Switch:
-  - It's an statement so it can`t be inside a function or return
-  - `switch(variable){case logic: exec;}`
-  - `break;` if you want to break at that step
-  - `case logic: case logic: exec;` several cases or
-  - `default` like an else statement
-- Ternary:
-  - It's a expression so it can be inside a function or return
-  - `5 ? It's five : 'It's not five'`
+- Switch: It's an statement so it can`t be inside a function or return
+  ```JavaScript
+  const variable = 1;
+  switch(variable){
+    case 1:
+      console.log('It\'s one'); // If variable is equal to 1 it's executed
+      break; //if you want to break at that step
+    case 2:
+      console.log('It\'s two'); // Multiple cases
+    default:
+      console.log('It\'s not a number');//like an else statement
+  }
+  ```
+- Ternary operator: It's a expression so it can be inside a function or return
+  ```JavaScript
+  const isFive = 5 ? 'It\'s five' : 'It\'s not five';
+  ```
 
 </details>
 
@@ -145,30 +154,37 @@
   - Define functions
     - `function` reserved word can be used to define a function
       - `function funcName(parameters) {action};` this is a function declaration and it can be used before it's declarated
-      - You can also use this reserved word to create an anonymous function (function expression):
-        - `const anonymous = function(params) {action}`
+      - You can also use this reserved word to create an anonymous function (function expression): `const anonymous = function(params) {action}`
     - Arrow functions
-      - It doesn't have the `this` keword
-      - `parameter => action`
+      - They don't have the `this` keword
+        ```JavaScript
+        const myFunction = num1 => num1 + 1;
+        ```
         - it returns explicitally without `return`
       - If it gets complex it needs more structure
-        - `const myFunction = (multiple, params) => {multipleLineAction needs return}`
-  - Call / run / invoke functions
-    - `myFunction(argument);`
+        ```JavaScript
+        const myFunction = (num1, num2) => num1 + num2; // Single line
+        const myFunction = (num1, num2) => {
+          return num1 + num2 // Multi-line needs return
+        }
+        ```
+  - Call / run / invoke functions `myFunction(argument);`
     - The parameter is the name used to define the function variables and the argument the actual value used when calling the function
   - `return` returns a value at the end of the function
     - Just the first `return` achieved returns a value
     - Just works inside functions
     - If the function doesn't have a `return` it returns `undefined`
     - If you want to return a list use brackets `[]` if not it will return just the last value
-      - `return true, false //false`
-      - `return [true, false] //[true, false]`
+      ```JavaScript
+      return true, false //false
+      return [true, false] //[true, false]
+      ```
     - It needs parenthesis if you start the return value in the second line
-    ```JavaScript
-    return (
-        5 + 10
-    )
-    ```
+      ```JavaScript
+      return (
+          5 + 10
+      )
+      ```
   - You can use functions inside other functions so you can write cleaner code
     ```JavaScript
     function func1() {return true};
@@ -179,27 +195,38 @@
     ```
   - Arrays
     - Declarate an array:
-      - Literal:
-        - `const nums = [1,2,3,4];`
-      - New object:
-        - `const nums = new Array(1,2,3,4);`
+      - Literal: `const nums = [1,2,3,4];`
+      - New object: `const nums = new Array(1,2,3,4);`
       - Zero indexed `nums[0] // first element, expression inside, not statement`
       - Length `nums.length // 4`
-      - Change array values:
-        - `nums[0] = 10; //[10,2,3,4]`
+      - Change array values: `nums[0] = 10; //[10,2,3,4]`
       - This is not a primitive value so even though it's declared as const you can change the values inside the object.
       - If you put an array in another variable and modify it, the value will be modified in both becaus is the same object referenced in another variable, to change this behavior you'll need to copy it in the new variable.
     - Array methods:
       - `.push` add to the end
-        - `console.log(arr.push(5)) //5`
+        ```JavaScript
+        console.log(arr.push(5)) //5
+        ```
       - `.unshift` add to the begining
-        - `console.log(arr.unshift(5)) //5`
+        ```JavaScript
+        console.log(arr.unshift(5)) //5
+        ```
       - `.pop` remove the last element
-        - `console.log(arr.pop()) //Value popped`
+        ```JavaScript
+        console.log(arr.pop()) //Value popped
+        ```
       - `.shift` removes the first element
-        - `console.log(arr.shift()) //Value popped`
+        ```JavaScript
+        console.log(arr.shift()) //Value shifted
+        ```
       - `.indexOf` returns the index of the argument
-        - `arr.indexOf(value)`
+        ```JavaScript
+        arr.indexOf(value) // Returns a number
+        ```
+      - `.includes` returns whether or not an array includes certain value
+        ```JavaScript
+        arr.includes(value) // Returns a boolean
+        ```
   - Objects
 
     - Non ordered data structure
@@ -209,8 +236,7 @@
         - Dot notation, member access `objName.key`
         - Bracket notation, computed member access `objName['key']`
           - Useful when concatenation needed `objName['key'+'2']`
-      - Add or modify an entry:
-        - `objName['key'+'2'] = 'new value 2';`
+      - Add or modify an entry: `objName['key'+'2'] = 'new value 2';`
       - Add functions to objects
         ```JavaScript
         const objWithFunc = {
@@ -317,7 +343,7 @@
 - Developer mind
   - Goal
     - Realistic time based
-    - Why are you learning? `Career change`
+    - Why are you learning? `Complement my career`
     - Imagine a project
     - Research technologies
   - Always understand the code by studying it and typing it
@@ -360,7 +386,9 @@
         - Write unit testing
     - Breakpoint:
       - Usefull console methods for debugging:
-        - `console.warn() console.error() console.table(object)`
+        ```JavaScript
+        console.warn(); console.error(); console.table(object);
+        ```
       - Chrome debugger:
         - `View > Developer > Inspect Element` or `⌘⌥C`
         - Go to sources and select the JavaScript file to debug
@@ -491,11 +519,15 @@
   - Access by query selector `document.querySelector('.my-class');`
     - Query selector only acces the first incidence, if you want to get all just use `.querySelectorAll()`
     - The `.` is only used when you are looking for a class selector, other methods like `myNode.classList.remove('my-class-1', 'my-class-2');`
-  - Access by ID `document.getElementByID('my-ID');`
+  - Access by ID
+    ```JavaScript
+    document.getElementByID('my-ID'); // Faster
+    document.querySelector('#my-ID'); // Easier
+    ```
   - You can modify properties of the element
     ```JavaScript
     document.querySelector('.my-class').textContent = 'New content';
-    document.getElementByID('my-ID').textContent = 'New content';
+    document.querySelector('#my-ID').textContent = 'New content';
     ```
   - Events
     - An event is something that happends in te page like a mouse movement
@@ -507,5 +539,126 @@
       myNode.addEventListener('click', function() {return true});
       myNode.addEventListener('click', myFunction);
       ```
+
+</details>
+
+<details>
+<summary><strong>How JavaScript Works Behind the Scenes</strong></summary>
+<br/>
+
+- ### A Hiigh-Level Overview of JavaScript
+
+  - High-Level: You don't manage hardware resources
+  - Garbage-collected: Clears the memory time to time
+  - Interpreted or just-in-time compiled: We write human readable code and is interpreted by the computer as machine code
+  - Multi-paradigm:
+    - Procedural programming - Organize code with some functions in betweem
+    - Object-oriented programming (OOP) -
+    - Functional programming
+  - Prototype-based object-oriented
+    - Almost everything is an object (has methods inside)
+      ```JavaScript
+      // Array object
+      // --------------------------------
+      const myArr = new Array(1);
+      // [ <1 empty item> ]
+      myArr.push('Index 1');
+      // [ <1 empty item>, 'Index 1' ]
+      myArr[0] = 'Index 0';
+      // [ 'Index 0', 'Index 1' ]
+      myArr.length
+      // 2
+      // --------------------------------
+      ```
+    - First-class functions
+      - Functions treated as variables, we can pass them into other functions and return them from functions
+        - `document.querySelector('.some-class').addEventListener('click', firstClassFunction);`
+    - Dynamically-typed language
+      - No data type definitions (identified at runtime)
+      - Data type is automatically changed
+        ```JavaScript
+        let myVar = 3;
+        myVar = 'Changed to string';
+        ```
+    - Non-blocking event loop
+      - _Concurrency model_ is how JavaScript handles multiple tasks happening at the same time
+      - Runs in a single thread, so it can only do one thing at a time
+      - By using an _event loop_ JavaScript takes long running tasks, executes them in background and puts them back in the main thread when they're finished
+
+- ### The JavaScript Engine and Runtime
+
+  - Computer Science side note:
+    - Compilation: The code is converted into machine code so the computer can execute it
+      - `Source Code` -Compilation-> `Portable file: Machine code` -Execution-> `Program running`
+    - Interpretation: An interpreter runs through the source code and executes it line by line
+      - `Source Code` -Execution line by line-> `Program running`
+    - Just-in-time (JIT) compilation: the code is converted into machine code at once, then it's executed immediately
+      - `Source Code` -Compilation-> `Machine code` -Execution-> `Program running`
+  - An engine is a program that executes JavaScript code
+    - Some of the most popular are:
+      - Node JS, Google's V8, Firefox, Safari
+    - How does an engine work?
+      - Call Stack: Where the code is executed
+      - Heap: Where the objects are stored
+    - Engine step by step
+      - Parsing: Checks for errors in the code and generates the Abstract Syntax Tree (AST)
+      - Compilation: Takes the AST and converts it into machine code (Just-in-time compilation)
+      - Execution: Executes the machine code in the Call Stack
+      - Optimization: Modern JavaScript executes code faster by bringing a not optimized machine code to execution and then re-compilate it until it's optimized
+  - Runtime
+    - The heart of the runtime is an engine.
+    - In the browser the engine has extra-functionalities provided by the WEB APIs and the callback queue (events, data, etc.)
+      - The callback queue puts callback functions ready to use in the call stack
+
+- ### Execution Contexts and The Call Stack:
+
+  > **Execution context (EC):** Environment in which a piece of JavaScript is executed, stores the necessary information for a code to be executed
+  >
+  > - Structure:
+  >   - Variable environment
+  >     - let, const and var decalrations, functions, arguments object (not arrow functions)
+  >   - Scope chain
+  >   - `this` keyword (not arrow functions)
+
+  - Execution:
+    - Global execution context for top level code (it's always one) -> Code outside our functions
+    - Execution of the top-level code inside the global EC
+    - Execution of functions and waiting for callbacks (one per function call)
+
+  > **The Call Stack:** Is where all the execution contexts are stacked for execution and it gives the instructions to execute
+
+- ### Scope and The Scope Chain
+  - Scoping: How oure variables are organized and accessed
+  - Lexical Scoping: Scoping is controlled by placement of functions and blocks in the code
+  - Scope: Space or environment in which certain variable is declared
+    - Global scope: Top level code accesible everywhere
+    - Function scope: Variables accesible inside the function (local scope)
+    - Block scope (ES6 only): `let` and `const` variables are accesible only inside a block, functions are block scope just in strict mode
+  - Scope of a variable: Region of our code where a certain variable can be accessed
+    ```JavaScript
+    const myGlobalVar = 'Global scope';
+    let mutable = 'I will change';
+    function first() {
+      const myFunctionScope = 'Local scope';
+      mutable = 'I changed';
+      // Local scopes can access global scopes
+      return `${myGlobalVar} ${myFunctionScope}`;
+    }
+    first(); // 'Global scope Local scope' and changes mutable
+    console.log(mutable); // 'I changed'
+    // Block scopes only live within a block
+    if (myGlobalVar) {
+      // You can use global scopes in functions
+      const blockScope = myGlobalVar.replace('Global', 'Block');
+      var varVariable = myGlobalVar.replace('Global', 'Var');
+      console.log(blockScope); // 'Block scope'
+    }
+    // Printing the scopes, local and block scopes cannot be accessed in the global scope
+    console.log(myGlobalVar); // 'Global scope'
+    console.log(varVariable); // 'Var scope' var is not block scope because is not ES6
+    console.log(myFunctionScope); // Uncaught ReferenceError: myFunctionScope is not defined
+    console.log(blockScope); // Uncaught ReferenceError: blockScope is not defined
+    ```
+- ### Variable Environment: Hoisting and The TDZ
 
 </details>
