@@ -661,4 +661,341 @@
     ```
 - ### Variable Environment: Hoisting and The TDZ
 
+  - Hoisting: Makes some types of variables accesible/usable in the code before they are actually declared
+
+    - Before execute the code, variable declarations are scanned and a new property is declared in the variable environment object for each variable.
+      ||Hoisted|Initial Value|Scope
+      |---|---|---|---|
+      |**`function()` declarations** |✅ Yes|Actual function|Block|
+      |**`var` variables** |✅ Yes|`undefined`|Function|
+      |**`let` and `const` variables** |🚫 No|`<uninitialized>`, Temporal Dead Zone (TDZ)|Block|
+      |**`function` expressions and arrows `= () => {}`** |Depends if using `var` or `let/const`|Depends if using `var` or `let/const`|Depends if using `var` or `let/const`|
+
+  - Why hoisting?
+    - Using functions before the actual declaration
+    - `var` hoisting is just a byproduct
+  - Why TDZ?
+    - Easier to avoid cache errors: accessing variables before declare is a bad practice
+    - Makes const variables actually work
+
+- In Practice:
+
+  ```JavaScript
+  // Hoisting and Temporal Dead Zone (TDZ)
+  'use strict';
+
+  // Variables
+
+  console.log(varVar);
+  // Returns undefined also if var is used in functions so you cannot call them
+  // var keyword adds a variable into the DOM window object, so be careful
+  console.log(letVar);
+  // ReferenceError: Cannot access 'letVar' before initialization
+  console.log(constVar);
+  // ReferenceError: Cannot access 'constVar' before initialization
+  var varVar = 'var variable';
+  let letVar = 'let variable';
+  const constVar = 'const variable';
+
+  // Functions
+
+  console.log(funcDec());
+  // Function declaration
+  console.log(funcExp());
+  // ReferenceError: Cannot access 'funcExp' before initialization
+  console.log(funcArr());
+  // ReferenceError: Cannot access 'funcArr' before initialization
+
+  function funcDec() {
+    return 'Function declaration';
+  }
+  const funcExp = function() {
+    return 'Function expression';
+  };
+  const funcArr = () => 'Arrow function';
+  ```
+
+  - The conclusion is never to use `var` because it an lead to hoisting problems
+  - Declare functions before calling them
+
+- ### The `this` Keyword
+
+  - Special variable created for every execution context
+    - Points to the owner of the object
+    - It's not static and depends on how the function is called (its value is asigned when it's called)
+      - Method `this` -> Object that is calling the method
+        ```JavaScript
+        const owner = {name: 'Mr. Owner', whoIsTheOwner: function() {return this.name + ' is the owner'}}
+        // The owner is the object referenced in the variable const owner
+        owner.whoIsTheOwner(); // Mr. Owner is the owner
+        ```
+      - Simple function call `this` -> undefined
+      - Arrow functions `this` -> Don't have it because it doesn't uses the lexical this keyword, it points to window
+      - Event listener `this` -> DOM element attached to the event
+      - `new` `call` `apply` `bind`
+
+  ```JavaScript
+  console.log(this);
+  // Strict mode: {}
+  // No strict mode: {} -> Window in browser
+
+  const thisFunction = function(thisNumber) {
+    console.log(thisNumber);
+    console.log(this);
+  };
+  thisFunction(1);
+  // Strict mode: 1, undefined
+  // No strict mode: 1, <ref *1> Object [global] -> Undefined in browser
+
+  const thisArrowFunction = function(thisNumber) {
+    console.log(thisNumber);
+    console.log(this);
+  };
+  thisArrowFunction(2);
+  // Strict mode: 2, undefined
+  // No strict mode: 2, <ref *1> Object [global] -> Window in browser
+
+  const thisObject = {
+    number: 3,
+    objectFunction: function() {
+      console.log(this.number);
+      console.log(this);
+    },
+  };
+  thisObject.objectFunction();
+  // Strict mode: 3, { number: 3, objectFunction: [Function: objectFunction] }
+  // No strict mode: 3, { number: 3, objectFunction: [Function: objectFunction] }
+
+  const thisOtherObject = { number: 4 };
+  thisOtherObject.objectFunction = thisObject.objectFunction;
+  thisOtherObject.objectFunction();
+  // Strict mode: 4, { number: 4, objectFunction: [Function: objectFunction] }
+  // No strict mode: 4, { number: 4, objectFunction: [Function: objectFunction] }
+
+  const objectFunctionOutside = thisObject.objectFunction;
+  console.log(objectFunctionOutside());
+  // Strict mode: undefined, TypeError: Cannot read property 'number' of undefined
+  // No strict mode: undefined, <ref *1> Object [global] -> Window in browser - undefined
+  ```
+
+- ### Regular Functions vs. Arrow Functions
+
+  - Arrow functions inside objects will return undefined for this
+
+    ```JavaScript
+    const thisObject = {
+      number: 1,
+      objectFunction: function() {
+        console.log(this.number);
+        console.log(this);
+      },
+      objectArrowFunction: () => {
+        console.log(this.number);
+        console.log(this);
+      },
+    };
+
+    thisObject.objectFunction();
+    // Strict and no strict mode:
+    /*
+    1
+    {
+      number: 1,
+      objectFunction: [Function: objectFunction],
+      objectArrowFunction: [Function: objectArrowFunction]
+    }
+    */
+
+    thisObject.objectArrowFunction();
+    // Strict and no strict mode: undefined, {}
+    // It's because an arrow this is a reference to the global scope, window in the browser
+    // B
+    ```
+
+  - Var adds values to global scope and those can be accessed by using this inside arrow functions
+
+    ```JavaScript
+    var number = 2;
+    const thisObject = {
+      number: 1,
+      objectArrowFunction: () => {
+        console.log(this.number);
+        console.log(this);
+      },
+    };
+
+    thisObject.objectArrowFunction();
+    // On browser: 2, Window{... number: 2 ...}
+    ```
+
+  - You can also have trouble calling the `this` keword inside a function that is inside another function in an object
+
+    ```JavaScript
+    const thisObject = {
+      number: 1,
+      objectFunction: function() {
+        console.log(this.number);
+        console.log(this);
+        const isOne = function() {
+          console.log(this.number === 1);
+        };
+        isOne();
+      },
+    };
+
+    thisObject.objectFunction();
+    // Strict mode: 1, TypeError: Cannot read property 'number' of undefined
+    // No strict mode: 1, { number: 1, objectFunction: [Function: objectFunction] }, false
+    ```
+
+    - A smart solution for this is to use another variable inide the first method, usually `self` or `that`
+
+    ```JavaScript
+    const thisObject = {
+      number: 1,
+      objectFunction: function() {
+        console.log(this.number);
+        console.log(this);
+        const self = this;
+        const isOne = function() {
+          console.log(self.number === 1);
+        };
+        isOne();
+      },
+    };
+
+    thisObject.objectFunction();
+    // Strict and no strict mode:
+    /*
+    1
+    { number: 1, objectFunction: [Function: objectFunction] }
+    true
+    */
+    ```
+
+    - Or you can use an arrow function because it doesn't have a this keyword and inside the other method it'll use the `this` keword of the parent object
+
+    ```JavaScript
+    const thisObject = {
+      number: 1,
+      objectFunction: function() {
+        console.log(this.number);
+        console.log(this);
+        const isOne = () => {
+          console.log(this.number === 1);
+        };
+        isOne();
+      },
+    };
+
+    thisObject.objectFunction();
+    // Strict and no strict mode:
+    /*
+    1
+    { number: 1, objectFunction: [Function: objectFunction] }
+    true
+    */
+    ```
+
+    - The `arguments` keyword returns the arguments of the function but onlu in function expressions
+
+      ```JavaScript
+      const funcExpr = function(a, b) {
+        console.log(arguments);
+        return a + b;
+      };
+      funcExpr(1, 2);
+      // [Arguments] { '0': 1, '1': 2 }
+      funcExpr(1, 2, 3, 4, 5);
+      // [Arguments] { '0': 1, '1': 2, '2': 3, '3': 4, '4': 5 }
+
+      const funcArrow = (a, b) => {
+        console.log(arguments);
+        return a + b;
+      };
+      funcArrow(1, 2);
+      // ReferenceError: arguments is not defined
+      funcArrow(1, 2, 3, 4, 5);
+      // ReferenceError: arguments is not defined
+      ```
+
+- ### Primitives vs. Objects (Primitive vs. Reference Types)
+
+  - Primitives:
+
+    - _Number, String, Boolean, Undefined, Null, Symbol, BigInt_
+    - Stored in the Call Stack
+
+      ```JavaScript
+      let someVariable = 30;
+      let oldVariable = someVariable;
+      someVariable = 31 // Value saved on 0002 not in 0001 because it's used on oldVariable
+      const myObj = {someEntry: 'Some entry value'} // referenced to an object saved on Heap
+      ```
+
+      | Identifier   | Address | Value |
+      | ------------ | ------- | ----- |
+      | someVariable | 0001    | 30    |
+      | oldVariable  | 0002    | 31    |
+      | myObj        | 0003    | D30F  |
+
+    - Can be modified after asigned
+      ```JavaScript
+      let someNum = 1;
+      console.log(someNum); // 1
+      let newNum = someNum;
+      someNum = 2;
+      console.log(newNum); // 1
+      console.log(someNum); // 2
+      ```
+
+  - Objects
+
+    - _Object literal, Arrays, Functions, Many more…_
+    - Stored in the Heap
+
+      | Address | Value                           |
+      | ------- | ------------------------------- |
+      | D30F    | {someEntry: 'Some entry value'} |
+
+    - There are referenced inside variables and if you change them inside one variable it will be changed inside other variables that share the reference
+      ```JavaScript
+      const me = { name: 'Jonas', age: 30 };
+      const friend = me;
+      friend.age = 27;
+      console.log(me); // { name: 'Jonas', age: 27 }
+      console.log(friend); // { name: 'Jonas', age: 27 }
+      ```
+    - If you want to create a new object using a previous one you can use the following method
+      ```JavaScript
+      const newFriend = Object.assign({}, friend);
+      newFriend.name = 'Douglas';
+      newFriend.age = 30;
+      console.log(friend); // { name: 'Jonas', age: 27 }
+      console.log(newFriend) // { name: 'Douglas', age: 30 }
+      ```
+      - This is good for a first level copy but it doesn't works with objects inside objects (deep cloning)
+
+</details>
+
+<details>
+<summary><strong>Data Structures, Modern Operators and Strings</strong></summary>
+
+- Destructuring Arrays
+- Destructuring Objects
+- The Spread Operator (...)
+- Rest Pattern and Parameters
+- Short Circuiting (&& and ||)
+- The Nullish Coalescing Operator (??)
+- Logical Assignment Operators
+- Looping Arrays: The for-of Loop
+- Enhaced Object Literals
+- Optional chaining (?.)
+- Looping Objects: Object Keys, Values, and Entries
+- Sets
+- Maps: Fundamentals
+- Maps: Iteration
+- Which Data Structure to Use?
+- Working With Strings
+
 </details>
