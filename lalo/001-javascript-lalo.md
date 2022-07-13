@@ -982,20 +982,367 @@
 <summary><strong>Data Structures, Modern Operators and Strings</strong></summary>
 
 - Destructuring Arrays
+
+  ```JavaScript
+  const arr = [2, 3, 4];
+  // You can assingn an array values to different variables
+  const a = arr[0];
+  const b = arr[1];
+  const c = arr[2];
+  // Or destructure and do it in one line
+  const [x, y, z] = arr;
+  console.log(x, y, z); // 2, 3, 4
+
+  // You can use destructure with arrays inside objects
+  const sports = {
+    name: 'Sports selection',
+    trainingCentre: 'Two Rivers, MX, Mexico',
+    categories: ['Rugby', 'Skateboard', 'Soccer', 'Swimming', 'Tennis'],
+    warmUp: ['Jogging', 'Jumping', 'Sprinting'],
+    coolDown: ['Walk', 'Stretch'],
+    ranWorkout: function() {
+      return [
+        this.warmUp[Math.floor(Math.random() * this.warmUp.length)],
+        this.categories[Math.floor(Math.random() * this.categories.length)],
+        this.coolDown[Math.floor(Math.random() * this.coolDown.length)],
+      ];
+    },
+  };
+  // You can destructure an array by assin¡gning a name to the elements you want,
+  // and leaving empty the ones you dont want
+  let [favorite, , , , lessFavorite] = sports.categories;
+  console.log(favorite, lessFavorite); // Rugby Tennis
+  // Switch values
+  [favorite, lessFavorite] = [lessFavorite, favorite];
+  console.log(favorite, lessFavorite); // Tennis Rugby
+  // Destructuring from a return value from a function
+  let [myWarmUp, mySport, myCoolDown] = sports.ranWorkout();
+  console.log(myWarmUp, mySport, myCoolDown); // Jumping Rugby Stretch
+
+  // Destructuring nested arrays
+  const nested = [0, [1, 11], [2, 3]];
+  const [, [one], [two, three]] = nested;
+  console.log(one, two, three); // 1 2 3
+
+  // Destructuring with default values, if they are not assigned they're undefined
+  const [ja, ha, kha = 'Russian'] = ['Español', 'Inglés'];
+  console.log(ja, ha, kha); // Español Inglés Russian (undefined if not assigned)
+  ```
+
 - Destructuring Objects
+
+  ```JavaScript
+  const sports = {
+    collectionName: 'Sports selection',
+    trainingCentre: 'Two Rivers, MX, Mexico',
+    categories: ['Rugby', 'Skateboard', 'Soccer', 'Swimming', 'Tennis'],
+  };
+
+  // For object destructure you need to match the key of the object
+  let { collectionName, trainingCentre, categories } = sports;
+  console.log(collectionName, trainingCentre, categories);
+  // Sports selection Two Rivers, MX, Mexico [ 'Rugby', 'Skateboard', 'Soccer', 'Swimming', 'Tennis' ]
+
+  // You can assign specific entries { entryName: yourVar }
+  const {
+    collectionName: myCollection,
+    trainingCentre: myClub,
+    categories: mySports,
+  } = sports;
+  console.log(myCollection, myClub, mySports);
+  // Sports selection Two Rivers, MX, Mexico [ 'Rugby', 'Skateboard', 'Soccer', 'Swimming', 'Tennis' ]
+
+  // You can set default values
+  const { categories: normalSports, extreme = [] } = sports;
+  console.log(normalSports, extreme);
+  // [ 'Rugby', 'Skateboard', 'Soccer', 'Swimming', 'Tennis' ] []
+
+  // Mutating variables
+  let col1 = 'Red',
+    col2 = 'Blue';
+  const colors = { col1: 'Magenta', col2: 'Cyan' };
+  ({ col1, col2 } = colors); // Wrapped into parenthesis
+  console.log(col1, col2); // Magenta Cyan
+
+  // Nested objects
+  const square = {
+    coord1: { x: 0, y: 0 },
+    coord2: { x: 10, y: 0 },
+    coord3: { x: 10, y: 10 },
+    coord4: { x: 0, y: 10 },
+  };
+  const {
+    coord1: { x, y, z = 0 }, // You can add defaults to prevent undefined values
+  } = square;
+  console.log(x, y, z); // 0 0 0
+
+  // Destructuring an object inside a function
+  function destructureObj({ name, surname }) {
+    return `I am ${name} ${surname}`;
+  }
+  const jonasFierro = { name: 'Jonás', surname: 'Fierro' };
+  console.log(destructureObj(jonasFierro));
+  // I am Jonás Fierro
+  ```
+
 - The Spread Operator (...)
+
+  ```JavaScript
+  // SPREAD packs elements into an array
+  // Is useful to unpack an array
+  const arr1 = [0, 1, 2, 3, 4, 5];
+  const arr2 = [...arr1, 6, 7, 8, 9];
+  // arr2 is the same as [arr1[0], arr1[1], arr1[2], arr1[3], arr1[4], arr1[5], 6, 7, 8, 9]
+  console.log(arr2); // [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+
+  // Yuo can unpack an array inside an object
+  const arrInObj = { arr: [1, 2, 3, 4] };
+  const arr3 = [...arrInObj.arr, 5];
+  console.log(arr3); // [ 1, 2, 3, 4, 5 ]
+
+  // Copy an array
+  const arr4 = [...arr3];
+  console.log(arr4); // [ 1, 2, 3, 4, 5 ]
+
+  // Join 2 arrays
+  const arr5 = [6, 7, 8, 9, 10];
+  const arr6 = [...arr4, ...arr5];
+  console.log(arr6); // [ 1, 2, 3, 4,  5, 6, 7, 8, 9, 10 ]
+
+  // Iterables: arrays, strings, maps, sets, NOT objects
+  const str = 'Iterate';
+  const letters = [...str, '!'];
+  console.log(letters); // [ 'I', 't', 'e', 'r', 'a', 't', 'e', '!' ]
+
+  // Add it to a function
+  function iterable(one, two, three) {
+    let str = '';
+    for (const count of [one, two, three]) {
+      str += `Now the number is ${count}!\n`;
+    }
+    return str;
+  }
+  console.log(iterable(...[1, 2, 3]));
+  /*
+  Now the number is 1!
+  Now the number is 2!
+  Now the number is 3!
+  */
+
+  // You can use it with an object as well
+  const oldObj = { old: "I'm old", age: 90 };
+  const newObj = { ...oldObj, new: "I'm new", age: 1 };
+  const copyOfNewObj = { ...newObj }; // Copy of newObj
+  copyOfNewObj.old = "I'm not old";
+  console.log(oldObj); // { old: "I'm old", age: 90 }
+  console.log(newObj); // { old: "I'm old", age: 1, new: "I'm new" }
+  console.log(copyOfNewObj); // { old: "I'm not old", age: 1, new: "I'm new" }
+  ```
+
 - Rest Pattern and Parameters
+
+  ```JavaScript
+  // REST packs elements into a variable
+  const [a, b, ...others] = [1, 2, 3, 4, 5, 6, 7];
+  console.log(a, b, others); // 1 2 [ 3, 4, 5, 6, 7 ]
+
+  // REST is useful with destructuring
+  const countries = {
+    latam: ['México', 'Argentina', 'Brasil'],
+    northam: ['United States', 'Canada'],
+    oeurope: ['Netherlands', 'España', 'France', 'Italia'],
+    eeurope: ['România', 'Hrvatska', 'Україна'],
+  };
+  const [mx, , brl, ...otherCountries] = [
+    ...countries.latam,
+    ...countries.eeurope,
+  ];
+  console.log(mx, brl, otherCountries);
+  // México Brasil [ 'România', 'Hrvatska', 'Україна' ]
+
+  const { oeurope: euroOr, eeurope: euroOcc, ...america } = countries;
+  console.log(euroOr, euroOcc, america);
+  // [ 'Netherlands', 'España', 'France', 'Italia' ]
+  // [ 'România', 'Hrvatska', 'Україна' ]
+  /*
+  {
+    latam: [ 'México', 'Argentina', 'Brasil' ],
+    northam: [ 'United States', 'Canada' ]
+  }
+  */
+
+  // Add it to a function
+  function iterable(...counting) {
+    let str = '';
+    for (const count of counting) {
+      str += `Now the number is ${count}!\n`;
+    }
+    return str;
+  }
+  console.log(iterable(1, 2, 3, 4, 5, 6, 7, 8));
+  /*
+    Now the number is 1!
+    Now the number is 2!
+    Now the number is 3!
+    Now the number is 4!
+    Now the number is 5!
+    Now the number is 6!
+    Now the number is 7!
+    Now the number is 8!
+    */
+  const newArr = [1, 2, 3];
+  console.log(iterable(...newArr));
+  /*
+  Now the number is 1!
+  Now the number is 2!
+  Now the number is 3!
+  */
+  console.log(iterable(...newArr, 4));
+  /*
+  Now the number is 1!
+  Now the number is 2!
+  Now the number is 3!
+  Now the number is 4!
+  */
+
+  ```
+
 - Short Circuiting (&& and ||)
+
+  ```JavaScript
+  // || (or) Returns the first value that is truthy
+  console.log(1 || 'Dope'); // 1
+  console.log(0 || 'Dope'); // Dope
+  console.log(0 || ''); // null
+  console.log(0 || '' || null || 'Truthty'); // Truthty
+  const lights = { on: false };
+  const lightsOn = lights.on || 'Turn on the lights';
+  console.log(lightsOn); // Turn on the lights
+
+  // && (and) returns the last value if everything is truthy
+  // it stops when finds a falsy value
+  console.log(0 && 'a'); // 0
+  console.log(1 && 'a'); // a
+  console.log(1 && 'a' && []); // []
+  console.log(1 && 'a' && [1] && null); // null
+
+  // Let's put them in conditionals
+  const bool1 = true,
+    bool2 = false,
+    bool3 = true,
+    bool4 = false;
+
+  if (bool1 || bool2) console.log(`bool1: ${bool1} || bool2: ${bool2}`);
+  // bool1: true || bool2: false
+  if (bool2 || bool4) console.log(`bool2: ${bool2} || bool4: ${bool4}`);
+  // nothing
+  if (bool1 || bool3) console.log(`bool1: ${bool1} || bool3: ${bool3}`);
+  // bool1: true || bool3: true
+  if (bool1 && bool2) console.log(`bool1: ${bool1} && bool2: ${bool2}`);
+  // nothing
+  if (bool1 && bool3) console.log(`bool1: ${bool1} && bool3: ${bool3}`);
+  // bool1: true && bool3: true
+  if (bool2 && bool2) console.log(`bool2: ${bool2} && bool4: ${bool4}`);
+  // nothing
+  ```
+
 - The Nullish Coalescing Operator (??)
+
+  ```JavaScript
+  // Nullish: Null and undefined
+  const lights = { on: false };
+  let lightsOn = lights.on ?? 'Turn on the lights';
+  console.log(lightsOn); // false
+  lights.on = undefined;
+  lightsOn = lights.on ?? 'Turn on the lights';
+  console.log(lightsOn); // 'Turn on the lights'
+  ```
+
 - Logical Assignment Operators
+
+  ```JavaScript
+  const p1 = {
+    controller: 'P1',
+    alias: 'Berta',
+    hallOfFame: undefined,
+  };
+  const p2 = {
+    controller: 'P2',
+    alias: '',
+    exp: 10,
+    hallOfFame: undefined,
+  };
+
+  // The long way
+  p1.exp = p1.exp || 1;
+  console.log(p1);
+  // {controller: 'P1', alias: 'Berta', hallOfFame: undefined, exp: 1}
+  p2.exp = p2.exp && 1;
+  console.log(p2);
+  // {controller: 'P2', alias: '', exp: 1, hallOfFame: undefined}
+
+  // The short way in JavaScript 2021
+  p1.hallOfFame &&= 'Not yet!';
+  console.log(p1);
+  // {controller: 'P1', alias: 'Berta', hallOfFame: undefined, exp: 1}
+  p2.alias ||= 'No-Alias';
+  p2.hallOfFame ??= 'Not yet!';
+  console.log(p2);
+  // {controller: 'P2', alias: 'No-Alias', exp: 1, hallOfFame: 'Not yet!'}
+  ```
+
 - Looping Arrays: The for-of Loop
+
+  ```JavaScript
+
+  ```
+
 - Enhaced Object Literals
+
+  ```JavaScript
+
+  ```
+
 - Optional chaining (?.)
+
+  ```JavaScript
+
+  ```
+
 - Looping Objects: Object Keys, Values, and Entries
+
+  ```JavaScript
+
+  ```
+
 - Sets
+
+  ```JavaScript
+
+  ```
+
 - Maps: Fundamentals
+
+  ```JavaScript
+
+  ```
+
 - Maps: Iteration
+
+  ```JavaScript
+
+  ```
+
 - Which Data Structure to Use?
+
+  ```JavaScript
+
+  ```
+
 - Working With Strings
+
+  ```JavaScript
+
+  ```
 
 </details>
