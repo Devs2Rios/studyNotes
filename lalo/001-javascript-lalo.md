@@ -1294,25 +1294,198 @@
 - Looping Arrays: The for-of Loop
 
   ```JavaScript
+  const bigArray = [];
+  for (let i = 0; i < 5; i++) bigArray.push(Math.round(Math.random() * 1000));
+  for (const ranNum of bigArray) console.log(`Te random number is ${ranNum}`);
+  /*
+  Te random number is 831
+  Te random number is 769
+  Te random number is 223
+  Te random number is 188
+  Te random number is 204
+  */
 
+  // for loop with index and destructure
+  for (const [i, ranNum] of bigArray.entries())
+    console.log(`Te random number ${i + 1} is ${ranNum}`);
+  /*
+  Te random number 1 is 831
+  Te random number 2 is 769
+  Te random number 3 is 223
+  Te random number 4 is 188
+  Te random number 5 is 204
+  */
   ```
 
 - Enhaced Object Literals
 
   ```JavaScript
+  const thought = 'Thinking';
+  const arrLength = 3;
 
+  const objLiteral = {
+    quote: "I'm literal",
+    thoughts: ["I'm happy", "I'm sad", "I'm hungry"],
+    // ES& enhaced object literals
+    // Add an entry just by calling an outside variable
+    thought,
+    // Define an entry name by computing
+    arrLength,
+    [`arrWith${arrLength}els`]: new Array(arrLength),
+    // Add a function just by declaring the name and adding the paranthesis
+    newThougt() {
+      this.thought = this.thoughts[
+        Math.floor(Math.random() * this.thoughts.length)
+      ];
+      return this.thought;
+    },
+  };
+
+  objLiteral.newThougt();
+  console.log(objLiteral);
+  /*
+  {
+    quote: "I'm literal",
+    thoughts: [ "I'm happy", "I'm sad", "I'm hungry" ],
+    thought: "I'm sad",
+    arrLength: 3,
+    arrWith3els: [ <3 empty items> ],
+    newThougt: [Function: newThougt]
+  }
+  */
   ```
 
 - Optional chaining (?.)
 
   ```JavaScript
+  const pad = num => num.toString().padStart(5, '0');
+  const tr = 'tr',
+    bk = 'block';
 
+  const chained = {
+    [`${bk}${pad(1)}`]: {
+      [`${tr}${pad(1)}`]: {
+        hash: 'e193a01ecf8d30ad0affefd332ce934e32ffce72',
+        time: new Date(2019, 1, 28, 18, 1, 10, 230),
+      },
+      [`${tr}${pad(2)}`]: {
+        hash: '6fc978af728d43c59faa400d5f6e0471ac850d4c',
+        time: new Date(2020, 6, 1, 14, 31, 3, 915),
+      },
+    },
+    [`${bk}${pad(2)}`]: {
+      [`${tr}${pad(3)}`]: {
+        hash: '221407c03ae5c73109cce71d27e24637824f3333',
+        time: new Date(2020, 10, 1, 17, 15, 50, 750),
+      },
+      [`${tr}${pad(4)}`]: {
+        hash: 'c63528a52274a35d1c07bd9e55a83c6eb073de81',
+        time: new Date(2021, 8, 30, 11, 11, 11, 111),
+      },
+    },
+    [`${bk}${pad(3)}`]: {
+      [`${tr}${pad(5)}`]: {
+        hash: 'de1f53b6fbc3fecd35b0bbc963e21902a149e5e3',
+        time: new Date(2021, 11, 3, 0, 3, 45, 104),
+      },
+      [`${tr}${pad(6)}`]: {
+        hash: '20dd129da16a9afb802d8b595485f8d2719aea44',
+        time: new Date(2022, 2, 16, 9, 21, 36, 426),
+      },
+    },
+    [`${bk}${pad(4)}`]: {
+      [`${tr}${pad(7)}`]: {
+        hash: '',
+      },
+    },
+  };
+
+  console.log(chained?.block00001);
+  /*
+  {
+    tr00001: {
+      hash: 'e193a01ecf8d30ad0affefd332ce934e32ffce72',
+      time: 2019-03-01T00:01:10.230Z
+    },
+    tr00002: {
+      hash: '6fc978af728d43c59faa400d5f6e0471ac850d4c',
+      time: 2020-07-01T19:31:03.915Z
+    }
+  }
+  */
+  console.log(chained?.block00001?.tr00003 ?? 'No such transaction in the block'); // No such transaction in the block
+  console.log(chained?.block00004?.tr00007); // { hash: '' }
+  console.log(
+    chained?.block00004?.tr00007?.time ?? 'No timestamp in such transaction'
+  ); // No timestamp in such transaction
+  // It might be useful for a loop that checks transactions within a block
+  const [...myBlocks] = Object.keys(chained);
+  const myTransactions = [];
+  for (let i = 0; i < 7; i++) myTransactions.push(`${tr}${pad(i + 1)}`);
+  for (const myBlock of myBlocks) {
+    for (const myTransaction of myTransactions) {
+      const currentTransaction = chained[myBlock][myTransaction]?.hash;
+      if (currentTransaction) {
+        console.log(
+          `Block ${myBlock}, transaction ${myTransaction}: ${currentTransaction}`
+        );
+      }
+    }
+  }
+  /*
+  Block block00001, transaction tr00001: e193a01ecf8d30ad0affefd332ce934e32ffce72
+  Block block00001, transaction tr00002: 6fc978af728d43c59faa400d5f6e0471ac850d4c
+  Block block00002, transaction tr00003: 221407c03ae5c73109cce71d27e24637824f3333
+  Block block00002, transaction tr00004: c63528a52274a35d1c07bd9e55a83c6eb073de81
+  Block block00003, transaction tr00005: de1f53b6fbc3fecd35b0bbc963e21902a149e5e3
+  Block block00003, transaction tr00006: 20dd129da16a9afb802d8b595485f8d2719aea44
+  */
   ```
 
 - Looping Objects: Object Keys, Values, and Entries
 
   ```JavaScript
+  const animals = {
+  dog: {
+      id: 'Dog',
+      animalName: 'Frida',
+      breed: 'Labrador',
+      isPet: true,
+    },
+    cat: {
+      id: 'Cat',
+      animalName: 'Koshka',
+      breed: 'Munchkin',
+      isPet: true,
+    },
+    snake: {
+      id: 'Snake',
+      animalName: 'Piguay',
+      breed: 'Python',
+    },
+  };
 
+  const [...keys] = Object.keys(animals);
+  console.log(keys); // [ 'dog', 'cat', 'snake' ]
+  const [...values] = Object.values(animals);
+  console.log(values);
+  /*[
+    { id: 'Dog', animalName: 'Frida', breed: 'Labrador', isPet: true },
+    { id: 'Cat', animalName: 'Koshka', breed: 'Munchkin', isPet: true },
+    { id: 'Snake', animalName: 'Piguay', breed: 'Python' }
+  ]*/
+  for (const [key, animal] of Object.entries(animals)) {
+    console.log(
+      `animals.${key}: I'm a ${animal.breed} ${animal.id}, my name is ${
+        animal.animalName
+      } and I'm ${(animal?.isPet && 'a pet') || 'not a pet'}`
+    );
+  }
+  /*
+  animals.dog: I'm a Labrador Dog, my name is Frida and I'm a pet
+  animals.cat: I'm a Munchkin Cat, my name is Koshka and I'm a pet
+  animals.snake: I'm a Python Snake, my name is Piguay and I'm not a pet
+  */
   ```
 
 - Sets
