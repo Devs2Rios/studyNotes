@@ -1491,26 +1491,148 @@
 - Sets
 
   ```JavaScript
-
+  // A set is an unordered data (it has no indexes) structure that has unique elements inside of it
+  const newSet = new Set([10, 11, 40, 50, 11, 66, 50]); // You can pass any iterable as argument
+  console.log(newSet); // Set(5) { 10, 11, 40, 50, 66 }
+  const newStringSet = new Set('Still Fozzy');
+  console.log(newStringSet); // Set(9) { 'S', 't', 'i', 'l', ' ', 'F', 'o', 'z', 'y' }
+  // set methods
+  console.log(newSet.has(1)); // false
+  console.log(newStringSet.has('z')); // true
+  console.log(newStringSet.has(' ')); // true
+  newStringSet.delete(' ');
+  console.log(newStringSet.has(' ')); // false
+  newStringSet.add('!');
+  console.log(newStringSet.has('!')); // true
+  console.log(newStringSet); // Set(9) { 'S', 't', 'i', 'l', 'F', 'o', 'z', 'y', '!' }
+  for (const val of newStringSet) {
+    if (val === 'F') {
+      break;
+    } else {
+      console.log(val);
+    }
+  }
+  /*
+  S
+  t
+  i
+  l
+  */
+  newStringSet.clear();
+  console.log(newStringSet); // Set(0) {}
+  const newArrFromSet = [...new Set('Parangaricutirimicuaro')];
+  console.log(newArrFromSet); // [ 'P', 'a', 'r', 'n', 'g', 'i', 'c', 'u', 't', 'm', 'o' ]
   ```
 
 - Maps: Fundamentals
 
   ```JavaScript
-
+  // In maps the keys can have eny kind of value
+  const coffee = new Map();
+  // You can set values using the set method
+  coffee.set('Roast', 'Dark');
+  coffee.set('Origin', 'Chiapas');
+  coffee.set(304029198, 'Batch serial number');
+  // Set can be also used chained
+  const arr = [10, 10, 9];
+  coffee
+    .set('Packed Date', 20220134)
+    .set(1045, 'River One Store, HXQ')
+    .set(arr, 'Quality Control')
+    .set(true, 'Packed')
+    .set(false, 'Not packed');
+  console.log(coffee);
+  /*
+  Map(8) {
+    'Roast' => 'Dark',
+    'Origin' => 'Chiapas',
+    304029198 => 'Batch serial number',
+    'Packed Date' => 20220134,
+    1045 => 'River One Store, HXQ',
+    [ 10, 10, 9 ] => 'Quality Control',
+    true => 'Packed',
+    false => 'Not packed'
+  }
+  */
+  const packedOn = coffee.get('Packed Date');
+  console.log(coffee.get(packedOn < 1900) && coffee.get(packedOn >= 19000)); // Packed
+  // Another usefull methods
+  console.log(coffee.has('Roast')); // true
+  coffee.delete(arr); // Two arrays with the same values are not equal, it must be the same array
+  console.log(coffee);
+  /*
+  Map(7) {
+    'Roast' => 'Dark',
+    'Origin' => 'Chiapas',
+    304029198 => 'Batch serial number',
+    'Packed Date' => 20220134,
+    1045 => 'River One Store, HXQ',
+    true => 'Packed',
+    false => 'Not packed'
+  }
+  */
+  console.log(coffee.size); // 7
   ```
 
 - Maps: Iteration
 
   ```JavaScript
+  // Prompt is a browser engine method, this is for the terminal
+  const prompt = require('prompt-sync')();
+
+  // Create a map using Arrays of two elements inside another array
+  const programmingLangs = new Map([
+    ['Question', "What's the best programming language"],
+    [1, 'Python'],
+    [2, 'JavaScript'],
+    [true, 'Pythonist'],
+    [false, 'Not pythonist'],
+  ]);
+  console.log(programmingLangs);
+  /*
+  Map(5) {
+    'Question' => "What's the best programming language",
+    1 => 'Python',
+    2 => 'JavaScript',
+    true => 'Pythonist',
+    false => 'Not pythonist'
+  }
+  */
+  // It could also be an object's entries
+  const songs = { song1: 'GOD', song2: 'Unwind' };
+  const songMap = new Map(Object.entries(songs));
+  console.log(songMap); // Map(2) { 'song1' => 'GOD', 'song2' => 'Unwind' }
+
+  // Iterations are easier destructuring
+  console.log(programmingLangs.get('Question')); // What's the best programming language
+  for (const [key, value] of programmingLangs) {
+    if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+    /*
+    Python
+    JavaScript
+    */
+  }
+  const answer = Number(prompt('Your answer (write the number): '));
+  console.log(programmingLangs.get(answer === 1) || programmingLangs.get(false));
+  // Depends on the answer it will return Python or Not pythonist
+
+  // Convert map to array
+  console.log([...songMap]); // [ [ 'song1', 'GOD' ], [ 'song2', 'Unwind' ] ]
+  console.log([...songMap.keys()]); // [ 'song1', 'song2' ]
+  console.log([...songMap.values()]); // [ 'GOD', 'Unwind' ]
 
   ```
 
 - Which Data Structure to Use?
 
-  ```JavaScript
-
-  ```
+  - Sources of data: from the program, from the UI and from external sources (APIs)
+  - Detect if it just needs values or key/value pairs
+    - Just values
+      - Arrays: if you need an order and you can have duplicated values
+      - Sets: if you don't need an order and you don't want duplicated values, they're also faster
+    - Keys and values
+      - Objects: they're easier to use, you can use methods inside of them and are the best structure when using JSON 
+      - Maps: When you need keys that are not strings, they're easier to iterate, they perform better than objects
 
 - Working With Strings
 
