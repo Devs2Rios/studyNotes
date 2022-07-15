@@ -1631,13 +1631,89 @@
       - Arrays: if you need an order and you can have duplicated values
       - Sets: if you don't need an order and you don't want duplicated values, they're also faster
     - Keys and values
-      - Objects: they're easier to use, you can use methods inside of them and are the best structure when using JSON 
+      - Objects: they're easier to use, you can use methods inside of them and are the best structure when using JSON
       - Maps: When you need keys that are not strings, they're easier to iterate, they perform better than objects
 
 - Working With Strings
 
   ```JavaScript
+  const myString = 'This is a string';
+  // Access to certain letter by index
+  console.log(myString[0]); // T
+  // Return the length of a string
+  console.log(myString.length); // 16
+  // Find index of a letter inside a string
+  console.log(myString.indexOf('a')); // 8
+  console.log(myString.indexOf('x')); // -1 didn't find
+  console.log(myString.lastIndexOf('i')); // 13
+  // Cut a string
+  console.log(myString.slice(4)); // is a string
+  console.log(myString.slice(1, 10)); // his is a
+  console.log(myString.slice(0, myString.indexOf(' a '))); // This is
+  console.log(myString.slice(0, myString.lastIndexOf('i'))); // This is a str
+  console.log(myString.slice(0, -5)); // This is a s
+  // These methods create new string objects behind the scenes
+  // Change case
+  console.log(myString.toLowerCase()); // this is a string
+  console.log(myString.toUpperCase()); // THIS IS A STRING
+  let badName = 'MaLoLe';
+  badName = badName[0].toUpperCase() + badName.slice(1).toLowerCase();
+  console.log(badName); // Malole
+  const email = 'prompt@devs2rios.io';
+  let badEmail = ' promPt@devS2rIos.iO \n';
+  badEmail = badEmail.toLowerCase().trim(); // Trim clears trailing whitespaces
+  console.log(email === badEmail); // true
+  const priceE = '3049,91€';
+  const priceA = priceE.replace('€', '$').replace(',', '.');
+  console.log(priceE, priceA); // 3049,91€ 3049.91$
+  // Replacing all by using regex with the global flag
+  const lol = 'ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha';
+  const notSoLol = lol.replace(/ha\s/g, '');
+  console.log(notSoLol); // ha
+  // Methods that return booleans
+  console.log(myString.includes('i')); // true
+  console.log(myString.includes('x')); // false
+  console.log(myString.startsWith('T')); // true
+  console.log(myString.startsWith('t')); // false
+  console.log(myString.endsWith('g')); // true
+  console.log(myString.endsWith('G')); // false
+  // If you look for a word regardless the case you can transform everything to lowercase befor searching
 
+  // Transforming strings to arrays
+  const myFood = 'Banana, Potato, Cucumber'.replace(/,/g, '').split(' ');
+  console.log(myFood);
+  // [ 'Banana', 'Potato', 'Cucumber' ]
+  console.log(myFood.join(' * '));
+  // Banana * Potato * Cucumber
+  const [firstName, lastname] = 'Bob Alice'.split(' ');
+  console.log(firstName, lastname); // Bob Alice
+
+  // Capitalize first letter of every word
+  const titleCase = str => {
+    return str.replace(
+      /([a-zA-Z]+)/g,
+      word => word[0].toUpperCase() + word.slice(1).toLowerCase()
+    );
+  };
+  console.log(titleCase('lksjdkd lajkdj kaks')); // Lksjdkd Lajkdj Kaks
+  console.log('12'.padStart(4, '0')); // 0012
+  console.log('12'.padEnd(4, '0')); // 1200
+  console.log('12'.padStart(6, '0').padEnd(12, '0')); // 000012000000
+  const maskPassword = str => str.slice(0, -4).replace(/./g, '*') + str.slice(-4);
+  console.log(maskPassword('467')); // 467
+  console.log(maskPassword('1234')); // 1234
+  console.log(maskPassword('93u58')); // *3u58
+  console.log(maskPassword('09032u4029039849nsdjk900'));
+  // ********************k900
+  console.log(maskPassword('pdncsojñxapkokpoawoijcnncdioe'));
+  // *************************dioe
+  console.log('Eat, Sleep, Rave, Repeat\n'.repeat(4).trim());
+  /*
+  Eat, Sleep, Rave, Repeat
+  Eat, Sleep, Rave, Repeat
+  Eat, Sleep, Rave, Repeat
+  Eat, Sleep, Rave, Repeat
+  */
   ```
 
 </details>
