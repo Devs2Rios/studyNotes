@@ -289,7 +289,7 @@
       ```JavaScript
       for (let i=myArr.length-1; i>=0; i--) {doubleArr.push(i*2);};
       ```
-    - Nested loop are sometimes usefull, like when you want all the 10 units square coordinates inside a 100\*100 square
+    - Nested loop are sometimes useful, like when you want all the 10 units square coordinates inside a 100\*100 square
       ```JavaScript
       const increment = 10;
       for (let x=0; x<100; x+=increment) {
@@ -385,7 +385,7 @@
         - Find it elsewhere
         - Write unit testing
     - Breakpoint:
-      - Usefull console methods for debugging:
+      - useful console methods for debugging:
         ```JavaScript
         console.warn(); console.error(); console.table(object);
         ```
@@ -1556,7 +1556,7 @@
   */
   const packedOn = coffee.get('Packed Date');
   console.log(coffee.get(packedOn < 1900) && coffee.get(packedOn >= 19000)); // Packed
-  // Another usefull methods
+  // Another useful methods
   console.log(coffee.has('Roast')); // true
   coffee.delete(arr); // Two arrays with the same values are not equal, it must be the same array
   console.log(coffee);
@@ -1993,20 +1993,114 @@
 
 - Immediately Invoked Function Expressions (IIFE)
 
-  ```JavaScript
+  - They're good for private outputs or variables that don't require to be mutated, nevertheless, they're like block scope so in modern JavaScript is not useful
 
+  ```JavaScript
+  (function () {
+    console.log('Just once!'); // Just once!
+    (() => console.log('Just once!'))(); // Just once!
+  })();
   ```
 
 - Closures
 
-  ```JavaScript
+  - They're the closed-over variable environment of the execution in which a function was created, even after that execution context is gone
+  - We can't create them manually, it happens automatically
+  - We can't access to them because they're not a tangible Js object
+  - The variables inside the closure have priority over the scope chain
 
+  ```JavaScript
+  const closureFunc = function () {
+    let counter = 0;
+    return function () {
+      counter++;
+      console.log(`Current Number: ${counter}`);
+    };
+  };
+
+  // The function inside the variable creates an execution context
+  // that remembers the variables inside the function
+  const outsideCounter = closureFunc();
+  outsideCounter(); // Current Number: 1
+  outsideCounter(); // Current Number: 2
+  outsideCounter(); // Current Number: 3
+  console.dir(outsideCounter);
+  /*
+  [Function (anonymous)]
+      [[Scopes]]: Scopes[3]
+          0: Closure (closureFunc)
+              counter: 3
+  You cannot access to [[Scopes]] in your code
+  */
   ```
 
 - More Closure Examples
 
   ```JavaScript
+  let f = 10;
 
+  const g = function () {
+    const a = 19;
+    f = function () {
+      console.log(a * f);
+    };
+  };
+  const h = function () {
+    const b = 30;
+    f = function () {
+      console.log(b * 4);
+    };
+  };
+
+  g();
+  f();
+  console.dir(f);
+  /*
+  Closure created when g is used
+  [[Scopes]]: Scopes[3]
+      0: Closure (g)
+          a: 19
+  */
+
+  // Re-assign f function
+  h();
+  f();
+  console.dir(f);
+  /*
+  Closure replaced when h is used
+  [[Scopes]]: Scopes[3]
+      0: Closure (h)
+          b: 30
+  */
+  const row = 250;
+  const timedGrid = function (grid, newLineTime) {
+    const row = grid / 5;
+    setTimeout(function () {
+      console.log(`Grid: ${grid}`);
+      console.log(`Row: ${row}`);
+    }, newLineTime * 1000);
+    console.log(`New Line Time: ${newLineTime}`);
+  };
+  timedGrid(200, 2);
+  /*
+  New Line Time: 2
+  Grid: 200
+  Row: 40 -> From closure
+  */
+  const timedGrid2 = function (grid, newLineTime) {
+    // This doesn't have const row
+    setTimeout(function () {
+      console.log(`Grid: ${grid}`);
+      console.log(`Row: ${row}`);
+    }, newLineTime * 1000);
+    console.log(`New Line Time: ${newLineTime}`);
+  };
+  timedGrid2(200, 2);
+  /*
+  New Line Time: 2
+  Grid: 200
+  Row: 250 -> From global scope
+  */
   ```
 
 </details>
