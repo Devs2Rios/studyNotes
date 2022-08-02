@@ -2104,3 +2104,246 @@
   ```
 
 </details>
+<details>
+<summary><b>Working With Arrays</b></summary>
+<br/>
+
+- Methods are functions attached to Arrays which are objects
+
+- Simple Array Methods
+
+  ```JavaScript
+  let arr = ['a', 'b', 'c', 'd', 'e'];
+
+  // .slice() doesn't mutate the original array
+  console.log(arr.slice(2)); // [ 'c', 'd', 'e' ]
+  console.log(arr); // [ 'c', 'd', 'e' ]
+  console.log(arr.slice(1, 3)); // [ 'b', 'c' ]
+  console.log(arr.slice(-1)); // [ 'e' ]
+  console.log(arr.slice()); // [ 'a', 'b', 'c', 'd', 'e' ] a copy
+  console.log([...arr]); // [ 'a', 'b', 'c', 'd', 'e' ] another copy
+
+  // .splice() mutates the original array
+  arr.splice(1, 3);
+  console.log(arr); // [ 'a', 'e' ]
+  arr.splice(1, 2);
+  console.log(arr); // [ 'a' ]
+
+  // .reverse() mutates the original array
+  arr = ['a', 'b', 'c', 'd', 'e'];
+  arr.reverse();
+  console.log(arr); // [ 'e', 'd', 'c', 'b', 'a' ]
+
+  // .concat() doesn't mutate the original array
+  const arr2 = arr.concat([...arr].reverse());
+  console.log(arr);
+  // [ 'e', 'd', 'c', 'b', 'a' ]
+  console.log(arr2);
+  // [ 'e', 'd', 'c', 'b', 'a', 'a', 'b', 'c', 'd', 'e' ]
+  console.log([...arr, ...[...arr].reverse()]);
+  // [ 'e', 'd', 'c', 'b', 'a', 'a', 'b', 'c', 'd', 'e' ]
+
+  // .join() doesn't mutate the original array
+  console.log(arr.join('-')); // e-d-c-b-a
+  ```
+
+- The new at Method
+
+  ```JavaScript
+  const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  console.log(arr[0]); // 0
+  console.log(arr.at(0)); // 0
+  // Last element
+  console.log(arr[arr.length - 1]); // 10
+  console.log(arr.slice(-1)); // 10
+  console.log(arr.at(-1)); // 10
+  console.log('Dope'.at(-1)); // e
+  ```
+
+- Looping Arrays: forEach
+
+  ```JavaScript
+  const arr = [10, -15, 3, 5, -9, 12];
+  // With an of loop
+  console.log('---Loop---');
+  for (const num of arr)
+    console.log(`${num > 0 ? `In: ${num}` : `Out: ${Math.abs(num)}`}`);
+  /*
+  ---Loop---
+  In: 10
+  Out: 15
+  In: 3
+  In: 5
+  Out: 9
+  In: 12
+  */
+  // With the forEach method
+  console.log('---forEach()---');
+  arr.forEach(num =>
+    console.log(`${num > 0 ? `In: ${num}` : `Out: ${Math.abs(num)}`}`)
+  );
+  /*
+  ---forEach()---
+  In: 10
+  Out: 15
+  In: 3
+  In: 5
+  Out: 9
+  In: 12
+  */
+  console.log('---forEach()---');
+  // instead using for (const [i, num] of arr.entries())
+  arr.forEach((num, i) => {
+    console.log(
+      `(${String(i).padStart(2, '0')}) ${
+        num > 0 ? `In: ${num}` : `Out: ${Math.abs(num)}`
+      }`
+    );
+  });
+  /*
+  ---forEach()---
+  (00) In: 10
+  (01) Out: 15
+  (02) In: 3
+  (03) In: 5
+  (04) Out: 9
+  (05) In: 12
+  */
+  ```
+
+- forEach With Maps and Sets
+
+  ```JavaScript
+  const cities = new Map([
+    ['CDMX', 'Mexico City'],
+    ['NYC', 'New York City'],
+    ['TKY', 'Tokyo'],
+  ]);
+  // forEach used on the map
+  cities.forEach((k, v, m) => {
+    // m is the map object
+    console.log(`'${k}': '${v}'`);
+  });
+  /*
+  'Mexico City': 'CDMX'
+  'New York City': 'NYC'
+  'Tokyo': 'TKY'
+  */
+  new Set([2, 2, 12, 34, 10, 4]).forEach((v, _, s) => {
+    // s is the set onject, as sets doesn't have indexes the key and value are the same
+    console.log(`${v}: ${v}`);
+  });
+  /*
+  2: 2
+  12: 12
+  34: 34
+  10: 10
+  4: 4
+  */
+  ```
+
+- Creating DOM Elements
+
+  ```JavaScript
+  container.innerHTML = ''; // Cleans the content of the HTML element
+  // Create your HTML element(s) in a string template literal
+  const html = `
+      <div>
+        <p>New element!</p>
+      </div>
+    `;
+  // Inserts the HTML after the begining of the container
+  container.insertAdjacentHTML('afterbegin', html);
+  ```
+
+- Data Transformations: map, filter, reduce
+
+  ```JavaScript
+
+  ```
+
+- The map Method
+
+  ```JavaScript
+
+  ```
+
+- Computing Usernames
+
+  ```JavaScript
+
+  ```
+
+- The filter Method
+
+  ```JavaScript
+
+  ```
+
+- The reduce Method
+
+  ```JavaScript
+
+  ```
+
+- The Magic of Chaining Methods
+
+  ```JavaScript
+
+  ```
+
+- The find Method
+
+  ```JavaScript
+
+  ```
+
+- Implementing Login
+
+  ```JavaScript
+
+  ```
+
+- Implementing Transfers
+
+  ```JavaScript
+
+  ```
+
+- The findIndex Method
+
+  ```JavaScript
+
+  ```
+
+- some and every
+
+  ```JavaScript
+
+  ```
+
+- flat and flatMap
+
+  ```JavaScript
+
+  ```
+
+- Sorting Arrays
+
+  ```JavaScript
+
+  ```
+
+- More Ways of Creating and Filling Arrays
+
+  ```JavaScript
+
+  ```
+
+- Which Array Method to Use?
+
+  ```JavaScript
+
+  ```
+
+</details>
