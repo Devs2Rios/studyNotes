@@ -2259,31 +2259,82 @@
 - Data Transformations: map, filter, reduce
 
   ```JavaScript
+  const arr1 = [1, 2, 3, 4];
 
+  // .map()
+  const arr2 = arr1.map(num => num * 2);
+  console.log(arr2); // [ 2, 4, 6, 8 ]
+
+  // .filter()
+  const arr3 = arr1.filter(num => num % 2 === 0);
+  console.log(arr3); // [ 2, 4 ]
+
+  // .reduce()
+  const arr4 = arr1.reduce((accumulator, current) => accumulator + current);
+  console.log(arr4); // 10
   ```
 
 - The map Method
 
   ```JavaScript
+  const pricesUSD = [10.2, 5.25, 100, 25.2];
 
-  ```
+  // Returns a brand new array
+  const dollarPrice = 20.54,
+    pricesMXN = pricesUSD.map(price => price * dollarPrice);
 
-- Computing Usernames
+  /*
+  With regular functions
+  pricesMXN = pricesUSD.map(function(price) {
+      return price * dollarPrice;
+  };
+  */
 
-  ```JavaScript
-
+  for (const [i, price] of pricesUSD.entries())
+    console.log(`${price.toFixed(2)} USD = ${pricesMXN[i].toFixed(2)} MXN`);
+  /*
+  10.20 USD = 209.51 MXN
+  5.25 USD = 107.83 MXN
+  100.00 USD = 2054.00 MXN
+  25.20 USD = 517.61 MXN
+  */
   ```
 
 - The filter Method
 
   ```JavaScript
+  const pricesUSD = [10.2, 5.25, 100, 25.2, 234.12];
 
+  // Returns a brand new array
+  const expensive = pricesUSD.filter(price => price > 80);
+  console.log(expensive); // [ 100, 234.12 ]
   ```
 
 - The reduce Method
 
   ```JavaScript
+  const pricesUSD = [10.2, 5.25, 100, 25.2, 234.12, 5];
 
+  // Returns a primitive value
+  const total = pricesUSD.reduce(function (acumulator, current) {
+    console.log(`acumulator: ${acumulator} | current: ${current}`);
+    return acumulator + current;
+  });
+  /*
+  acumulator: 10.2 | current: 5.25
+  acumulator: 15.45 | current: 100
+  acumulator: 115.45 | current: 25.2
+  acumulator: 140.65 | current: 234.12
+  acumulator: 374.77 | current: 5
+  */
+
+  const lol = [...'abcdefghijk'].reduce(
+    (acumulator, current) => acumulator + `${current}ha`
+  );
+  console.log(lol); // abhachadhaehafhaghahhaihajhakha
+
+  // Get max value
+  console.log(pricesUSD.reduce((a, b) => (a > b ? a : b))); // 234.12
   ```
 
 - The Magic of Chaining Methods
