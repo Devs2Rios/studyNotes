@@ -2339,8 +2339,19 @@
 
 - The Magic of Chaining Methods
 
-  ```JavaScript
+  - Don't overchain, it can lead to performance issues
+  - Don't chain methods that mutate the original array like the splice or reverse method
 
+  ```JavaScript
+  const eurToUSD = 1.1;
+  const totalInUSD = movements
+    .filter(mov => mov > 0)
+    .map((mov, i, arr) => {
+      console.log(arr) // Check the array for debugging
+      mov * eurToUSD
+    })
+    .reduce((a, b) => a + b, 0);
+  console.log(totalInUSD);
   ```
 
 - The find Method
