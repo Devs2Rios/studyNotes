@@ -2343,6 +2343,7 @@
   - Don't chain methods that mutate the original array like the splice or reverse method
 
   ```JavaScript
+  const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
   const eurToUSD = 1.1;
   const totalInUSD = movements
     .filter(mov => mov > 0)
@@ -2357,13 +2358,19 @@
 - The find Method
 
   ```JavaScript
-
-  ```
-
-- Implementing Login
-
-  ```JavaScript
-
+  const wallet = {
+    crypto1: { symbol: 'ETH', balance: 1232, inUSD: 1933.25 },
+    crypto2: { symbol: 'BTC', balance: 243, inUSD: 24125.24 },
+    crypto3: { symbol: 'APE', balance: 122, inUSD: 7.01 },
+    crypto4: { symbol: 'AVAX', balance: 4459, inUSD: 27.23 },
+    crypto5: { symbol: 'MATIC', balance: 9832812, inUSD: 1.01 },
+    crypto6: { symbol: 'SOL', balance: 2094, inUSD: 42.4 },
+  };
+  // Retrieves the first element found
+  const myEth = Object.values(wallet).find(crypto => crypto.symbol === 'ETH');
+  console.log(myEth); // { symbol: 'ETH', balance: 1232, inUSD: 1933.25 }
+  console.log(myEth.balance); // 1232
+  console.log(Object.values(wallet).find(crypto => crypto.symbol === 'XRP')); // undefined
   ```
 
 - Implementing Transfers
