@@ -2373,46 +2373,92 @@
   console.log(Object.values(wallet).find(crypto => crypto.symbol === 'XRP')); // undefined
   ```
 
-- Implementing Transfers
-
-  ```JavaScript
-
-  ```
-
 - The findIndex Method
 
   ```JavaScript
-
+  const arr = [...'abcdefghijklmnñopqrstuvwxyz'];
+  // Returns the index of the value you are searchig for
+  console.log(arr.findIndex(letter => letter === 'ñ')); // 14
+  console.log(arr[14]); // ñ
   ```
 
 - some and every
 
   ```JavaScript
-
+  const arr = [90, 2043, 1000, 345, 5690];
+  // Returns a boolean if the condition is achieved or not in at least one element
+  console.log(arr.some(num => num > 100)); // true
+  console.log(arr.some(num => num > 10000)); // false
+  // Returns a boolean if the condition is achieved or not in all elements
+  console.log(arr.every(num => num > 80)); // true
+  console.log(arr.every(num => num > 10000)); // false
+  // With callback
+  const myCallback = num => num > 100;
+  console.log(arr.some(myCallback)); // true, DRY
   ```
 
 - flat and flatMap
 
   ```JavaScript
-
+  // Nested Array
+  const arr = [
+    [90, 2043, 1000],
+    [[345], [5690]],
+  ];
+  // .flat() unnests a nested array at the level indicated
+  console.log(arr.flat()); // [ 90, 2043, 1000, [ 345 ], [ 5690 ] ]
+  console.log(arr.flat(2)); // [ 90, 2043, 1000, 345, 5690 ]
+  // .flatMap() makes a map and flat at the same time
+  console.log(arr.flatMap(narr => narr)); // [ 90, 2043, 1000, [ 345 ], [ 5690 ] ]
   ```
 
 - Sorting Arrays
 
   ```JavaScript
+  // String array
+  const books = ['Creep', 'Chunk', 'Yangling', 'Deogus'];
+  console.log(books.sort()); // [ 'Chunk', 'Creep', 'Deogus', 'Yangling' ]
+  // It modifies the original array
+  console.log(books); // [ 'Chunk', 'Creep', 'Deogus', 'Yangling' ]
 
+  // Numbers array
+  const prices = [12.5, 5.5, 8.3, 9.1];
+  console.log(prices.sort()); // [ 12.5, 5.5, 8.3, 9.1 ]
+  /*
+  The function is based on strings, that's why 12.5 is the first one.
+  To make a succesful number sort use a and b parameters where:
+      a - The first element for comparison.
+      b - The second element for comparison.
+      < 0, sort a before b (a - b returns a negative number)
+      > 0, sort a after b (a + b returns a positive number)
+      === 0, keep original order of a and b
+  */
+  // Ascending
+  console.log(prices.sort((a, b) => (a > b ? 1 : -1))); // [ 5.5, 8.3, 9.1, 12.5 ]
+  console.log(prices.sort((a, b) => a - b)); // [ 5.5, 8.3, 9.1, 12.5 ]
+  // Descending
+  console.log(prices.sort((a, b) => (a < b ? 1 : -1))); // [ 12.5, 9.1, 8.3, 5.5 ]
+  console.log(prices.sort((a, b) => a + b)); // [ 12.5, 9.1, 8.3, 5.5 ]
+  // The loop keeps runing until the numbers are ordered accordingly to the function
   ```
 
 - More Ways of Creating and Filling Arrays
 
   ```JavaScript
+  // Literal
+  let arr = ['Creep', 'Chunk', 'Yangling', 'Deogus'];
+  const arr2 = new Array('Creep', 'Chunk', 'Yangling', 'Deogus');
 
-  ```
+  // New empty plus .fill()
+  arr = new Array(4); // [ <4 empty items> ]
+  // arr.fill(1); // [ 1, 1, 1, 1 ]
+  arr.fill(1, 3); // [ <3 empty items>, 1 ]
+  arr2.fill(1, 2, 3); // [ 'Creep', 'Chunk', 1, 'Deogus' ]
 
-- Which Array Method to Use?
-
-  ```JavaScript
-
+  // New array with .from()
+  const arr3 = Array.from({ length: 4 }, () => 1); // [ 1, 1, 1, 1 ]
+  const arr4 = Array.from({ length: 4 }, (_, i) => i + 1);
+  // [ 1, 2, 3, 4 ] _ not used variables
   ```
 
 </details>
