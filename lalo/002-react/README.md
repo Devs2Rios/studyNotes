@@ -36,12 +36,7 @@
   - [React State and Working With Events](./002-react-003.md)
   - [Styling React Components](./002-react-004.md)
   - [Debugging React Apps](./002-react-005.md)
-  - Introduction to `React Hooks`
 - Advanced concepts (building for production)
-  - Side Effects: `refs` and more `React Hooks`
-  - React's Context API and Redux
-  - Forms, http requests and `Custom Hooks`
-  - Routing, Deployment, NextJS and more
+  - [Fragments, Portals, and Refs](./002-react-006.md)
 - Summaries and refresehers (optimize your time)
   - [JavaScript refresher](./002-react-001.md)
-  - ReactJS refresher
