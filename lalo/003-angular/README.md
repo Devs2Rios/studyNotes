@@ -25,3 +25,4 @@
 
 1. [Typscript](./content/typescript.md)
 2. [Intro](./content/intro.md)
+3. [Custom Components](./content/custom-components.md.md)
