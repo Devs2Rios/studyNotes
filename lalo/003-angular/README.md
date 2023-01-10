@@ -24,3 +24,4 @@
 ## Content
 
 1. [Typscript](./content/typescript.md)
+2. [Intro](./content/intro.md)
