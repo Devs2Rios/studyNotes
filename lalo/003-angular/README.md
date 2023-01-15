@@ -28,3 +28,4 @@
 3. [Custom Components](./content/custom-components.md)
 4. [Directives](./content/directives.md)
 5. [Built-In Pipes](./content/built-in-pipes.md)
+6. [Local Template Querying](./content/local-template-querying.md)
