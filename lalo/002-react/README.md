@@ -39,6 +39,7 @@
 -   Advanced concepts (building for production)
     -   [Fragments, Portals, and Refs](./002-react-006.md)
     -   [Side Effects, Reducers & Context API](./002-react-007.md)
+    -   [React behind the scenes](./002-react-008.md)
     -   [React + Typescript](./002-react-022.md)
 -   Frameworks
     -   [Next.js](002-react-030.md)
