@@ -39,10 +39,11 @@
 -   Advanced concepts (building for production)
     -   [Fragments, Portals, and Refs](./002-react-006.md)
     -   [Side Effects, Reducers & Context API](./002-react-007.md)
-    -   [React behind the scenes](./002-react-008.md)
+    -   [React Behind the Scenes](./002-react-008.md)
     -   [Class Based Components](./002-react-009.md)
     -   [Sending Http Requests](./002-react-010.md)
     -   [Custom Hooks](./002-react-011.md)
+    -   [Forms & User Input](./002-react-012.md)
     -   [React + Typescript](./002-react-022.md)
 -   Frameworks
     -   [Next.js](002-react-030.md)
