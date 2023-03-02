@@ -42,6 +42,7 @@
     -   [React behind the scenes](./002-react-008.md)
     -   [Class Based Components](./002-react-009.md)
     -   [Sending Http Requests](./002-react-010.md)
+    -   [Custom Hooks](./002-react-011.md)
     -   [React + Typescript](./002-react-022.md)
 -   Frameworks
     -   [Next.js](002-react-030.md)
