@@ -12,4 +12,6 @@
 ### Content
 
 1. [Node.js introduction](./content/intro.md)
-1. [NPM](./content/npm.md)
+2. [NPM](./content/npm.md)
+3. [Node.js Event Loop](./content/event-loop.md)
+4. [Events](./content/events.md)
