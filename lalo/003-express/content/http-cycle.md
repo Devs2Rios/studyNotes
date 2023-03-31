@@ -87,3 +87,5 @@
 
         server.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
         ```
+
+-   Serving this files will become tedious fast with this approach, that’s why libraries with abstraction like express.js are more useful
