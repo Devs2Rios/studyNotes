@@ -15,3 +15,4 @@
 2. [NPM](./content/npm.md)
 3. [Node.js Event Loop](./content/event-loop.md)
 4. [Events](./content/events.md)
+5. [HTTP Response/Request Cycle](./content/http-cycle.md)
