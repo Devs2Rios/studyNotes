@@ -200,3 +200,34 @@
         ```
 
 ## HTTP Requests
+
+-   `GET` - The GET method is used by web applications to retrieve data from a server.
+
+    -   The `GET` method is typically used for retrieving information, such as web pages, images, videos, and other resources, from a server
+    -   It is a simple and widely used method for accessing data on the internet
+
+        ```JS
+        // GET data form a database
+        const morgan = require('morgan'),
+            express = require('express'),
+            sqlite3 = require('sqlite3').verbose(),
+            app = express(),
+            port = process.env.PORT || 8080;
+
+        app.use(morgan('tiny'));
+
+        app.get('/', (req, res) => {
+            const db = new sqlite3.Database('./data.db');
+            db.all('SELECT * FROM users', (err, rows) => {
+                if (err) {
+                    res.status(500).send(err.message);
+                    return;
+                }
+                db.close();
+                res.status(200).json({
+                    success: true,
+                    data: rows,
+                });
+            });
+        });
+        ```
