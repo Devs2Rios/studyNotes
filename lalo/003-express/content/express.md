@@ -198,3 +198,5 @@
 
         app.use(morgan('tiny'));
         ```
+
+## HTTP Requests
