@@ -204,7 +204,7 @@
 -   `GET` - The GET method is used by web applications to retrieve data from a server.
 
     -   The `GET` method is typically used for retrieving information, such as web pages, images, videos, and other resources, from a server
-    -   It is a simple and widely used method for accessing data on the internet
+    -   It is used to access data on the Internet
 
         ```JS
         // GET data form a database
@@ -218,16 +218,143 @@
 
         app.get('/', (req, res) => {
             const db = new sqlite3.Database('./data.db');
+            // Query all the data from the database
             db.all('SELECT * FROM users', (err, rows) => {
                 if (err) {
                     res.status(500).send(err.message);
-                    return;
+                    return; // Handles the error and stops the function
                 }
                 db.close();
                 res.status(200).json({
                     success: true,
                     data: rows,
-                });
+                }); // Sends the data to the client
             });
         });
         ```
+
+-   `POST` - Is a request where a client (such as a web browser or a mobile app) can send data (JSON, XML) to a server in order to create a new resource on it
+
+    ```JS
+    const morgan = require('morgan'),
+        express = require('express'),
+        sqlite3 = require('sqlite3').verbose(),
+        app = express(),
+        port = process.env.PORT || 8080;
+
+    // Middleware express.json() helps to parse the body
+    app.use(morgan('tiny'), express.json());
+
+    app.post('/add', (req, res) => {
+        // Destructure the ens entry from the body
+        const { ens } = req.body,
+            db = new sqlite3.Database('./data.db');
+        // Check that is a correct ens value
+        if (!/^[a-z]+\.eth$/.test(ens)) {
+            res.status(400).send('ENS must be lowercase and end with .eth');
+            return;
+        }
+        // Create the entry into the database
+        db.run('INSERT INTO users (ens) VALUES (?)', [ens], function (err) {
+            if (err) {
+                res.status(500).send(err.message);
+                return; // Handles the error and stops the function
+            }
+            const id = this.lastID; // Autocompletes the ID
+            db.close();
+            res.status(201).json({
+                success: true,
+                data: { id, ens },
+            }); // Sends ID and ENS to the client
+        });
+    });
+    ```
+
+    -   In this kind of requests the body is crucial to send a resource that later will be stored in the persistent data, in this example you'll need to send a valid `ens`
+    -   Test it using `curl`
+        -   Request
+            ```SHELL
+            curl --header "Content-Type: application/json" \
+            --request POST \
+            --data '{"ens":"vitalik.eth"}' \
+            http://localhost:8080/add
+            ```
+        -   Response
+            ```SHELL
+            {"success":true,"data":{"id":2,"ens":"vitalik.eth"}}
+            ```
+    -   Or with JavaScript and node
+
+        ```JS
+        const axios = require('axios'),
+            ens = process.argv[2];
+        // Axios is a library that makes easier to make requests
+        // process.argv[2] is used to take arguments from CLI
+        async function main() {
+            // makes sure to have an argument
+            if (!ens) throw new Error('Missing argument: ens');
+            // makes the request
+            const response = await axios.post('http://localhost:8080/add', { ens });
+            // if everything goes well returns the data from the response
+            console.log(response.data);
+            return response.data;
+        }
+
+        main()
+            .then(() => {
+                process.exit(0);
+            })
+            .catch(err => {
+                console.error(err);
+                process.exit(1);
+            });
+        ```
+
+        -   Request
+            ```Shell
+            node add.js jsdude.eth
+            ```
+        -   Response
+            ```Shell
+            { success: true, data: { id: 3, ens: 'jsdude.eth' } }
+            ```
+
+    -   JavaScript can also be wired to the frontend and use events to trigger the call, like in this react example
+
+        ```JSX
+        import { useState } from 'react';
+        import axios from 'axios';
+        import './App.css';
+
+        function App() {
+            const [ens, setEns] = useState(''),
+                addEns = async () => {
+                    try {
+                        if (!ens) throw new Error('Not ENS provided');
+                        const response = await axios.post('http://localhost:8080/add', {
+                                ens,
+                            }),
+                            data = response.data.data;
+                        alert(`Added ${data.ens} with id ${data.id}`);
+                    } catch (error) {
+                        alert(error);
+                    }
+                };
+            return (
+                <div className='add'>
+                    <input
+                        type='text'
+                        onChange={e => setEns(e.target.value)}
+                        value={ens}
+                    />
+                    <button onClick={addEns}>Add</button>
+                </div>
+            );
+        }
+
+        export default App;
+        ```
+
+    -   You can also use apps like [postman](https://www.postman.com/downloads/) to meke your life easier
+
+        ![Postman UI](../_resources/postman.png)
