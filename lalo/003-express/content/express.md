@@ -358,3 +358,58 @@
     -   You can also use apps like [postman](https://www.postman.com/downloads/) to make your life easier
 
         ![Postman UI](../_resources/postman.png)
+
+-   `PUT` - HTTP method used for updating or modifying existing resources on a server.
+
+    -   In a PUT request, the client sends the updated data to the server to replace the existing data
+    -   Is an idempotent method (same result when sending the request once or multiple times)
+
+        ```JS
+        app.put('/edit/:id', (req, res) => {
+            // Extract the ENS and ID from the request
+            const { ens } = req.body,
+                { id } = req.params,
+                db = new sqlite3.Database('./data.db');
+            // Check that the ID is valid
+            if (!id || !/\d+/.test(id)) {
+                res.status(400).send('Must be a valid ID');
+                return;
+            }
+            // Check that the ENS record is valid
+            if (!/^[a-z]+\.eth$/.test(ens)) {
+                res.status(400).send('ENS must be lowercase and end with .eth');
+                return;
+            }
+            // Check that the ID exists in the database
+            db.get('SELECT * FROM users WHERE id = ?', [id], (err, row) => {
+                if (err) {
+                    // Handle errors
+                    res.status(500).send(err.message);
+                    return;
+                }
+                // If the ID is not found, return an error
+                if (!row) {
+                    res.status(404).send('ID not found');
+                    return;
+                }
+                // If the ID exists, update the ENS record in the database
+                db.run(
+                    'UPDATE users SET ens = ? WHERE id = ?',
+                    [ens, id],
+                    function (err) {
+                        if (err) {
+                            // Handle errors
+                            res.status(500).send(err.message);
+                            return;
+                        }
+                        // Close the database connection and send a response with the updated data
+                        db.close();
+                        res.status(200).json({
+                            success: true,
+                            data: { id, ens },
+                        });
+                    }
+                );
+            });
+        });
+        ```
