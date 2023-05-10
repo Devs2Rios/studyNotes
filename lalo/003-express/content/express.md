@@ -413,3 +413,37 @@
             });
         });
         ```
+
+-   `DELETE` - Request that asks the server to delete a specified resource
+
+    ```JS
+    app.delete('/delete/:id', (req, res) => {
+        // Extract the ID from the request parameters and create a new database instance
+        const { id } = req.params,
+            db = new sqlite3.Database('./data.db');
+        // Check if the ID is valid
+        if (!id || !/\d+/.test(id)) {
+            res.status(400).send('Must be a valid ID');
+            return;
+        }
+        // Run a DELETE query to remove the user with the specified ID from the database
+        db.run('DELETE FROM users WHERE id = ?', [id], function (err) {
+            // Handle any errors that may occur during the query execution
+            if (err) {
+                res.status(500).send(err.message);
+                return;
+            }
+            // If no row was affected by the DELETE query, return a 404 error
+            if (this.changes === 0) {
+                res.status(404).send('ID not found');
+                return;
+            }
+            // Close the database connection and return a success response
+            db.close();
+            res.status(200).json({
+                success: true,
+                data: { id },
+            });
+        });
+    });
+    ```
