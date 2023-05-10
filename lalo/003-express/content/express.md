@@ -447,3 +447,5 @@
         });
     });
     ```
+
+-   Check [this repo](https://github.com/Devs2Rios/express-example) to try the requests explained in this document
