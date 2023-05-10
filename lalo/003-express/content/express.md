@@ -355,6 +355,6 @@
         export default App;
         ```
 
-    -   You can also use apps like [postman](https://www.postman.com/downloads/) to meke your life easier
+    -   You can also use apps like [postman](https://www.postman.com/downloads/) to make your life easier
 
         ![Postman UI](../_resources/postman.png)
