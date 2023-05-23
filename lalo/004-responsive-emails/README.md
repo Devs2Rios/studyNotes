@@ -16,3 +16,8 @@
 ## Contents
 
 1. [Introduction to HTML Email](./contents/intro.md)
+2. [Tables and styling](./contents/tables-styling.md)
+
+## Examples
+
+1. [Simple table](./examples/01-simple-table/index.html)

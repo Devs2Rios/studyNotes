@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HTML Tables Practice Activity</title>
+        <style>
+            body {
+                background-color: grey;
+            }
+            table {
+                background-color: white;
+                border: 1px solid black;
+                width: 600px;
+                margin: 0 auto;
+                border-spacing: 0; /* Very important for email templates*/
+            }
+            th,
+            td {
+                text-align: center;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Regular tables can be managed this way -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bill</td>
+                    <td>52</td>
+                    <td>Atlanta</td>
+                </tr>
+                <tr>
+                    <td>Bob</td>
+                    <td>44</td>
+                    <td>Toronto</td>
+                </tr>
+                <tr>
+                    <td>Bart</td>
+                    <td>23</td>
+                    <td>New York</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Use this <br /> approach instead margins -->
+        <br />
+        <!-- Multi columns will need to be managed as nested lists -->
+        <table>
+            <tr>
+                <th style="padding: 20px">Name</th>
+            </tr>
+            <tr style="padding: 0">
+                <table>
+                    <tr>
+                        <td
+                            style="
+                                padding: 20px;
+                                background-color: red;
+                                width: 300px;
+                            "
+                            colspan="2"
+                        >
+                            Bill
+                        </td>
+                        <td
+                            style="
+                                padding: 20px;
+                                background-color: green;
+                                width: 300px;
+                            "
+                            colspan="2"
+                        >
+                            Bob
+                        </td>
+                    </tr>
+                </table>
+            </tr>
+            <tr style="padding: 0">
+                <table>
+                    <tr>
+                        <td
+                            style="
+                                padding: 20px;
+                                background-color: red;
+                                width: 200px;
+                            "
+                        >
+                            Bill
+                        </td>
+                        <td
+                            style="
+                                padding: 20px;
+                                background-color: green;
+                                width: 200px;
+                            "
+                        >
+                            Bob
+                        </td>
+                        <td
+                            style="
+                                padding: 20px;
+                                background-color: yellow;
+                                width: 200px;
+                            "
+                        >
+                            Bart S
+                        </td>
+                    </tr>
+                </table>
+            </tr>
+        </table>
+    </body>
+</html>
