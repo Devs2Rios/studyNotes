@@ -11,7 +11,7 @@
 -   [Emmet extension](https://code.visualstudio.com/docs/editor/emmet) for faster ´HTML´ layout
     -   [Cheat Sheet](https://docs.emmet.io/cheat-sheet/)
 -   Image hosting
-    -   You’ll need an image hosting because images in email templating are referenced from outside of the email
+    -   You’ll need hosted images because images in email templating are referenced from outside of the email
 
 ## Contents
 
