@@ -74,3 +74,19 @@
     ```
 
 -   Check the [simple table example](../examples/01-simple-table/index.html)
+-   I order to get better support from Microsoft Outlook you can target Outlook 2000 and Internet Explorer
+    ```HTML
+    <!--[if (gte mso 9)|(IE)]>
+        <style type="text/css">
+            body {background-color:#dde0e1!important;}
+        </style>
+    <![endif]-->
+    ```
+-   Centering uses the `<center>` tag, only valid for HTML template design
+    ```HTML
+    <center></center>
+    ```
+
+## Resources
+
+-   [Outlook conditioning](https://stackoverflow.design/email/base/mso/)
