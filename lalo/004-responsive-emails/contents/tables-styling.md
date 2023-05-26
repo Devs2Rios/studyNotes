@@ -86,6 +86,16 @@
     ```HTML
     <center></center>
     ```
+-   All images need the property `border="0"` for some old clients
+    ```HTML
+    <img
+        alt="Instagram"
+        title="Instagram"
+        src="https://i.ibb.co/x8G1NMz/circle-instagram.png"
+        width="32"
+        border="0"
+    />
+    ```
 
 ## Resources
 

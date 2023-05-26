@@ -124,9 +124,22 @@
                         <tr>
                         <td style="padding: 0;">
                     <![endif]-->
-
+                    <table
+                        align="center"
+                        style="
+                            border-spacing: 0;
+                            color: #565656;
+                            font-family: 'Lato', sans-serif, Arial, Helvetica !important;
+                            background-color: #fafdfe;
+                            margin: 0;
+                            padding: 0;
+                            width: 100%;
+                            max-width: 600px;
+                        "
+                        role="presentation"
+                    >
                     <!-- Content -->
-
+                    </table>
                     <!--[if (gte mso 9)|(IE)]>
                         </td>
                         </tr>
