@@ -86,7 +86,7 @@
     ```HTML
     <center></center>
     ```
--   All images need the property `border="0"` for some old clients
+-   All images except GIFs need the property `border="0"` for some old clients
     ```HTML
     <img
         alt="Instagram"
@@ -96,6 +96,33 @@
         border="0"
     />
     ```
+-   For GIFs the best approach is to use them as background
+    -   GIFs don't work on Outlook, you'll need to use Vector Markup Language as fallback
+        ```HTML
+        <tr>
+            <td
+                background="https://i.ibb.co/hMhVbjT/stats2.gif"
+                width="600"
+                height="332"
+                style="background-position: center top"
+            >
+                <!--[if (gte mso 9)|(IE)]>
+                    <v:rect
+                        xmlns:v="urn:schemas-microsoft-com:vml"
+                        fill="true"
+                        stroke="false"
+                        style="width: 600px; height: 332px;"
+                    >
+                    <v:fill type="title" src="https://i.ibb.co/hMhVbjT/stats2.gif"/>
+                    <v:textbox inset="0,0,0,0">
+                <![endif]-->
+                <!--[if (gte mso 9)|(IE)]>
+                    </v:textbox>
+                    </v:rect>
+                <![endif]-->
+            </td>
+        </tr>
+        ```
 
 ## Resources
 
