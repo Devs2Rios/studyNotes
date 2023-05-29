@@ -123,6 +123,387 @@
             </td>
         </tr>
         ```
+-   Buttons need to be anchors and have a border to be displayed correctly in Outlook
+    ```HTML
+    <tr>
+        <td align="center">
+            <table
+                class="darkmode-transparent"
+                cellpadding="0"
+                cellspacing="0"
+                role="presentation"
+            >
+                <tr
+                    style="border-radius: 10px"
+                    bgcolor="#eff8fe"
+                >
+                    <a
+                        href="#"
+                        target="_blank"
+                        style="
+                            font-size: 17px;
+                            font-weight: bold;
+                            text-decoration: none;
+                            color: #1e5d7b;
+                            background-color: #eff8fe;
+                            border: 1px solid
+                                #eff8fe;
+                            border-radius: 10px;
+                            padding: 12px 20px;
+                            display: inline-block;
+                        "
+                        >VIEW DEMO</a
+                    >
+                </tr>
+            </table>
+        </td>
+    </tr>
+    ```
+-   Two column layouts need to have nested ghost tables and to control the spacing between the elements (check widths and paddings)
+
+```HTML
+<tr>
+    <td style="padding: 35px 0 30px 0">
+        <table
+            width="100%"
+            style="border-spacing: 0"
+            role="presentation"
+        >
+            <tr>
+                <td
+                    class="two-columns"
+                    style="
+                        padding: 0;
+                        font-size: 0;
+                        text-align: center;
+                    "
+                >
+                    <!--[if (gte mso 9)|(IE)]>
+                        <table
+                            width="100%"
+                            style="border-spacing: 0;"
+                            role="presentation"
+                        >
+                        <tr>
+                        <td
+                            width="300"
+                            valign="top"
+                            style="padding: 0;"
+                        >
+                    <![endif]-->
+                    <table
+                        class="column"
+                        style="
+                            border-spacing: 0;
+                            vertical-align: top;
+                            width: 100%;
+                            max-width: 300px;
+                            display: inline-block;
+                        "
+                        role="presentation"
+                    >
+                        <!-- vertical-align: top; and display: inline-block; are key players to ensure the columns to display properly -->
+                        <tr>
+                            <td
+                                class="padding"
+                                style="padding: 20px"
+                            >
+                                <table
+                                    class="content"
+                                    style="
+                                        border-spacing: 0;
+                                        text-align: left;
+                                    "
+                                    role="presentation"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                background-color: #fafdfe;
+                                                padding: 20px
+                                                    0;
+                                                text-align: center;
+                                            "
+                                        >
+                                            <a
+                                                href="#"
+                                                target="_blank"
+                                            >
+                                                <img
+                                                    alt="Man"
+                                                    src="https://i.ibb.co/Tmg3qbV/man-teal.jpg"
+                                                    width="260"
+                                                    style="
+                                                        max-width: 260px;
+                                                        border-radius: 8px;
+                                                    "
+                                                    border="0"
+                                                />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 10px
+                                                    10px
+                                                    20px
+                                                    10px;
+                                            "
+                                        >
+                                            <p
+                                                style="
+                                                    font-size: 17px;
+                                                    font-weight: bold;
+                                                "
+                                            >
+                                                Build
+                                                Responsive
+                                                Emails
+                                            </p>
+                                            <p
+                                                style="
+                                                    font-size: 15px;
+                                                    line-height: 20px;
+                                                "
+                                            >
+                                                Responsive
+                                                HTML Email
+                                                Templates
+                                                that you can
+                                                build around
+                                                to master
+                                                email
+                                                development.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            align="left"
+                                            style="
+                                                padding-left: 10px;
+                                            "
+                                        >
+                                            <table
+                                                border="0"
+                                                cellpadding="0"
+                                                style="
+                                                    border-spacing: 0;
+                                                "
+                                                role="presentation"
+                                            >
+                                                <td
+                                                    align="center"
+                                                >
+                                                    <table
+                                                        class="darkmode-transparent"
+                                                        cellpadding="0"
+                                                        cellspacing="0"
+                                                        role="presentation"
+                                                    >
+                                                        <tr
+                                                            style="
+                                                                border-radius: 10px;
+                                                            "
+                                                            bgcolor="#1e5d7b"
+                                                        >
+                                                            <a
+                                                                href="#"
+                                                                target="_blank"
+                                                                style="
+                                                                    font-size: 16px;
+                                                                    font-weight: bold;
+                                                                    text-decoration: none;
+                                                                    color: #fff;
+                                                                    background-color: #1e5d7b;
+                                                                    border: 1px
+                                                                        solid
+                                                                        #1e5d7b;
+                                                                    border-radius: 10px;
+                                                                    padding: 10px
+                                                                        25px;
+                                                                    display: inline-block;
+                                                                "
+                                                                >HTML
+                                                                Email</a
+                                                            >
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--[if (gte mso 9)|(IE)]>
+                        </td>
+                        <td
+                            width="300"
+                            valign="top"
+                            style="padding: 0;"
+                            role="presentation"
+                        >
+                    <![endif]-->
+                    <table
+                        class="column"
+                        style="
+                            border-spacing: 0;
+                            vertical-align: top;
+                            width: 100%;
+                            max-width: 300px;
+                            display: inline-block;
+                        "
+                        role="presentation"
+                    >
+                        <tr>
+                            <td
+                                class="padding"
+                                style="padding: 20px"
+                            >
+                                <table
+                                    class="content"
+                                    style="
+                                        border-spacing: 0;
+                                        text-align: left;
+                                    "
+                                    role="presentation"
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                background-color: #fafdfe;
+                                                padding: 20px
+                                                    0;
+                                                text-align: center;
+                                            "
+                                        >
+                                            <a
+                                                href="#"
+                                                target="_blank"
+                                            >
+                                                <img
+                                                    alt="Man"
+                                                    src="https://i.ibb.co/nQn29Sg/woman-teal.jpg"
+                                                    width="260"
+                                                    style="
+                                                        max-width: 260px;
+                                                        border-radius: 8px;
+                                                    "
+                                                    border="0"
+                                                />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="
+                                                padding: 10px
+                                                    10px
+                                                    20px
+                                                    10px;
+                                            "
+                                        >
+                                            <p
+                                                style="
+                                                    font-size: 17px;
+                                                    font-weight: bold;
+                                                "
+                                            >
+                                                Create
+                                                Custom
+                                                Designs
+                                            </p>
+                                            <p
+                                                style="
+                                                    font-size: 15px;
+                                                    line-height: 20px;
+                                                "
+                                            >
+                                                Responsive
+                                                HTML Email
+                                                Templates
+                                                that you can
+                                                build around
+                                                to master
+                                                email
+                                                development.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            align="left"
+                                            style="
+                                                padding-left: 10px;
+                                            "
+                                        >
+                                            <table
+                                                border="0"
+                                                cellpadding="0"
+                                                style="
+                                                    border-spacing: 0;
+                                                "
+                                                role="presentation"
+                                            >
+                                                <td
+                                                    align="center"
+                                                >
+                                                    <table
+                                                        class="darkmode-transparent"
+                                                        cellpadding="0"
+                                                        cellspacing="0"
+                                                        role="presentation"
+                                                    >
+                                                        <tr
+                                                            style="
+                                                                border-radius: 10px;
+                                                            "
+                                                            bgcolor="#1e5d7b"
+                                                        >
+                                                            <a
+                                                                href="#"
+                                                                target="_blank"
+                                                                style="
+                                                                    font-size: 16px;
+                                                                    font-weight: bold;
+                                                                    text-decoration: none;
+                                                                    color: #fff;
+                                                                    background-color: #1e5d7b;
+                                                                    border: 1px
+                                                                        solid
+                                                                        #1e5d7b;
+                                                                    border-radius: 10px;
+                                                                    padding: 10px
+                                                                        25px;
+                                                                    display: inline-block;
+                                                                "
+                                                                >Get
+                                                                Started</a
+                                                            >
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--[if (gte mso 9)|(IE)]>
+                        </td>
+                        </tr>
+                        </table>
+                    <![endif]-->
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+```
 
 ## Resources
 
