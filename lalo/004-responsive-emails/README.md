@@ -17,6 +17,7 @@
 
 1. [Introduction to HTML Email](./contents/intro.md)
 2. [Tables and styling](./contents/tables-styling.md)
+3. [Media Queries](./contents/media-queries.md)
 
 ## Examples
 
