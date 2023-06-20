@@ -28,6 +28,11 @@
             border: 0;
         }
 
+        a {
+            color: #e8fbfa;
+            text-decoration: none;
+        }
+
         @media screen and (max-width: 599.98px) {
             .banner {
                 height: auto !important;
@@ -78,8 +83,33 @@
             }
         }
 
-        @media (prefers-color-scheme: dark) {}
+        :root {
+            color-scheme: light dark;
+            supported-color-schemes: light dark;
+        }
+
+        @media (prefers-color-scheme: dark) {
+
+            body,
+            center,
+            table {
+                background: #2d2d2d !important;
+                color: #ffffff !important;
+            }
+
+            .darkmode-transparent {
+                background-color: transparent !important;
+            }
+        }
     </style>
+
+    <!--[if (gte mso 9)|(IE)]>
+            <style type="text/css">
+                table {
+                    border-collapse: collapse !important;
+                }
+            </style>
+        <![endif]-->
 </head>
 
 <body style="
@@ -98,10 +128,11 @@
                 td,
                 p,
                 a {
-                    font-family: sans-serif, Helvetica, Arial;
+                    font-family: sans-serif, Arial, Helvetica !important;
                 }
             </style>
         <![endif]-->
+
     <center style="
                 width: 100%;
                 table-layout: fixed;
@@ -111,7 +142,7 @@
         <div style="
                     max-width: 600px;
                     background-color: #fafdfe;
-                    box-shadow: 0 0 10px #00000020;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
                 ">
             <div style="
                         font-size: 0;
@@ -128,15 +159,10 @@
                 This is our preheader text
             </div>
             <!--[if (gte mso 9)|(IE)]>
-                    <table 
-                        width="600"
-                        align="center"
-                        style="border-spacing: 0; color: #565656;"
-                        role="presentation"
-                    >
-                    <tr>
-                    <td style="padding: 0;">
-                <![endif]-->
+                <table width="600" align="center" style="border-spacing:0;color:#565656;" role="presentation">
+                <tr>
+                <td style="padding:0;">
+            <![endif]-->
             <table align="center" style="
                         border-spacing: 0;
                         color: #565656;
@@ -149,36 +175,28 @@
                     " role="presentation">
                 <tr>
                     <td style="padding: 0">
-                        <table width="100%" style="border-spacing: 0" role="presentation">
+                        <table width="100%" style="
+                                    border-spacing: 0;
+                                    background-color: #eaf6fb;
+                                " role="presentation">
                             <tr>
-                                <td height="2" style="background-color: #21c6b8"></td>
+                                <td height="3" style="background-color: #21c6b8"></td>
                             </tr>
                             <tr>
                                 <td style="
-                                            background-color: #ebf5fa;
                                             text-align: center;
                                             padding: 10px 0 8px 0;
                                         ">
-                                    <a href="#" target="_blank">
-                                        <img alt="Facebook" title="Facebook"
-                                            src="https://i.ibb.co/bPLzh61/circle-facebook.png" width="32" border="0" />
-                                    </a>
-                                    <a href="#" target="_blank">
-                                        <img alt="Twitter" title="Twitter"
-                                            src="https://i.ibb.co/sRH7TK2/circle-twitter.png" width="32" border="0" />
-                                    </a>
-                                    <a href="#" target="_blank">
-                                        <img alt="YouTube" title="YouTube"
-                                            src="https://i.ibb.co/VQ9nCv3/circle-youtube.png" width="32" border="0" />
-                                    </a>
-                                    <a href="#" target="_blank">
-                                        <img alt="LinkedIn" title="LinkedIn"
-                                            src="https://i.ibb.co/K5wbWBS/circle-linkedin.png" width="32" border="0" />
-                                    </a>
-                                    <a href="#" target="_blank">
-                                        <img alt="Instagram" title="Instagram"
-                                            src="https://i.ibb.co/x8G1NMz/circle-instagram.png" width="32" border="0" />
-                                    </a>
+                                    <a href="#" target="_blank"><img src="https://i.ibb.co/bPLzh61/circle-facebook.png"
+                                            alt="Facebook" title="Facebook" width="32" border="0" /></a>
+                                    <a href="#" target="_blank"><img src="https://i.ibb.co/sRH7TK2/circle-twitter.png"
+                                            alt="#" width="32" border="0" /></a>
+                                    <a href="#" target="_blank"><img src="https://i.ibb.co/VQ9nCv3/circle-youtube.png"
+                                            alt="#" width="32" border="0" /></a>
+                                    <a href="#" target="_blank"><img src="https://i.ibb.co/K5wbWBS/circle-linkedin.png"
+                                            alt="#" width="32" border="0" /></a>
+                                    <a href="#" target="_blank"><img src="https://i.ibb.co/x8G1NMz/circle-instagram.png"
+                                            alt="#" width="32" border="0" /></a>
                                 </td>
                             </tr>
                             <tr>
@@ -189,17 +207,17 @@
                 </tr>
                 <tr>
                     <td style="padding: 0">
-                        <table width="100%" style="border-spacing: 0" role="presentation">
+                        <table width="100%" style="
+                                    border-spacing: 0;
+                                    background-color: #fafdfe;
+                                " role="presentation">
                             <tr>
                                 <td style="
-                                            background-color: #fafdfe;
-                                            padding: 20px 0;
+                                            padding: 20px 0 20px 0;
                                             text-align: center;
                                         ">
-                                    <a href="#" target="_blank">
-                                        <img alt="Logo" title="Logo" src="https://i.ibb.co/rx31TX7/html-email.png"
-                                            width="280" border="0" />
-                                    </a>
+                                    <a href="#" target="_blank"><img src="https://i.ibb.co/rx31TX7/html-email.png"
+                                            alt="" width="280" border="0" /></a>
                                 </td>
                             </tr>
                         </table>
@@ -209,75 +227,86 @@
                     <td background="https://i.ibb.co/hMhVbjT/stats2.gif" width="600" height="332"
                         style="background-position: center top">
                         <!--[if (gte mso 9)|(IE)]>
-                                <v:rect
-                                    xmlns:v="urn:schemas-microsoft-com:vml"
-                                    fill="true"
-                                    stroke="false"
-                                    style="width: 600px; height: 332px;"
-                                >
-                                <v:fill type="title" src="https://i.ibb.co/hMhVbjT/stats2.gif"/>
-                                <v:textbox inset="0,0,0,0">
-                            <![endif]-->
+                        <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;height:332px;">
+                            <v:fill type="tile" src="https://i.ibb.co/hMhVbjT/stats2.gif" />
+                            <v:textbox inset="0,0,0,0">
+                        <![endif]-->
                         <table class="darkmode-transparent" cellpadding="0" cellspacing="0" role="presentation">
                             <tr>
                                 <td width="600" align="center" valign="middle">
                                     <table class="darkmode-transparent" cellpadding="0" cellspacing="0"
                                         role="presentation">
                                         <tr>
-                                            <!--[if (gte mso 9)|(IE)]>
-                                                    <td style="padding-top; 100px; padding-bottom: 25px;">
-                                                <![endif]-->
-                                            <td align="center" style="
-                                                        font-size: 30px;
-                                                        line-height: 30px;
-                                                        color: #fff;
-                                                        padding: 10px 10px 20px
-                                                            10px;
-                                                        font-weight: bold;
-                                                    ">
-                                                <p style="
-                                                            font-size: 30px;
-                                                            line-height: 30px;
-                                                            color: #fff;
-                                                            font-weight: bold;
-                                                        ">
-                                                    Responsive HTML Email
-                                                    Template
-                                                </p>
+                                            <td align="center">
+                                                <table class="darkmode-transparent" role="presentation">
+                                                    <tr>
+                                                        <!--[if (gte mso 9)|(IE)]>
+                                                            <td style="padding-top:100px;padding-bottom:25px;">
+                                                        <![endif]-->
+                                                        <td align="center" style="
+                                                                    font-size: 30px;
+                                                                    line-height: 30px;
+                                                                    color: #ffffff;
+                                                                    padding: 10px
+                                                                        10px
+                                                                        20px
+                                                                        10px;
+                                                                    font-weight: bold;
+                                                                ">
+                                                            <p style="
+                                                                        font-size: 30px;
+                                                                        line-height: 30px;
+                                                                        color: #ffffff;
+                                                                        font-weight: bold;
+                                                                    ">
+                                                                Responsive
+                                                                HTML Email
+                                                                Template
+                                                            </p>
+                                                        </td>
+                                                        <!--[if (gte mso 9)|(IE)]>
+                                                            </td>
+                                                        <![endif]-->
+                                                    </tr>
+                                                </table>
                                             </td>
-                                            <!--[if (gte mso 9)|(IE)]>
-                                                    </td>
-                                                <![endif]-->
                                         </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="center">
-                                    <table class="darkmode-transparent" cellpadding="0" cellspacing="0"
-                                        role="presentation">
-                                        <tr style="border-radius: 10px" bgcolor="#eff8fe">
-                                            <a href="#" target="_blank" style="
-                                                        font-size: 17px;
-                                                        font-weight: bold;
-                                                        text-decoration: none;
-                                                        color: #1e5d7b;
-                                                        background-color: #eff8fe;
-                                                        border: 1px solid
-                                                            #eff8fe;
-                                                        border-radius: 10px;
-                                                        padding: 12px 20px;
-                                                        display: inline-block;
-                                                    ">VIEW DEMO</a>
+                                        <tr>
+                                            <td align="center">
+                                                <table class="darkmode-transparent" cellpadding="0" cellspacing="0"
+                                                    role="presentation">
+                                                    <tr>
+                                                        <td style="
+                                                                    border-radius: 10px;
+                                                                " bgcolor="#eff8fe">
+                                                            <a href="#" target="_blank" style="
+                                                                        font-size: 17px;
+                                                                        font-weight: bold;
+                                                                        text-decoration: none;
+                                                                        color: #1e5d7b;
+                                                                        background-color: #eff8fe;
+                                                                        border: 1px
+                                                                            solid
+                                                                            #eff8fe;
+                                                                        border-radius: 10px;
+                                                                        padding: 12px
+                                                                            20px;
+                                                                        display: inline-block;
+                                                                    ">VIEW
+                                                                DEMO</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
                             </tr>
                         </table>
                         <!--[if (gte mso 9)|(IE)]>
-                                </v:textbox>
-                                </v:rect>
-                            <![endif]-->
+                            </v:textbox>
+                            </v:rect>
+                        <![endif]-->
                     </td>
                 </tr>
                 <tr>
@@ -290,18 +319,10 @@
                                             text-align: center;
                                         ">
                                     <!--[if (gte mso 9)|(IE)]>
-                                            <table
-                                                width="100%"
-                                                style="border-spacing: 0;"
-                                                role="presentation"
-                                            >
-                                            <tr>
-                                            <td
-                                                width="300"
-                                                valign="top"
-                                                style="padding: 0;"
-                                            >
-                                        <![endif]-->
+                                        <table width="100%" style="border-spacing: 0;" role="presentation">
+                                        <tr>
+                                        <td width="300" valign="top" style="padding: 0;">
+                                    <![endif]-->
                                     <table class="column" style="
                                                 border-spacing: 0;
                                                 vertical-align: top;
@@ -316,20 +337,13 @@
                                                             text-align: left;
                                                         " role="presentation">
                                                     <tr>
-                                                        <td style="
-                                                                    background-color: #fafdfe;
-                                                                    padding: 20px
-                                                                        0;
-                                                                    text-align: center;
-                                                                ">
-                                                            <a href="#" target="_blank">
-                                                                <img alt="Man" class="two-col-img"
-                                                                    src="https://i.ibb.co/Tmg3qbV/man-teal.jpg"
+                                                        <td>
+                                                            <a href="#" target="_blank"><img class="two-col-img"
+                                                                    src="https://i.ibb.co/Tmg3qbV/man-teal.jpg" alt=""
                                                                     width="260" style="
                                                                             max-width: 260px;
                                                                             border-radius: 8px;
-                                                                        " border="0" />
-                                                            </a>
+                                                                        " border="0" /></a>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -342,6 +356,7 @@
                                                             <p style="
                                                                         font-size: 17px;
                                                                         font-weight: bold;
+                                                                        line-height: 25px;
                                                                     ">
                                                                 Build
                                                                 Responsive
@@ -366,33 +381,30 @@
                                                         <td align="left" style="
                                                                     padding-left: 10px;
                                                                 ">
-                                                            <table border="0" cellpadding="0" style="
+                                                            <table align="left" border="0" cellpadding="0" style="
                                                                         border-spacing: 0;
                                                                     " role="presentation">
-                                                                <td align="center">
-                                                                    <table class="darkmode-transparent" cellpadding="0"
-                                                                        cellspacing="0" role="presentation">
-                                                                        <tr style="
+                                                                <tr>
+                                                                    <td style="
+                                                                                border-radius: 10px;
+                                                                            " bgcolor="#1e5d7b">
+                                                                        <a href="#" target="_blank" style="
+                                                                                    font-size: 16px;
+                                                                                    font-weight: bold;
+                                                                                    text-decoration: none;
+                                                                                    color: #ffffff;
+                                                                                    background-color: #1e5d7b;
+                                                                                    border: 1px
+                                                                                        solid
+                                                                                        #1e5d7b;
                                                                                     border-radius: 10px;
-                                                                                " bgcolor="#1e5d7b">
-                                                                            <a href="#" target="_blank" style="
-                                                                                        font-size: 16px;
-                                                                                        font-weight: bold;
-                                                                                        text-decoration: none;
-                                                                                        color: #fff;
-                                                                                        background-color: #1e5d7b;
-                                                                                        border: 1px
-                                                                                            solid
-                                                                                            #1e5d7b;
-                                                                                        border-radius: 10px;
-                                                                                        padding: 10px
-                                                                                            25px;
-                                                                                        display: inline-block;
-                                                                                    ">HTML
-                                                                                Email</a>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
+                                                                                    padding: 10px
+                                                                                        25px;
+                                                                                    display: inline-block;
+                                                                                ">HTML
+                                                                            Email</a>
+                                                                    </td>
+                                                                </tr>
                                                             </table>
                                                         </td>
                                                     </tr>
@@ -401,14 +413,8 @@
                                         </tr>
                                     </table>
                                     <!--[if (gte mso 9)|(IE)]>
-                                            </td>
-                                            <td
-                                                width="300"
-                                                valign="top"
-                                                style="padding: 0;"
-                                                role="presentation"
-                                            >
-                                        <![endif]-->
+                                        </td><td width="300" valign="top" style="padding: 0;">
+                                    <![endif]-->
                                     <table class="column" style="
                                                 border-spacing: 0;
                                                 vertical-align: top;
@@ -423,20 +429,13 @@
                                                             text-align: left;
                                                         " role="presentation">
                                                     <tr>
-                                                        <td style="
-                                                                    background-color: #fafdfe;
-                                                                    padding: 20px
-                                                                        0;
-                                                                    text-align: center;
-                                                                ">
-                                                            <a href="#" target="_blank">
-                                                                <img alt="Woman" class="two-col-img"
-                                                                    src="https://i.ibb.co/nQn29Sg/woman-teal.jpg"
+                                                        <td>
+                                                            <a href="#" target="_blank"><img class="two-col-img"
+                                                                    src="https://i.ibb.co/nQn29Sg/woman-teal.jpg" alt=""
                                                                     width="260" style="
                                                                             max-width: 260px;
                                                                             border-radius: 8px;
-                                                                        " border="0" />
-                                                            </a>
+                                                                        " border="0" /></a>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -449,6 +448,7 @@
                                                             <p style="
                                                                         font-size: 17px;
                                                                         font-weight: bold;
+                                                                        line-height: 25px;
                                                                     ">
                                                                 Create
                                                                 Custom
@@ -473,33 +473,30 @@
                                                         <td align="left" style="
                                                                     padding-left: 10px;
                                                                 ">
-                                                            <table border="0" cellpadding="0" style="
+                                                            <table align="left" border="0" cellpadding="0" style="
                                                                         border-spacing: 0;
                                                                     " role="presentation">
-                                                                <td align="center">
-                                                                    <table class="darkmode-transparent" cellpadding="0"
-                                                                        cellspacing="0" role="presentation">
-                                                                        <tr style="
+                                                                <tr>
+                                                                    <td style="
+                                                                                border-radius: 10px;
+                                                                            " bgcolor="#1e5d7b">
+                                                                        <a href="#" target="_blank" style="
+                                                                                    font-size: 16px;
+                                                                                    font-weight: bold;
+                                                                                    text-decoration: none;
+                                                                                    color: #ffffff;
+                                                                                    background-color: #1e5d7b;
+                                                                                    border: 1px
+                                                                                        solid
+                                                                                        #1e5d7b;
                                                                                     border-radius: 10px;
-                                                                                " bgcolor="#1e5d7b">
-                                                                            <a href="#" target="_blank" style="
-                                                                                        font-size: 16px;
-                                                                                        font-weight: bold;
-                                                                                        text-decoration: none;
-                                                                                        color: #fff;
-                                                                                        background-color: #1e5d7b;
-                                                                                        border: 1px
-                                                                                            solid
-                                                                                            #1e5d7b;
-                                                                                        border-radius: 10px;
-                                                                                        padding: 10px
-                                                                                            25px;
-                                                                                        display: inline-block;
-                                                                                    ">Get
-                                                                                Started</a>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
+                                                                                    padding: 10px
+                                                                                        25px;
+                                                                                    display: inline-block;
+                                                                                ">Get
+                                                                            Started</a>
+                                                                    </td>
+                                                                </tr>
                                                             </table>
                                                         </td>
                                                     </tr>
@@ -508,10 +505,10 @@
                                         </tr>
                                     </table>
                                     <!--[if (gte mso 9)|(IE)]>
-                                            </td>
-                                            </tr>
-                                            </table>
-                                        <![endif]-->
+                                        </td>
+                                        </tr>
+                                        </table>
+                                    <![endif]-->
                                 </td>
                             </tr>
                         </table>
@@ -531,7 +528,7 @@
                                         <table width="100%" style="border-spacing: 0;" role="presentation">
                                         <tr>
                                         <td width="200" valign="top" style="padding: 0;">
-                                        <![endif]-->
+                                    <![endif]-->
                                     <table class="column" style="
                                                 border-spacing: 0;
                                                 vertical-align: top;
@@ -564,7 +561,7 @@
                                     </table>
                                     <!--[if (gte mso 9)|(IE)]>
                                         </td><td width="400" valign="top" style="padding: 0;">
-                                        <![endif]-->
+                                    <![endif]-->
                                     <table class="column" style="
                                                 border-spacing: 0;
                                                 vertical-align: top;
@@ -629,7 +626,7 @@
                                         </td>
                                         </tr>
                                         </table>
-                                        <![endif]-->
+                                    <![endif]-->
                                 </td>
                             </tr>
                         </table>
@@ -648,7 +645,7 @@
                                         <table width="100%" style="border-spacing: 0;" role="presentation">
                                         <tr>
                                         <td width="200" valign="top" style="padding: 0;">
-                                        <![endif]-->
+                                    <![endif]-->
                                     <table class="column" style="
                                                 border-spacing: 0;
                                                 vertical-align: top;
@@ -736,7 +733,7 @@
                                     </table>
                                     <!--[if (gte mso 9)|(IE)]>
                                         </td><td width="200" valign="top" style="padding: 0;">
-                                        <![endif]-->
+                                    <![endif]-->
                                     <table class="column" style="
                                                 border-spacing: 0;
                                                 vertical-align: top;
@@ -824,7 +821,7 @@
                                     </table>
                                     <!--[if (gte mso 9)|(IE)]>
                                         </td><td width="200" valign="top" style="padding: 0;">
-                                        <![endif]-->
+                                    <![endif]-->
                                     <table class="column" style="
                                                 border-spacing: 0;
                                                 vertical-align: top;
@@ -915,7 +912,7 @@
                                         </td>
                                         </tr>
                                         </table>
-                                        <![endif]-->
+                                    <![endif]-->
                                 </td>
                             </tr>
                         </table>
@@ -937,11 +934,10 @@
                                             text-align: center;
                                         ">
                                     <!--[if (gte mso 9)|(IE)]>
-                                       <table width="100%" style="border-spacing: 0;" role="presentation">
-                                       <tr>
-                                       <td width="150" valign="top" style="padding: 0;">
+                                        <table width="100%" style="border-spacing: 0;" role="presentation">
+                                        <tr>
+                                        <td width="150" valign="top" style="padding: 0;">
                                     <![endif]-->
-
                                     <table class="column" style="
                                                 border-spacing: 0;
                                                 vertical-align: top;
@@ -973,11 +969,9 @@
                                             </td>
                                         </tr>
                                     </table>
-
                                     <!--[if (gte mso 9)|(IE)]>
-                                    </td><td width="150" valign="top" style="padding: 0;">
+                                        </td><td width="150" valign="top" style="padding: 0;">
                                     <![endif]-->
-
                                     <table class="column" style="
                                                 border-spacing: 0;
                                                 vertical-align: top;
@@ -1009,11 +1003,9 @@
                                             </td>
                                         </tr>
                                     </table>
-
                                     <!--[if (gte mso 9)|(IE)]>
-                                    </td><td width="150" valign="top" style="padding: 0;">
+                                        </td><td width="150" valign="top" style="padding: 0;">
                                     <![endif]-->
-
                                     <table class="column" style="
                                                 border-spacing: 0;
                                                 vertical-align: top;
@@ -1045,11 +1037,9 @@
                                             </td>
                                         </tr>
                                     </table>
-
                                     <!--[if (gte mso 9)|(IE)]>
-                                    </td><td width="150" valign="top" style="padding: 0;">
+                                        </td><td width="150" valign="top" style="padding: 0;">
                                     <![endif]-->
-
                                     <table class="column" style="
                                                 border-spacing: 0;
                                                 vertical-align: top;
@@ -1081,11 +1071,10 @@
                                             </td>
                                         </tr>
                                     </table>
-
                                     <!--[if (gte mso 9)|(IE)]>
-                                       </td>
-                                       </tr>
-                                       </table>
+                                        </td>
+                                        </tr>
+                                        </table>
                                     <![endif]-->
                                 </td>
                             </tr>
@@ -1093,51 +1082,77 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding: 0;">
-                        <table width="100%" style="border-spacing: 0;" role="presentation">
+                    <td style="padding: 0">
+                        <table width="100%" style="border-spacing: 0" role="presentation">
                             <tr>
-                                <td height="3" style="background-color: #21c6b8;"></td>
+                                <td height="3" style="background-color: #21c6b8"></td>
                             </tr>
                         </table>
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding: 0;background-color: #565656;">
-                        <table width="100%" style="border-spacing: 0;" role="presentation">
-
+                    <td style="padding: 0; background-color: #565656">
+                        <table width="100%" style="border-spacing: 0" role="presentation">
                             <tr>
-                                <td style="padding: 60px 0 50px 0;color: #ffffff;text-align: center;font-size: 16px;">
-
+                                <td style="
+                                            padding: 60px 0 50px 0;
+                                            color: #ffffff;
+                                            text-align: center;
+                                            font-size: 16px;
+                                        ">
                                     <a href="#" target="_blank"><img src="https://i.ibb.co/rdjLnjG/html-email-white.png"
-                                            alt="" width="210" border="0"></a>
-                                    <p style="font-size: 16px;padding: 10px 0 5px 0;">Responsive HTML Email</p>
-                                    <p style="font-size: 16px;padding-bottom: 5px;">123 Street Road, City, State 55555
+                                            alt="" width="210" border="0" /></a>
+                                    <p style="
+                                                font-size: 16px;
+                                                padding: 10px 0 5px 0;
+                                            ">
+                                        Responsive HTML Email
                                     </p>
-                                    <p style="font-size: 16px;padding-bottom: 5px;"><a href="mailto:email@example.com"
-                                            style="text-decoration:none;color:#e8fbfa">email@example.com</a></p>
-                                    <p style="font-size: 16px;padding-bottom: 5px;"><a href="tel:18008888888"
-                                            style="text-decoration:none;color:#e8fbfa">1-800-888-8888</a></p>
-                                    <p style="font-size: 13px;"><a href="#"
-                                            style="text-decoration:none;color:#e8fbfa">UNSUBSCRIBE</a></p>
-
+                                    <p style="
+                                                font-size: 16px;
+                                                padding-bottom: 5px;
+                                            ">
+                                        123 Street Road, City, State 55555
+                                    </p>
+                                    <p style="
+                                                font-size: 16px;
+                                                padding-bottom: 5px;
+                                            ">
+                                        <a href="mailto:email@example.com" style="
+                                                    text-decoration: none;
+                                                    color: #e8fbfa;
+                                                ">email@example.com</a>
+                                    </p>
+                                    <p style="
+                                                font-size: 16px;
+                                                padding-bottom: 5px;
+                                            ">
+                                        <a href="tel:18008888888" style="
+                                                    text-decoration: none;
+                                                    color: #e8fbfa;
+                                                ">1-800-888-8888</a>
+                                    </p>
+                                    <p style="font-size: 13px">
+                                        <a href="#" style="
+                                                    text-decoration: none;
+                                                    color: #e8fbfa;
+                                                ">UNSUBSCRIBE</a>
+                                    </p>
                                 </td>
                             </tr>
-
                             <tr>
-                                <td height="4" style="background-color: #21c6b8;"></td>
+                                <td height="4" style="background-color: #21c6b8"></td>
                             </tr>
-
                         </table>
                     </td>
                 </tr>
             </table>
             <!--[if (gte mso 9)|(IE)]>
-                    </td>
-                    </tr>
-                    </table>
-                <![endif]-->
+                </td>
+                </tr>
+                </table>
+            <![endif]-->
         </div>
-
     </center>
 </body>
 

@@ -18,7 +18,9 @@
 1. [Introduction to HTML Email](./contents/intro.md)
 2. [Tables and styling](./contents/tables-styling.md)
 3. [Media Queries](./contents/media-queries.md)
+4. [Dark Mode](./contents/dark-mode.md)
 
 ## Examples
 
 1. [Simple table](./examples/01-simple-table/index.html)
+1. [Full exampñe](./examples/02-starter-example/index.html)
