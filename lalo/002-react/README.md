@@ -45,6 +45,7 @@
     -   [Custom Hooks](./002-react-011.md)
     -   [Forms & User Input](./002-react-012.md)
     -   [Redux](./002-react-013.md)
+    -   [React Router](./002-react-014.md)
     -   [React + Typescript](./002-react-022.md)
 -   Frameworks
     -   [Next.js](002-react-030.md)
