@@ -54,5 +54,5 @@
     -   [React + Typescript](./002-react-021.md)
 -   Frameworks
     -   [Next.js](002-react-017.md)
--   Summaries and refresehers (optimize your time)
+-   Summaries and refreshers (optimize your time)
     -   [JavaScript refresher](./002-react-001.md)
