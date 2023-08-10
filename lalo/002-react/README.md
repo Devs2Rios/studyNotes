@@ -52,7 +52,8 @@
     -   [Replacing Redux with React Hooks](./002-react-019.md)
     -   [Unit Testing](./002-react-020.md)
     -   [React + Typescript](./002-react-021.md)
--   Frameworks
+-   Frameworks and Services
     -   [Next.js](002-react-017.md)
+    -   [MongoDB](./002-react-022.md)
 -   Summaries and refreshers (optimize your time)
     -   [JavaScript refresher](./002-react-001.md)
