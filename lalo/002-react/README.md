@@ -51,7 +51,7 @@
     -   [Animating React Apps](./002-react-018.md)
     -   [Replacing Redux with React Hooks](./002-react-019.md)
     -   [Unit Testing](./002-react-020.md)
-    -   [React + Typescript](./002-react-021.md)
+    -   [React + TypeScript](./002-react-021.md)
 -   Frameworks and Services
     -   [Next.js](002-react-017.md)
     -   [MongoDB](./002-react-022.md)
