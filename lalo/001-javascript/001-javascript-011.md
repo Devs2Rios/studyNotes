@@ -120,20 +120,71 @@
 -   Implementing Smooth Scrolling
 
     ```JavaScript
+    const section1 = document.querySelector('#section--1');
+    const btnScrollTo = document.querySelector('.btn--scroll-to');
 
+    // Old approach
+    btnScrollTo.addEventListener('click', function (e) {
+        const s1coords = section1.getBoundingClientRect(); // Returns the coordinates of the element relative to the viewport
+        console.log(s1coords); // {left: ..., top: ..., right: ..., bottom: ...}
+        console.log(e.target.getBoundingClientRect()); // Same as above
+        console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset); // Current scroll position in pixels
+        console.log(
+            'height/width viewport',
+            document.documentElement.clientHeight,
+            document.documentElement.clientWidth
+        ); // Viewport dimensions in pixels (they don't include the scroll bars)
+        window.scrollTo({
+            left: s1coords.left + window.pageXOffset, // x position relative to the document
+            top: s1coords.top + window.pageYOffset, // y position relative to the document
+            behavior: 'smooth', // smooth scroll
+        }); // Smooth scroll to the coordinates, window.scrollTo(left, top) won't work with smooth scroll
+    });
+
+    // New Approach: Only works in modern browsers
+    btnScrollTo.addEventListener('click', function (e) {
+        section1.scrollIntoView({ behavior: 'smooth' });
+    });
     ```
 
 -   Types of Events and Event Handlers
 
     ```JavaScript
+    const h1 = document.querySelector('h1');
+    const alertEnter = () => {
+        alert('You entered the heading!');
+    };
+    // Recommended way
+    h1.addEventListener('mouseenter', alertEnter);
+    // Removing the event listeners after 3 seconds
+    setTimeout(() => h1.removeEventListener('mouseenter', alertEnter), 3000);
+    // The old way
+    h1.onmouseenter = alertEnter;
+    ```
 
+    ```HTML
+    <!-- Older than old -->
+    <h1 onclick="alert('HTML alert')">
     ```
 
 -   Event Propagation: Bubbling and Capturing
 
-    ```JavaScript
+    -   Events are triggered at the root of the document, this is called **capturing phase**
+    -   The **target phase** is when events travel from the root to the element that catches them, passing through every parent of the node
+    -   The **bubbling phase** is when the event is caught and sent back to the root
 
-    ```
+        ```JavaScript
+        document.querySelector('.nav__links').addEventListener('click', function (e) {
+            this.style.backgroundColor = ranColor(); // A click here will bubble the event up to the nav element.
+        });
+        document.querySelector('.nav').addEventListener('click', function (e) {
+            this.style.backgroundColor = ranColor();
+        });
+        ```
+
+        -   We can catch the origin of the event by using the target `e.target` and compare it with `e.currentTarget` if they are the same the the event occurs in the same element, if not the event was bubbled
+        -   We can stop the bubbling by using `e.stopPropagation()`
+        -   If we need to catch the event when capturing instead of bubbling, we can add the use capture argument to the event listeners `el.addEventListener('click', () => {}, true)`
 
 -   Event Delegation: Implementing Page Navigation
 
