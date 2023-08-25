@@ -204,9 +204,30 @@
 
 -   DOM Traversing
 
-    ```JavaScript
+    -   Useful when we need to select related elements
 
-    ```
+        ```JavaScript
+        const h1 = document.querySelector('h1');
+
+        // Downwards the parent
+        console.log(h1.querySelectorAll('.highlight')); // Children with specific class
+        console.log(h1.childNodes); // All children including whitespace
+        console.log(h1.children); // Only direct children
+        h1.firstElementChild.style.color = 'white'; // First child element
+        h1.lastElementChild.style.color = 'white'; // Last child element
+
+        // Upwards the parent
+        console.log(h1.parentNode); // Parent node object if present
+        console.log(h1.parentElement); // Element object representing parent element
+        console.log(h1.closest('.header')); // Closest specific element
+
+        // Siblings
+        console.log(h1.previousElementSibling); // Previous sibling element
+        console.log(h1.nextElementSibling); // Next sibling element
+        console.log(h1.previousSibling); // Previous sibling node
+        console.log(h1.nextSibling); // Next sibling node
+        console.log(h1.parentElement.children); // All children of parent element
+        ```
 
 -   Building a Tabbed Component
 
