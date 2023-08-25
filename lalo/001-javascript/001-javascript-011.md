@@ -232,26 +232,91 @@
 -   Building a Tabbed Component
 
     ```JavaScript
+    tabsContainer.addEventListener('click', function (e) {
+        const clicked = e.target.closest('.operations__tab');
 
+        // Guard clause
+        if (!clicked) return;
+
+        // Remove active classes
+        tabs.forEach(t => t.classList.remove('operations__tab--active'));
+        tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+        // Activate tab
+        clicked.classList.add('operations__tab--active');
+
+        // Activate content area
+        document
+            .querySelector(`.operations__content--${clicked.dataset.tab}`)
+            .classList.add('operations__content--active');
+    });
     ```
 
 -   Parsing Arguments to Event Handlers
 
-    ```JavaScript
+    -   Useful when some logic is shared between callbacks
 
-    ```
+        ```JavaScript
+        const handleHover = function (e) {
+            if (e.target.classList.contains('nav__link')) {
+                const link = e.target;
+                const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+                const logo = link.closest('.nav').querySelector('img');
+                siblings.forEach(el => {
+                    if (el !== link) el.style.opacity = this;
+                });
+                logo.style.opacity = this;
+            }
+        };
+        // Passing "argument" into handler
+        nav.addEventListener('mouseover', handleHover.bind(0.5));
+        nav.addEventListener('mouseout', handleHover.bind(1));
+        ```
 
 -   Implementing a Sticky Navigation: The Scroll Event
 
     ```JavaScript
-
+    // Bad performance on older computers and mobiles
+    const initialCoords = section1.getBoundingClientRect();
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+        else nav.classList.remove('sticky');
+    });
     ```
 
 -   A Better Way: The Intersection Observer API
 
-    ```JavaScript
+    -   Allows our code to observe changes
 
-    ```
+        ```JavaScript
+        // Define a function to be executed when the IntersectionObserver triggers
+        const stickyNav = function (entries) {
+            // Get the first entry from the array of entries
+            const [entry] = entries;
+
+            // If the observed element is not intersecting (i.e., not visible in the viewport)
+            if (!entry.isIntersecting) {
+                // Add the 'sticky' class to the navigation element
+                nav.classList.add('sticky');
+            } else {
+                // Remove the 'sticky' class from the navigation element
+                nav.classList.remove('sticky');
+            }
+        };
+
+        // Create a new IntersectionObserver instance
+        const headerObserver = new IntersectionObserver(stickyNav, {
+            // Use the entire viewport as the root for intersection checking
+            root: null,
+            // Trigger the callback function when the observed element starts intersecting
+            threshold: 0,
+            // Add a negative root margin to adjust the trigger point
+            rootMargin: `-${nav.getBoundingClientRect().height}px`,
+        });
+
+        // Start observing the 'header' element with the IntersectionObserver
+        headerObserver.observe(header);
+        ```
 
 -   Revealing Elements on Scroll
 
