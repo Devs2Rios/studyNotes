@@ -188,9 +188,19 @@
 
 -   Event Delegation: Implementing Page Navigation
 
-    ```JavaScript
+    -   It's useful when we have a lot of elements that share some functionality, instead of using `forEach` we can delegate the function from the parent
 
-    ```
+        ```JavaScript
+        // Select the parent element
+        document.querySelector('.nav__links').addEventListener('click', function (e) {
+            e.preventDefault();
+            // Matching strategy
+            if (e.target.classList.contains('nav__link')) {
+                const id = e.target.getAttribute('href');
+                document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+        ```
 
 -   DOM Traversing
 
