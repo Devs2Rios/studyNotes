@@ -321,7 +321,27 @@
 -   Revealing Elements on Scroll
 
     ```JavaScript
+    const allSections = document.querySelectorAll('.section');
 
+    // Function that will reveal the section when it is in the viewport
+    const revealSection = function (entries, observer) {
+        const [entry] = entries;
+        if (!entry.isIntersecting) return;
+        entry.target.classList.remove('section--hidden');
+        observer.unobserve(entry.target); // stop observing the section
+    };
+
+    // Create the intersection observer
+    const sectionObserver = new IntersectionObserver(revealSection, {
+        root: null,
+        threshold: 0.15,
+    });
+
+    // Add the observer to every element and the hidden class
+    allSections.forEach(function (section) {
+        sectionObserver.observe(section);
+        section.classList.add('section--hidden');
+    });
     ```
 
 -   Lazy Loading Images
