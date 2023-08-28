@@ -346,9 +346,12 @@
 
 -   Lazy Loading Images
 
-    ```JavaScript
+    -   Improves performance on the website
+    -   A good strategy is to add a small image as default and making the big one appear when scrolling to the image boundaries
 
-    ```
+        ```JavaScript
+
+        ```
 
 -   Building a Slider Component
 
