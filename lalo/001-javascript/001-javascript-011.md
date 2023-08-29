@@ -350,7 +350,23 @@
     -   A good strategy is to add a small image as default and making the big one appear when scrolling to the image boundaries
 
         ```JavaScript
-
+        const loadImg = function (entries, observer) {
+            const [entry] = entries;
+            if (!entry.isIntersecting) return;
+            entry.target.src = entry.target.dataset.src; // Replace the low-res image by the one we want
+            // We add an event listener to allow the element to change src smoothly
+            entry.target.addEventListener('load', function () {
+                entry.target.classList.remove('lazy-img');
+                // Remove the class that treats the low-res image when it finishes loading it
+            });
+            imgObserver.unobserve(entry.target);
+        };
+        const imgObserver = new IntersectionObserver(loadImg, {
+            root: null,
+            threshold: 0,
+            rootMargin: '200px', // Loads the image a bit before we reach it
+        });
+        imgTargets.forEach(img => imgObserver.observe(img));
         ```
 
 -   Building a Slider Component
