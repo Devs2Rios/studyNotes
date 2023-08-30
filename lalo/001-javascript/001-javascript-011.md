@@ -372,7 +372,32 @@
 -   Building a Slider Component
 
     ```JavaScript
-
+    // Initialize the current slide index as 0
+    let curSlide = 0;
+    // Calculate the maximum slide index based on the number of slides
+    const maxSlide = slides.length - 1;
+    // Define a function to change slides with a given current slide index
+    const slideChange = function (curSlide = 0) {
+        // Loop through each slide element and adjust its transform property
+        slides.forEach(function (slide, i) {
+            // Translate the slide horizontally based on the difference between its index and the current slide index
+            slide.style.transform = `translateX(${(i - curSlide) * 100}%)`;
+        });
+    };
+    // Add a click event listener to the 'btnRight' button
+    btnRight.addEventListener('click', function () {
+        // If the current slide is the last slide, reset to the first slide
+        if (curSlide === maxSlide) curSlide = 0;
+        else curSlide++; // Increment the current slide index
+        slideChange(curSlide); // Change slides using the updated current slide index
+    });
+    // Add a click event listener to the 'btnLeft' button
+    btnLeft.addEventListener('click', function () {
+        // If the current slide is the first slide, set it to the last slide
+        if (curSlide === 0) curSlide = maxSlide;
+        else curSlide--; // Decrement the current slide index
+        slideChange(curSlide); // Change slides using the updated current slide index
+    });
     ```
 
 -   Lifecycle DOM Events
