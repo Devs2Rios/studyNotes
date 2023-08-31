@@ -376,6 +376,23 @@
     let curSlide = 0;
     // Calculate the maximum slide index based on the number of slides
     const maxSlide = slides.length - 1;
+    // Create selection dots on the slider
+    const createDots = function () {
+        slides.forEach(function (_, i) {
+            dotContainer.insertAdjacentHTML(
+                'beforeend',
+                `<button class="dots__dot" data-slide="${i}"></button>`
+            );
+        });
+    };
+    const activateDot = function (slide) {
+        document
+            .querySelectorAll('.dots__dot')
+            .forEach(dot => dot.classList.remove('dots__dot--active'));
+        document
+            .querySelector(`.dots__dot[data-slide="${slide}"]`)
+            .classList.add('dots__dot--active');
+    };
     // Define a function to change slides with a given current slide index
     const slideChange = function (curSlide = 0) {
         // Loop through each slide element and adjust its transform property
@@ -383,7 +400,20 @@
             // Translate the slide horizontally based on the difference between its index and the current slide index
             slide.style.transform = `translateX(${(i - curSlide) * 100}%)`;
         });
+        activateDot(curSlide); // Add the dots to the slider
     };
+    // Initialize the slider
+    const initSlider = function () {
+        slides.forEach(function (slide, i) {
+            slide.style.transform = `translateX(${i * 100}%)`; // Set slides position
+            dotContainer.insertAdjacentHTML(
+                'beforeend',
+                `<button class="dots__dot" data-slide="${i}"></button>`
+            ); // Add dots per slide
+        });
+        slideChange(0); // Starts at slide 0
+    };
+    initSlider();
     // Add a click event listener to the 'btnRight' button
     btnRight.addEventListener('click', function () {
         // If the current slide is the last slide, reset to the first slide
@@ -397,6 +427,25 @@
         if (curSlide === 0) curSlide = maxSlide;
         else curSlide--; // Decrement the current slide index
         slideChange(curSlide); // Change slides using the updated current slide index
+    });
+    // Add button control for slide changes
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') {
+            if (curSlide === 0) curSlide = maxSlide;
+            else curSlide--;
+            slideChange(curSlide);
+        } else if (e.key === 'ArrowRight') {
+            if (curSlide === maxSlide) curSlide = 0;
+            else curSlide++;
+            slideChange(curSlide);
+        }
+    });
+    // And the button selection change
+    dotContainer.addEventListener('click', function (e) {
+        if (e.target.classList.contains('dots__dot')) {
+            const { slide } = e.target.dataset;
+            slideChange(slide);
+        }
     });
     ```
 
