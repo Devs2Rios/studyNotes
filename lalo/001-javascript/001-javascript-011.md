@@ -472,6 +472,21 @@
 
 -   Efficient Script Loading: defer and async
 
-    ```JavaScript
+    -   Regularly we put scripts at the end of the body so they can be loaded at the end of the HTML parsing
+    -   We can load scripts with `async` or `defer` (only modern browsers)
 
-    ```
+        -   `async` - Allows to fetch the script while the HTML is parsed and executed right away
+            -   `DOMContentLoaded` doesn't wait for them
+            -   Not guaranteed to be executed in the order they are written
+            -   Good for third party libraries that don't need execution order, like analytics
+        -   `defer` - The script is fetched when parsing and executed at the end
+
+            -   `DOMContentLoaded` fires after the script is executed
+            -   Executed in order
+            -   Overall the best solution, for example in scripts loaded in the `head`
+
+            ```HTML
+            <head>
+                <script defer src="script.js"></script>
+            </head>
+            ```
