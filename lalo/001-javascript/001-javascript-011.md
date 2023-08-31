@@ -451,9 +451,24 @@
 
 -   Lifecycle DOM Events
 
-    ```JavaScript
+    -   All scripts are executed after the DOM content is loaded, we have several ways to check what happens before, while or after the DOM is loaded
 
-    ```
+        ```JavaScript
+        // No needed since the script is loaded after the DOM
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('HTML parsed');
+        });
+        // Checks when the page is fully loaded
+        window.addEventListener('load', function () {
+            console.log('Window loaded');
+        });
+        // Actions after leaving the page
+        window.addEventListener('beforeunload', function (e) {
+            e.preventDefault();
+            e.returnValue = ''; // This will pop a dialog warning about leaving the site
+            window.scrollTo(0, 0);
+        });
+        ```
 
 -   Efficient Script Loading: defer and async
 
