@@ -44,3 +44,4 @@
 -   [Working With Arrays](./001-javascript-009.md)
 -   [Numbers, Dates, Intl and Timers](./001-javascript-010.md)
 -   [Advanced DOM and Events](./001-javascript-011.md)
+-   [Object-Oriented Programming (OOP) With JavaScript](./001-javascript-012.md)
