@@ -160,13 +160,24 @@
         -   `Object.create()`
 
             ```JavaScript
-            const pet = { name: '', species: '' };
+            const Pet = {
+                name: '',
+                species: '',
+                // Method to initialize the instance
+                init(name, species) {
+                    this.name = name;
+                    this.species = species;
+                },
+            };
             // Instance
-            const barky = Object.create(pet);
+            const barky = Object.create(Pet); // Object linked to Pet
             barky.name = 'Barky';
             barky.species = 'Dog';
             // { name: 'Barky', species: 'Dog' }
             console.log(barky instanceof Object); // true
+            const koshka = Object.create(Pet); // Object linked to Pet
+            koshka.init('Koshka', 'Cat');
+            console.log(koshka); // { name: 'Koshka', species: 'Cat' }
             ```
 
 -   Using the `prototype` structure we can add elements to our objects
