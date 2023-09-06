@@ -72,31 +72,40 @@
         -   `ES6` Classes
 
             ```JavaScript
-            class Pet {
-                constructor(name, species) {
-                    this.name = name; // String.prototype with properties and methods inherits the behavior of the object
-                    this.species = species;
+            // Class expression
+            // const PersonCl = class {};
+
+            // Class declaration
+            class PersonCl {
+                constructor(firstName, lastName, age) {
+                    this.firstName = firstName; // String.prototype with properties and methods inherits the behavior of the object
+                    this.lastName = lastName;
+                    this.age = age;
                     // Don't add methods to the constructor since is a bad practice and leads to bad performance
                 }
+                // methods
+                fullName() {
+                    return `${this.firstName} ${this.lastName}`;
+                }
+                greeting() {
+                    return `Hey there! ${this.fullName()}`;
+                }
             }
-            // Instance
-            const koshka = new Pet('Koshka', 'Cat');
-            // Pet { name: 'Koshka', species: 'Cat' }
-            console.log(koshka instanceof Pet); // true
-            console.log(koshka instanceof Object); // true
+            // Instances of the class
+            const jessica = new PersonCl('Jessica', 'Williams', 27);
+            console.log(jessica); // PersonCl { firstName: 'Jessica', lastName: 'Williams', age: 27 }
+            console.log(jessica.fullName()); // Jessica Williams
+            console.log(jessica.__proto__ === PersonCl.prototype); // true
+            console.log(jessica instanceof PersonCl); // true
+            console.log(jessica.greeting()); // Hey there! Jessica Williams
+
+            // Classes are not hoisted
+            // Classes are first-class citizens
+            // Classes are executed in strict mode
             ```
 
-        -   `Object.create()`
-
-            ```JavaScript
-            const pet = { name: '', species: '' };
-            // Instance
-            const barky = Object.create(pet);
-            barky.name = 'Barky';
-            barky.species = 'Dog';
-            // { name: 'Barky', species: 'Dog' }
-            console.log(barky instanceof Object); // true
-            ```
+            -   Classes are a good approach, but it's better to use them if we understand prototypal inheritance
+            -   It allows to make objects in a more readable and maintainable way
 
 -   Using the `prototype` structure we can add elements to our objects
 
