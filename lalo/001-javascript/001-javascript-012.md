@@ -143,6 +143,32 @@
                 console.log(errorCar); // Car { speed: 100 }
                 ```
 
+            -   Static methods are added to the class object and cannot be accessed on instances, like `Array.from()`
+
+                ```JS
+                class Math {
+                    // Static methods are not executed on the instances of the class
+                    static add(x, y) {
+                        return x + y;
+                    }
+                }
+                console.log(Math.add(1, 2)); // 3
+                const myMath = new Math();
+                console.log(myMath.add(1, 2)); // TypeError: myMath.add is not a function
+                ```
+
+        -   `Object.create()`
+
+            ```JavaScript
+            const pet = { name: '', species: '' };
+            // Instance
+            const barky = Object.create(pet);
+            barky.name = 'Barky';
+            barky.species = 'Dog';
+            // { name: 'Barky', species: 'Dog' }
+            console.log(barky instanceof Object); // true
+            ```
+
 -   Using the `prototype` structure we can add elements to our objects
 
     ```JS
