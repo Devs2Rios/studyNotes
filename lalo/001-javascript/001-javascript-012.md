@@ -106,6 +106,42 @@
 
             -   Classes are a good approach, but it's better to use them if we understand prototypal inheritance
             -   It allows to make objects in a more readable and maintainable way
+            -   Setters and getters are assistant functions that allow to retrieve and modify properties
+
+                ```JS
+                class Car {
+                    constructor(brand, speed) {
+                        this.brand = brand;
+                        this.speed = speed;
+                    }
+                    get brand() {
+                        return this._brand;
+                    }
+                    set brand(brandName) {
+                        // We can add logic into the setter to validate our properties
+                        try {
+                            if (brandName && brandName.length > 2) this._brand = brandName;
+                            else throw new Error('Brand name must be at least 3 characters');
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+                    get speedUS() {
+                        return this.speed / 1.6;
+                    }
+                    set speedUS(speed) {
+                        this.speed = speed * 1.6;
+                    }
+                }
+                const ford = new Car('Ford', 120);
+                console.log(ford.speedUS); // 75
+                ford.speedUS = 50; // Since speedUS is a getter, we can use it as a setter and is treated like a property, not a method
+                console.log(ford.speed); // 80
+                console.log(ford); // Car { make: 'Ford', speed: 80 }
+                console.log(ford.brand); // Ford
+                const errorCar = new Car('K', 100); // Error: Brand name must be at least 3 characters
+                console.log(errorCar); // Car { speed: 100 }
+                ```
 
 -   Using the `prototype` structure we can add elements to our objects
 
