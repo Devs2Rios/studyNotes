@@ -268,3 +268,73 @@
         console.log(herejes.averageEpisodeDuration()); // 60
         console.log(herejes.annualEarnings()); // 12000
         ```
+
+    -   ES6 classes
+
+        ```JS
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            greeting() {
+                console.log(`My name is ${this.name} and I am ${this.age}`);
+            }
+            static fromBirthYear(name, year) {
+                const currentYear = new Date().getFullYear();
+                return new Person(name, currentYear - year);
+            }
+        }
+        // Student class inherits Person
+        class Student extends Person {
+            constructor(name, age, major) {
+                super(name, age); // Construction function of the parent class
+                this.major = major;
+            }
+            // The following methods overwrite the parent class ones
+            greeting() {
+                console.log(
+                    `My name is ${this.name} and I am ${this.age} and I study ${this.major}`
+                );
+            }
+            static fromBirthYear(name, year, major) {
+                const currentYear = new Date().getFullYear();
+                return new Student(name, currentYear - year, major);
+            }
+        }
+        const person1 = Student.fromBirthYear('John', 1990, 'Computer Science');
+        person1.greeting(); // My name is John and I am 33 and I study Computer Science
+
+        // With this approach the prototype chain is set automatically
+        console.log(person1.__proto__ === Student.prototype); // true
+        console.log(person1.__proto__.__proto__ === Person.prototype); // true
+        console.log(person1.__proto__.__proto__.__proto__ === Object.prototype); // true
+        ```
+
+    -   `Object.create()`
+
+        ```JS
+        const Person = {
+            calcAge() {
+                return new Date().getFullYear() - this.birthYear;
+            },
+            init(firstName, lastName, birthYear) {
+                this.firstName = firstName;
+                this.lastName = lastName;
+                this.birthYear = birthYear;
+            },
+        };
+
+        const Student = Object.create(Person); // Student inherits from Person
+        Student.init = function (firstName, lastName, birthYear, course) {
+            Person.init.call(this, firstName, lastName, birthYear); // call the init method of the parent object
+            this.course = course;
+        };
+
+        const john = Object.create(Student);
+        john.init('John', 'Doe', 1992, 'Computer Science');
+        console.log(john.calcAge()); // 31
+        console.log(john.course); // Computer Science
+        ```
+
+        -   This is by far one of the most preferred approach for several developers since it's not faking classes
