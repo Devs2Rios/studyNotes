@@ -338,3 +338,109 @@
         ```
 
         -   This is by far one of the most preferred approach for several developers since it's not faking classes
+
+-   Encapsulation inside objects
+
+    -   Not native on JavaScript, we currently have to fake it
+
+        ```JS
+        class User {
+            constructor(name, email) {
+                this.name = name;
+                this.email = email;
+                // Protected property
+                this._password = '';
+            }
+
+            // Not a setter because we don't want to allow getting the password
+            setPassword(password) {
+                this._password = password;
+            }
+        }
+
+        const user = new User('myUser', 'user@test.com');
+        user.setPassword('MySecretPassword47??');
+        console.log(user.name); // myUser
+        console.log(user.email); // user@test.com
+        console.log(user.password); // undefined
+        console.log(user._password); // MySecretPassword47?? - Not completely secret
+        ```
+
+    -   Experimental feature Class Fields
+
+        ```JS
+        class User {
+            access = 'public'; // Public field
+            #password = ''; // Private field
+            constructor(name, email) {
+                this.name = name;
+                this.email = email;
+                console.log(this.#initialPassword());
+            }
+            // Public method
+            setPassword(oldPassword, newPassword) {
+                if (oldPassword === this.#password) {
+                    this.#password = newPassword;
+                    console.log('Password changed!');
+                } else {
+                    console.log('Wrong password!');
+                }
+            }
+            // Private method
+            #initialPassword() {
+                this.#password = `NewPassword-${Math.round(Math.random() * 1)}`;
+                return this.#password;
+            }
+        }
+
+        const user = new User('myUser', 'user@test.com'); // NewPassword-15
+        user.setPassword('NewPassword-1', 'MySecretPassword47??'); // Wrong password! or Password changed!
+        console.log(user.name); // myUser
+        console.log(user.email); // user@test.com
+        console.log(user.password); // undefined
+        console.log(user.#password); // SyntaxError: Private field '#password' must be declared in an enclosing class
+        console.log(user.#initialPassword()); // SyntaxError: Private field '#initialPassword' must be declared in an enclosing class
+        ```
+
+-   Chaining methods
+
+    ```JS
+    class MathOperations {
+        constructor() {
+            this.results = [];
+        }
+        add(a, b) {
+            const result = a + b;
+            console.log(`Add: ${a} + ${b} = ${result}`);
+            this.results.push(result);
+            return this; // needed for chaining
+        }
+        multiply(a, b) {
+            const result = a * b;
+            console.log(`Multiply: ${a} * ${b} = ${result}`);
+            this.results.push(result);
+            return this;
+        }
+        divide(a, b) {
+            const result = a / b;
+            console.log(`Divide: ${a} / ${b} = ${result}`);
+            this.results.push(result);
+            return this;
+        }
+        subtract(a, b) {
+            const result = a - b;
+            console.log(`Subtract: ${a} - ${b} = ${result}`);
+            this.results.push(result);
+            return this;
+        }
+    }
+    const mathOperations = new MathOperations();
+    mathOperations.add(2, 3).multiply(3, 4).subtract(4, 2).divide(2, 2);
+    /*
+    Add: 2 + 3 = 5
+    Multiply: 3 * 4 = 12
+    Subtract: 4 - 2 = 2
+    Divide: 2 / 2 = 1
+    */
+    console.log(mathOperations.results); // [ 5, 12, 2, 1 ]
+    ```
