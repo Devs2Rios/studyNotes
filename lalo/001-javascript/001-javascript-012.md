@@ -209,3 +209,62 @@
         };
         console.log(arr.unique()); // [ 2, 0, 3, 9, 4 ]
         ```
+
+-   Inheritance between objects
+
+    -   Construction functions
+
+        ```JS
+        const Podcast = function (name, episodes) {
+            this.name = name;
+            this.episodes = episodes;
+        };
+
+        Podcast.prototype.averageEpisodeDuration = function () {
+            let totalDuration = 0;
+            for (let i = 0; i < this.episodes.length; i++) {
+                totalDuration += this.episodes[i].duration;
+            }
+            return totalDuration / this.episodes.length;
+        };
+
+        // PatreonPodcast inherits from Podcast
+        const PatreonPodcast = function (name, episodes, monthlyDonation) {
+            Podcast.call(this, name, episodes); // call the parent constructor
+            this.monthlyDonation = monthlyDonation;
+        };
+
+        // Linking prototypes
+        PatreonPodcast.prototype = Object.create(Podcast.prototype); // links the prototype
+        PatreonPodcast.prototype.constructor = PatreonPodcast; // set the constructor
+
+        PatreonPodcast.prototype.annualEarnings = function () {
+            return this.monthlyDonation * 12;
+        };
+
+        const herejes = new PatreonPodcast(
+            'Herejes',
+            [
+                {
+                    title: 'Hereje 1',
+                    duration: 60,
+                },
+            ],
+            100
+        );
+
+        console.log(herejes.__proto__ === PatreonPodcast.prototype); // true
+        console.log(herejes instanceof PatreonPodcast); // true
+        console.log(herejes instanceof Podcast); // true (because of prototype linking)
+        console.log(herejes instanceof Object); // true
+        console.log(herejes);
+        /*
+        PatreonPodcast {
+        name: 'Herejes',
+        episodes: [ { title: 'Hereje 1', duration: 60 } ],
+        monthlyDonation: 100
+        }
+        */
+        console.log(herejes.averageEpisodeDuration()); // 60
+        console.log(herejes.annualEarnings()); // 12000
+        ```
