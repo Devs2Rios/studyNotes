@@ -45,3 +45,17 @@
 -   [Numbers, Dates, Intl and Timers](./001-javascript-010.md)
 -   [Advanced DOM and Events](./001-javascript-011.md)
 -   [Object-Oriented Programming (OOP) With JavaScript](./001-javascript-012.md)
+
+## General purpose tips
+
+### Planning a project
+
+1. User stories: describe the project from an user point of view
+    - As an user I want to...
+2. Features: Determine the features needed from the user stories
+    - Add a queue to allow the user...
+3. Flowchart: To describe the features
+    - To define the application workflow
+4. Architecture: How to build the project based on features
+    - To determine how to organize resources
+5. Development: Hands on the project
