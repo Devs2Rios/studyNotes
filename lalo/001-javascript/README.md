@@ -18,9 +18,9 @@
 >             -   A language to create interactive sites
 >         -   1996
 >             -   It has nothing to do with Java
->             -   Changes to LiveScript and to JavaScript to attract Java divelopers
+>             -   Changes to LiveScript and to JavaScript to attract Java developers
 >             -   Microsoft launches IE and copies JavaScript into JScript
->         -   1997 - ECMA releases ECMAScript 1 (ES1), the first standar for JavaScript
+>         -   1997 - ECMA releases ECMAScript 1 (ES1), the first standard for JavaScript
 >         -   2009 - ES5 (ECMAScript 5) was released with a lot of new features
 >         -   2015 - ES6 (ECMAScript 2015) was released (biggest update)
 >             -   Changes to an annual release cycle
@@ -45,6 +45,7 @@
 -   [Numbers, Dates, Intl and Timers](./001-javascript-010.md)
 -   [Advanced DOM and Events](./001-javascript-011.md)
 -   [Object-Oriented Programming (OOP) With JavaScript](./001-javascript-012.md)
+-   [Asynchronous JavaScript: Promises, Async/Await, and AJAX](./001-javascript-013.md)
 
 ## General purpose tips
 
@@ -59,3 +60,7 @@
 4. Architecture: How to build the project based on features
     - To determine how to organize resources
 5. Development: Hands on the project
+
+### All purpose tips
+
+-   `localStorage` is just useful fo small amounts of data like tokens
