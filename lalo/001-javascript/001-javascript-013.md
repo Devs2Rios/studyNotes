@@ -44,6 +44,36 @@
                 # Body (commonly a JSON)
                 ```
 
+-   Callback hell
+
+    -   Tons of nested callbacks to get one request
+    -   We can handle this with recursion
+
+        ```JS
+        const getCountryRequest = function (url, callback = null) {
+        const request = new XMLHttpRequest();
+        request.open('GET', url);
+        request.send();
+        request.addEventListener('load', function () {
+            const [data] = JSON.parse(this.responseText);
+            if (callback) return callback(data);
+            return data;
+        });
+        };
+
+        const getCountryAndNeighborData = function (country) {
+        getCountryRequest(`${endpoint}name/${country}`, function (data) {
+            const [neighbor] = data.borders;
+            if (!neighbor) return;
+            return getCountryRequest(
+            `${endpoint}alpha/${neighbor.toLowerCase()}`
+            );
+        });
+        };
+
+        getCountryAndNeighborData('usa'); // USA and Canada
+        ```
+
 ## Code Examples
 
 -   `AJAX`
