@@ -14,7 +14,7 @@
     -   You send a request to the server and the server sends back a response (client server architecture)
     -   It's all made by a dns (domain name service) which converts a domain into it's IP address
 
-        -   `Protocol` + `IPAddres` + `Port number (https=443 / http=80)`
+        -   `Protocol` + `IPAddress` + `Port number (https=443 / http=80)`
 
             ```SHELL
             http://104.27.142.889:443
@@ -44,36 +44,6 @@
                 # Body (commonly a JSON)
                 ```
 
--   Callback hell
-
-    -   Tons of nested callbacks to get one request
-    -   We can handle this with recursion
-
-        ```JS
-        const getCountryRequest = function (url, callback = null) {
-        const request = new XMLHttpRequest();
-        request.open('GET', url);
-        request.send();
-        request.addEventListener('load', function () {
-            const [data] = JSON.parse(this.responseText);
-            if (callback) return callback(data);
-            return data;
-        });
-        };
-
-        const getCountryAndNeighborData = function (country) {
-        getCountryRequest(`${endpoint}name/${country}`, function (data) {
-            const [neighbor] = data.borders;
-            if (!neighbor) return;
-            return getCountryRequest(
-            `${endpoint}alpha/${neighbor.toLowerCase()}`
-            );
-        });
-        };
-
-        getCountryAndNeighborData('usa'); // USA and Canada
-        ```
-
 ## Code Examples
 
 -   `AJAX`
@@ -93,3 +63,89 @@
     getCountryData('portugal');
     // {name: {…}, tld: Array(1), cca2: 'PT', ccn3: '620', cca3: 'PRT', …}
     ```
+
+    -   Callback hell
+
+        -   Tons of nested callbacks to get one request
+        -   We can handle this with recursion
+
+            ```JS
+            const getCountryRequest = function (url, callback = null) {
+            const request = new XMLHttpRequest();
+            request.open('GET', url);
+            request.send();
+            request.addEventListener('load', function () {
+                const [data] = JSON.parse(this.responseText);
+                if (callback) return callback(data);
+                return data;
+            });
+            };
+
+            const getCountryAndNeighborData = function (country) {
+            getCountryRequest(`${endpoint}name/${country}`, function (data) {
+                const [neighbor] = data.borders;
+                if (!neighbor) return;
+                return getCountryRequest(
+                `${endpoint}alpha/${neighbor.toLowerCase()}`
+                );
+            });
+            };
+
+            getCountryAndNeighborData('usa'); // USA and Canada
+            ```
+
+-   `Promises`
+
+    -   A placeholder from a future result of an operation
+    -   Lifecycle
+
+        -   Pending -> Settled -> (fulfilled | rejected)
+        -   Only settled once
+        -   The result of a promise is consumed by our code
+
+            ```JS
+            const getCountryAndNeighborData = country => {
+                    fetch(`${endpoint}name/${country}`)
+                    .then(response => response.json())
+                    .then(data => {
+                    renderCountry(data[0]);
+                    const [neighbor] = data[0].borders;
+                    if (!neighbor) return null;
+                    return fetch(`${endpoint}alpha/${neighbor}`); // Never nest a then inside another then
+                })
+                .then(response => response.json())
+                .then(data2 => renderCountry(data2[0], true));
+            };
+            getCountryAndNeighborData('usa');
+            ```
+
+        -   Handling errors and adding helpers
+
+            ```JS
+            // Request logic added into this helper function
+            const getJSON = function (url, errorMsg = 'Something went wrong') {
+              return fetch(url).then(response => {
+                if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+                return response.json();
+              });
+            };
+            // Handy error message helper
+            const countryErrorMessage = c => `Country ${c} not found.`;
+            // Request
+            const getCountryAndNeighborData = country => {
+              getJSON(`${endpoint}name/${country}`, countryErrorMessage(country))
+                .then(data => {
+                  const neighbors = data[0].borders;
+                  if (!neighbors) throw new Error('No neighbor found!');
+                  // Returns the helper function to continue the chain
+                  return getJSON(
+                    `${endpoint}alpha/${neighbors[0]}`,
+                    countryErrorMessage(neighbors[0])
+                  );
+                })
+                .then(data2 => data2[0]) // Chained request response
+                .catch(err => console.error(err)) // Catches errors
+                .finally(() => console.log('Finishes')); // It's always executed
+            };
+            getCountryAndNeighborData('australia');
+            ```
