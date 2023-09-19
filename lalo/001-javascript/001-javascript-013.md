@@ -44,6 +44,39 @@
                 # Body (commonly a JSON)
                 ```
 
+-   The event loop on asynchronous operations
+
+    -   JavasScript runtime: container that executes JavaScript
+
+        -   Engine: Heart of the runtime (heap, call stack)
+        -   Web APIs: Included functionality (DOM, fetch API, etc)
+        -   Event loop:
+            -   Micro-tasks queue: special queue made for promises
+                -   Take precedence over callbacks
+                -   They're added to the call stack when the promise is done
+            -   Callback queue:
+                -   Here's where asynchronous (`setTimeout`, `load`, etc) operations are prepared to be send to the call stack
+                -   When they're ready to be executed (event loop tick)
+                -   If micro-tasks queue takes a lot of time everything here will be delayed
+        -   Here's an example of execution
+
+            ```JS
+            console.log('Test start');
+            setTimeout(() => {
+                console.log('Callback');
+            }, 0);
+            Promise.resolve().then(() => {
+                console.log('Promise');
+            });
+            console.log('Test end');
+            /*
+            Test start -> Sync
+            Test end -> Sync
+            Promise -> Micro-tasks queue
+            Callback -> Callback queue
+            */
+            ```
+
 ## Code Examples
 
 -   `AJAX`
@@ -94,7 +127,7 @@
             getCountryAndNeighborData('usa'); // USA and Canada
             ```
 
--   `Promises`
+-   `fetch()` API
 
     -   A placeholder from a future result of an operation
     -   Lifecycle
@@ -150,14 +183,37 @@
             getCountryAndNeighborData('australia');
             ```
 
--   The event loop on asynchronous operations
-    -   JavasScript runtime: container that executes JavaScript
-        -   Engine: Heart of the runtime (heap, call stack)
-        -   Web APIs: Included functionality (DOM, fetch API, etc)
-        -   Event loop:
-            -   Micro-tasks queue: special queue made for promises
-                -   Take precedence over callbacks
-                -   They're added to the call stack when the promise is done
-            -   Callback queue:
-                -   Here's where asynchronous (`setTimeout`, `load`, etc) operations are prepared to be send to the call stack
-                -   When they're ready to be executed (event loop tick)
+-   Promises
+
+    ```JS
+    const lotteryPromise = new Promise((resolve, reject) => {
+        console.log('Lottery draw is happening...');
+        setTimeout(() => {
+            const randomNumber = Math.floor(Math.random() * 10);
+            if (randomNumber > 5) {
+                resolve(randomNumber); // fulfill state
+            } else {
+                reject(new Error('Number is too low')); // reject state
+            }
+        }, 2000);
+    });
+    // Consume the promise
+    lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+
+    // Promisifying setTimeout
+    const wait = seconds => {
+        return new Promise(resolve => {
+            setTimeout(resolve, seconds * 1000);
+        });
+    };
+    wait(2)
+        .then(() => {
+            console.log('I waited for 2 second');
+            return wait(1);
+        })
+        .then(() => console.log('I waited for 1 second'));
+
+    // Immediately executing promises
+    Promise.resolve('abc').then(x => console.log(x));
+    Promise.reject(new Error('Problem!')).catch(x => console.error(x));
+    ```
