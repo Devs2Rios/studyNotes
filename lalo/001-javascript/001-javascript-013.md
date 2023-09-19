@@ -149,3 +149,15 @@
             };
             getCountryAndNeighborData('australia');
             ```
+
+-   The event loop on asynchronous operations
+    -   JavasScript runtime: container that executes JavaScript
+        -   Engine: Heart of the runtime (heap, call stack)
+        -   Web APIs: Included functionality (DOM, fetch API, etc)
+        -   Event loop:
+            -   Micro-tasks queue: special queue made for promises
+                -   Take precedence over callbacks
+                -   They're added to the call stack when the promise is done
+            -   Callback queue:
+                -   Here's where asynchronous (`setTimeout`, `load`, etc) operations are prepared to be send to the call stack
+                -   When they're ready to be executed (event loop tick)
