@@ -217,3 +217,24 @@
     Promise.resolve('abc').then(x => console.log(x));
     Promise.reject(new Error('Problem!')).catch(x => console.error(x));
     ```
+
+-   `async/await` promises
+
+    ```JS
+    const getCat = async () => {
+        const response = await fetch('https://api.thecatapi.com/v1/images/search');
+        const data = await response.json();
+        console.log(data[0]); // Result of the request
+        return data[0];
+    };
+
+    getCat();
+    /*
+    {
+        id: '4km',
+        url: 'https://cdn2.thecatapi.com/images/4km.gif',
+        width: 500,
+        height: 200
+    }
+    */
+    ```
