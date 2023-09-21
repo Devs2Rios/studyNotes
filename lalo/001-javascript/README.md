@@ -46,6 +46,7 @@
 -   [Advanced DOM and Events](./001-javascript-011.md)
 -   [Object-Oriented Programming (OOP) With JavaScript](./001-javascript-012.md)
 -   [Asynchronous JavaScript: Promises, Async/Await, and AJAX](./001-javascript-013.md)
+-   [Modern JavaScript Development: Modules, Tooling, and Functional](./001-javascript-014.md)
 
 ## General purpose tips
 
