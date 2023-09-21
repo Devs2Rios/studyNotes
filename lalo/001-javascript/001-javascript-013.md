@@ -222,10 +222,19 @@
 
     ```JS
     const getCat = async () => {
-        const response = await fetch('https://api.thecatapi.com/v1/images/search');
-        const data = await response.json();
-        console.log(data[0]); // Result of the request
-        return data[0];
+        // in this approach we use try/catch to handle errors
+        try {
+            const response = await fetch(
+                'https://api.thecatapi.com/v1/images/search'
+            );
+            if (!response.ok) throw new Error('Something went wrong');
+            const data = await response.json();
+            console.log(data[0]); // Result of the request
+            return data[0];
+        } catch (error) {
+            console.error(error);
+            return error; // Needed to avoid an undefined return from the fulfilled promise
+        }
     };
 
     getCat();
@@ -238,3 +247,86 @@
     }
     */
     ```
+
+    -   We can get multiple responses at the same time with combinator functions
+
+        ```JS
+        const get2Cats = async () => {
+            // Promise.all returns an array of resolved promises
+            const res = await Promise.all([getCat(), getCat()]);
+            console.log(res.map(cat => cat.url));
+            return res;
+        };
+
+        const get2CatsRace = async () => {
+            // Promise.race returns the first promise to resolve (no matter if it's fulfilled or rejected)
+            const res = await Promise.race([getCat(), getCat()]);
+            console.log(res);
+            return res;
+        };
+
+        const get2CatsSettled = async () => {
+            // Promise.allSettled returns an array of promises with their status
+            const res = await Promise.allSettled([getCat(), getCat()]);
+            console.log(res);
+            return res;
+        };
+
+        const get2CatsAny = async () => {
+            // Promise.any returns the first fulfilled promise
+            const res = await Promise.any([getCat(), getCat()]);
+            console.log(res);
+            return res;
+        };
+
+        get2Cats();
+        /*
+        [
+            'https://cdn2.thecatapi.com/images/bte.jpg',
+            'https://cdn2.thecatapi.com/images/ap9.gif'
+        ]
+        */
+
+        get2CatsRace();
+        /*
+        {
+            id: '4b2',
+            url: 'https://cdn2.thecatapi.com/images/4b2.gif',
+            width: 400,
+            height: 300
+        }
+        */
+
+        get2CatsSettled();
+        /*
+        [
+            {
+            status: 'fulfilled',
+            value: {
+                id: '28f',
+                url: 'https://cdn2.thecatapi.com/images/28f.jpg',
+                width: 400,
+                height: 598
+            }
+            },
+            {
+            status: 'fulfilled',
+            value: {
+                id: 'MTcwNTI3NA',
+                url: 'https://cdn2.thecatapi.com/images/MTcwNTI3NA.jpg',
+                width: 1024,
+                height: 682
+            }
+            }
+        ]
+        */
+        get2CatsAny();
+        /*
+        {
+            id: 'ci7',
+            url: 'https://cdn2.thecatapi.com/images/ci7.jpg',
+            width: 425,
+            height: 270
+        }
+        */
+        ```
