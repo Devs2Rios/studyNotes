@@ -98,7 +98,7 @@
             console.log(d); // 4
             ```
 
-    -   Keep in mind that references keep their place in memory
+    -   Keep in mind that references keep their place in memory and are not cloned when they're exported
         ```JS
         // ref.mjs
         export const arr = [];
@@ -114,3 +114,94 @@
         addNum(5);
         console.log(arr); // [ 1, 2, 3, 4, 5 ]
         ```
+
+-   In ES2022 whe have a built-in `top-Level await`
+
+    ```JS
+    // index.js
+    // No need of using an async function
+    const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+    const data = await res.json();
+    console.log(data);
+    // { userId: 1, id: 1, title: 'delectus aut autem', completed: false }
+    ```
+
+    -   Be careful since the async calls block the whole script, especially when importing async resolved responses
+
+        ```JS
+        import { data } from './async.mjs';
+
+        console.log('Execution started');
+        const startTime = new Date();
+        console.log(data);
+        const endTime = new Date();
+        console.log('Execution finished');
+        const executionTime = endTime - startTime;
+        console.log(`Execution time: ${executionTime} milliseconds`);
+        ```
+
+        ```SHELL
+        node index.mjs
+        Execution started
+        { userId: 1, id: 1, title: 'delectus aut autem', completed: false }
+        Execution finished
+        Execution time: 1 milliseconds
+        ```
+
+-   The module pattern
+
+    ```JS
+    // index.mjs
+    const myModule = (() => {
+        // What we don't want to expose to the outside world
+        const privateVariable = 'Hello World';
+        const privateMethod = () => {
+            console.log(privateVariable);
+            return privateVariable;
+        };
+        // What we want to expose to the outside world
+        return {
+            publicVariable: privateMethod() + '!!!',
+            publicMethod: () => {
+                console.log(privateVariable);
+                return privateVariable;
+            },
+        };
+    })();
+
+    console.log(myModule.publicVariable);
+    /*
+    Hello World
+    Hello World!!!
+    */
+    console.log(myModule.publicMethod());
+    /*
+    Hello World
+    Hello World
+    */
+    console.log(myModule.privateVariable); // undefined
+    console.log(myModule.privateMethod); // undefined
+    ```
+
+-   CommonJS Modules
+
+    ```JS
+    // utils.js
+    const add = (a, b) => a + b;
+    module.exports = { add }; // There are several ways to export
+    ```
+
+    ```JS
+    // index.js
+    const { add } = require('./utils');
+    console.log(add(4, 5));
+    ```
+
+    ```SHELL
+    node index
+    9
+    ```
+
+    -   This was the original approach intended for `node.js`
+
+-   `NPM`
