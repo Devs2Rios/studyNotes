@@ -277,3 +277,69 @@
             -   `node_modules` should never be included in version control software, instead we use `package.json` to install the dependencies in different computers by using `npm install`
 
     -   Bundling with [`Parcel`](https://parceljs.org/)
+
+        -   Build tool installed also via `npm` with `npm install parcel --save-dev` (it's important to install it as dev dependency since it's not required on production)
+        -   We can use it with `npx` (node package execute) or with a script specified in the `package.json` file
+
+            -   Example
+
+                ```JS
+                // index.js
+                import { cloneDeep } from 'lodash-es'; // package already installed via NPM
+
+                const user = {
+                    name: 'Tom',
+                    age: 20,
+                    friends: [
+                        {
+                            name: 'Bob',
+                            age: 20,
+                        },
+                    ],
+                };
+
+                const user2 = cloneDeep(user);
+                user2.name = 'Bob';
+
+                console.log(user);
+                console.log(user2);
+
+                // Allows watching file changes and keeping our state
+                if (module.hot) module.hot.accept();
+                ```
+
+                ```SHELL
+                $ npx parcel index.js
+                Server running at http://localhost:1234
+                ✨ Built in 2.04s
+                # This creates a folder with our build, in this case dist/index.js (a file that )
+                # This file is now executable with node or our browser (no need to use <script type="module">)
+                $ node dist/index.js
+                { name: 'Tom', age: 20, friends: [ { name: 'Bob', age: 20 } ] }
+                { name: 'Bob', age: 20, friends: [ { name: 'Bob', age: 20 } ] }
+                ```
+
+        -   Using `npm script`
+
+            ```JS
+            {
+                "name": "test",
+                "version": "1.0.0",
+                "description": "",
+                "scripts": {
+                    "start": "parcel index.js",
+                    "build": "parcel build index.js"
+                },
+                "keywords": [],
+                "author": "",
+                "license": "ISC",
+                "dependencies": {
+                    "lodash-es": "^4.17.21"
+                },
+                "devDependencies": {
+                    "parcel": "^2.9.3"
+                }
+            }
+            ```
+
+            -   Now we can replicate the behavior from above by using `npm start` or build our distribution bundle with `npm run build`
