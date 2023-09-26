@@ -205,3 +205,75 @@
     -   This was the original approach intended for `node.js`
 
 -   `NPM`
+
+    -   Node Package Manager manages dependencies (external libraries) in our project
+    -   It handles the package and versions
+    -   It comes with [node](https://nodejs.org/en) and you can check if you've installed it by using `npm -v`
+    -   Starting a node project (creating the configuration file `package.json`)
+
+        ```SHELL
+        $ mkdir test
+        $ cd test
+        $ npm init
+        It only covers the most common items, and tries to guess sensible defaults.
+
+        See `npm help init` for definitive documentation on these fields
+        and exactly what they do.
+
+        Use `npm install <pkg>` afterwards to install a package and
+        save it as a dependency in the package.json file.
+
+        Press ^C at any time to quit.
+        package name: (test)
+        version: (1.0.0)
+        description:
+        entry point: (index.js)
+        test command:
+        git repository:
+        keywords:
+        author:
+        license: (ISC)
+        About to write to /Users/eat/Desktop/test/package.json:
+
+        {
+            "name": "test",
+            "version": "1.0.0",
+            "description": "",
+            "main": "index.js",
+            "scripts": {
+                "test": "echo \"Error: no test specified\" && exit 1"
+            },
+            "author": "",
+            "license": "ISC"
+        }
+
+
+        Is this OK? (yes)
+        ```
+
+        -   You'll need to fill the project fields, alternatively you can type `npm init -y` to get the default configuration:
+
+            ```SHELL
+            $ npm init -y
+            Wrote to /Users/user/path/test/package.json:
+
+            {
+                "name": "test",
+                "version": "1.0.0",
+                "description": "",
+                "main": "index.js",
+                "scripts": {
+                    "test": "echo \"Error: no test specified\" && exit 1"
+                },
+                "keywords": [],
+                "author": "",
+                "license": "ISC"
+            }
+            ```
+
+    -   To install a package you'll now just need to write `npm install <package-name>` or `npm i <package-name>`
+
+        -   This creates the `node_modules` directory that holds all the dependencies and the `package-lock.json` file which holds the exact dependency tree
+            -   `node_modules` should never be included in version control software, instead we use `package.json` to install the dependencies in different computers by using `npm install`
+
+    -   Bundling with [`Parcel`](https://parceljs.org/)
