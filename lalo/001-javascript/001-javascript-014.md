@@ -358,3 +358,37 @@
         ```
 
         -   Polyfilling recreates all of the methods not covered on old JS
+
+-   Writing clean an modern JavaScript
+
+    -   Code that can be readable by others, even yourself in a year
+    -   Not `clever` overcomplicated solutions
+    -   Use descriptive names and functions
+    -   Refactor as much as possible
+    -   Don't pollute the global namespace, encapsulate the code
+    -   Don't use `var`
+    -   Use strong type checks `!== ===`
+    -   Functions:
+        -   They do only one thing
+        -   No more than 3 parameters
+        -   Default parameters when possible
+        -   Return same data type as received
+        -   Use arrow functions for more readable code
+        -   Use ES6 classes
+        -   Encapsulate data (avoid outside of the class mutation)
+        -   Implement method chaining
+        -   Don't use arrow functions in regular objects
+    -   Avoid nested code
+
+        -   Use early `return`
+        -   Use ternary conditional or short circuiting instead multiple `if`
+        -   Use multiple `if` instead `else-if`
+        -   Prefer `forEach` or array methods in general instead `for` loops
+        -   Avoid callback-based asynchronous APIs
+            -   Consume them with `async/await`
+            -   Try to run them in parallel with `Promise.all`
+            -   Handle promise rejections and errors
+
+        ```JS
+
+        ```
