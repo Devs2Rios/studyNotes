@@ -389,6 +389,12 @@
             -   Try to run them in parallel with `Promise.all`
             -   Handle promise rejections and errors
 
-        ```JS
-
-        ```
+-   Coding paradigms
+    -   Imperative code
+        -   Explain every single step to the computer
+    -   Declarative code
+        -   Tell the computer only what to do
+        -   Is the base for functional programming
+            -   Writing software on the idea of combining several pure functions (same inputs always return the same outputs), avoiding side effects and mutating data (any data manipulation outside the function)
+            -   The original state is immutable
+-   We usually combine both paradigms
