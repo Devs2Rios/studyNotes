@@ -65,3 +65,20 @@
 ### All purpose tips
 
 -   `localStorage` is just useful fo small amounts of data like tokens
+-   Architecture
+    -   In general:
+        -   Helps keep the code clean and organized
+        -   Allows better maintainability
+        -   Prepares the project to be scaled
+    -   We can create our own architecture, use a well-stablish pattern like MVC, or use a framework like React
+    -   Component of any architecture
+        -   Business logic: Code that solves the business problems
+        -   State: All the data from the application
+        -   HTTP library: Responsible of getting and sending requests
+        -   Application logic (router): Implementation of the application itself
+        -   Representation logic (UI Layer): Visible part of the application (displays the state)
+    -   Examples:
+        -   MVC
+            -   Model: Business logic, state, HTTP library
+            -   Controller: Application logic
+            -   View: Presentation logic
