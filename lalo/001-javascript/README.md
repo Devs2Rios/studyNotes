@@ -82,3 +82,8 @@
             -   Model: Business logic, state, HTTP library
             -   Controller: Application logic
             -   View: Presentation logic
+-   Software design patterns
+
+    -   Publisher-subscriber pattern
+        -   Events are handled in the controller to keep the application logic there
+        -   Events are listened in te view to remove DOM elements in the controller
