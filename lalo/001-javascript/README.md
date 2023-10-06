@@ -87,3 +87,5 @@
     -   Publisher-subscriber pattern
         -   Events are handled in the controller to keep the application logic there
         -   Events are listened in te view to remove DOM elements in the controller
+
+-   Debugging by writing `debugger;` will create a breakpoint on the browser's developer tools
