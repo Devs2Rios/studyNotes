@@ -89,3 +89,99 @@
         -   Events are listened in te view to remove DOM elements in the controller
 
 -   Debugging by writing `debugger;` will create a breakpoint on the browser's developer tools
+-   Some recommendations on documentation (JS Docs)
+
+    ```JS
+    import { icons } from '../../utils';
+
+    /**
+     * Represents a view for rendering data in a web application.
+     */
+    export class View {
+      /**
+       * Creates an instance of the View class.
+       */
+      constructor() {
+        this.#markupCallback = () => {};
+        this.#parentElement = null;
+        this.#data = null;
+        this.actionHandlers = {};
+      }
+
+      /**
+       * Renders the data in the view.
+       * @param {any} data - The data to be rendered.
+       */
+      render(data) {
+        this.#data = data;
+        this.clear();
+        const markup = this.#generateMarkup();
+        this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+      }
+
+      /**
+       * Updates the view with new data.
+       * @param {any} data - The new data to update the view with.
+       */
+      update(data) {
+        // ... method implementation ...
+      }
+
+      /**
+       * Sets the parent element for rendering.
+       * @param {HTMLElement} parentElement - The parent HTML element.
+       */
+      setParentElement(parentElement) {
+        this.#parentElement = parentElement;
+      }
+
+      /**
+       * Sets a callback function to generate markup for rendering.
+       * @param {Function} markupCallback - A callback function to generate markup.
+       */
+      setMarkupCallback(markupCallback) {
+        this.#markupCallback = markupCallback;
+      }
+
+      /**
+       * Registers event handlers for rendering events.
+       * @param {string[]} events - An array of event names to listen for.
+       * @param {Function} callback - The callback function to execute when events occur.
+       */
+      renderHandler(events, callback) {
+        events.forEach(event => window.addEventListener(event, callback));
+      }
+
+      /**
+       * Displays a loading spinner in the view.
+       */
+      loadSpinner() {
+        // ... method implementation ...
+      }
+
+      /**
+       * Renders a message in the view.
+       * @param {string} message - The message to display.
+       * @param {boolean} isError - Indicates if the message is an error message (default is false).
+       */
+      renderMessage(message, isError = false) {
+        // ... method implementation ...
+      }
+
+      /**
+       * Clears the content of the parent element.
+       */
+      clear() {
+        this.#parentElement.innerHTML = '';
+      }
+
+      /**
+       * Generates the HTML markup based on the provided data and callback.
+       * @returns {string} - The generated HTML markup.
+       * @private
+       */
+      #generateMarkup() {
+        return this.#markupCallback(this.#data);
+      }
+    }
+    ```
